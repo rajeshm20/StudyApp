@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D32DFA452CA881A8009B603E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32DFA442CA881A8009B603E /* OnboardingView.swift */; };
+		D32DFA4B2CA88235009B603E /* TopIcon_Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32DFA4A2CA88235009B603E /* TopIcon_Title.swift */; };
 		D34BE7512C9F163400A3A3CA /* StudyAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BE7502C9F163400A3A3CA /* StudyAppApp.swift */; };
 		D34BE7532C9F163400A3A3CA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BE7522C9F163400A3A3CA /* ContentView.swift */; };
 		D34BE7552C9F163400A3A3CA /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BE7542C9F163400A3A3CA /* Item.swift */; };
@@ -15,6 +17,12 @@
 		D34BE7642C9F163600A3A3CA /* StudyAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BE7632C9F163600A3A3CA /* StudyAppTests.swift */; };
 		D34BE76E2C9F163600A3A3CA /* StudyAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BE76D2C9F163600A3A3CA /* StudyAppUITests.swift */; };
 		D34BE7702C9F163600A3A3CA /* StudyAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BE76F2C9F163600A3A3CA /* StudyAppUITestsLaunchTests.swift */; };
+		D34BE77E2C9F2CD800A3A3CA /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BE77D2C9F2CD800A3A3CA /* LaunchScreenView.swift */; };
+		D35B48862D32C04000AF3873 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35B48852D32C04000AF3873 /* SignInView.swift */; };
+		D39362082CA99770002C368B /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39362072CA99770002C368B /* SignUpView.swift */; };
+		D393620A2CA99E62002C368B /* OTPVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39362092CA99E62002C368B /* OTPVerificationView.swift */; };
+		D3FDDE1F2CA92AFD00143D0D /* BackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FDDE1E2CA92AFD00143D0D /* BackgroundImageView.swift */; };
+		D3FDDE212CA9771600143D0D /* OnboardUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FDDE202CA9771600143D0D /* OnboardUIModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D32DFA442CA881A8009B603E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		D32DFA4A2CA88235009B603E /* TopIcon_Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopIcon_Title.swift; sourceTree = "<group>"; };
 		D34BE74D2C9F163400A3A3CA /* StudyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D34BE7502C9F163400A3A3CA /* StudyAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyAppApp.swift; sourceTree = "<group>"; };
 		D34BE7522C9F163400A3A3CA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -46,6 +56,12 @@
 		D34BE7692C9F163600A3A3CA /* StudyAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudyAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D34BE76D2C9F163600A3A3CA /* StudyAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyAppUITests.swift; sourceTree = "<group>"; };
 		D34BE76F2C9F163600A3A3CA /* StudyAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D34BE77D2C9F2CD800A3A3CA /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		D35B48852D32C04000AF3873 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		D39362072CA99770002C368B /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		D39362092CA99E62002C368B /* OTPVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationView.swift; sourceTree = "<group>"; };
+		D3FDDE1E2CA92AFD00143D0D /* BackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImageView.swift; sourceTree = "<group>"; };
+		D3FDDE202CA9771600143D0D /* OnboardUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardUIModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +89,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D32DFA432CA88150009B603E /* OnBoardingViews */ = {
+			isa = PBXGroup;
+			children = (
+				D32DFA442CA881A8009B603E /* OnboardingView.swift */,
+				D3FDDE202CA9771600143D0D /* OnboardUIModel.swift */,
+			);
+			path = OnBoardingViews;
+			sourceTree = "<group>";
+		};
 		D34BE7442C9F163400A3A3CA = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +123,9 @@
 			children = (
 				D34BE7502C9F163400A3A3CA /* StudyAppApp.swift */,
 				D34BE7522C9F163400A3A3CA /* ContentView.swift */,
+				D34BE77C2C9F209000A3A3CA /* LaunchScreenView */,
+				D32DFA432CA88150009B603E /* OnBoardingViews */,
+				D39362062CA99760002C368B /* SignUpView */,
 				D34BE7542C9F163400A3A3CA /* Item.swift */,
 				D34BE7562C9F163600A3A3CA /* Assets.xcassets */,
 				D34BE7582C9F163600A3A3CA /* Preview Content */,
@@ -128,6 +156,26 @@
 				D34BE76F2C9F163600A3A3CA /* StudyAppUITestsLaunchTests.swift */,
 			);
 			path = StudyAppUITests;
+			sourceTree = "<group>";
+		};
+		D34BE77C2C9F209000A3A3CA /* LaunchScreenView */ = {
+			isa = PBXGroup;
+			children = (
+				D34BE77D2C9F2CD800A3A3CA /* LaunchScreenView.swift */,
+				D3FDDE1E2CA92AFD00143D0D /* BackgroundImageView.swift */,
+				D32DFA4A2CA88235009B603E /* TopIcon_Title.swift */,
+			);
+			path = LaunchScreenView;
+			sourceTree = "<group>";
+		};
+		D39362062CA99760002C368B /* SignUpView */ = {
+			isa = PBXGroup;
+			children = (
+				D39362072CA99770002C368B /* SignUpView.swift */,
+				D39362092CA99E62002C368B /* OTPVerificationView.swift */,
+				D35B48852D32C04000AF3873 /* SignInView.swift */,
+			);
+			path = SignUpView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,7 +309,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D34BE7532C9F163400A3A3CA /* ContentView.swift in Sources */,
+				D32DFA452CA881A8009B603E /* OnboardingView.swift in Sources */,
+				D3FDDE1F2CA92AFD00143D0D /* BackgroundImageView.swift in Sources */,
+				D34BE77E2C9F2CD800A3A3CA /* LaunchScreenView.swift in Sources */,
+				D3FDDE212CA9771600143D0D /* OnboardUIModel.swift in Sources */,
 				D34BE7552C9F163400A3A3CA /* Item.swift in Sources */,
+				D393620A2CA99E62002C368B /* OTPVerificationView.swift in Sources */,
+				D32DFA4B2CA88235009B603E /* TopIcon_Title.swift in Sources */,
+				D39362082CA99770002C368B /* SignUpView.swift in Sources */,
+				D35B48862D32C04000AF3873 /* SignInView.swift in Sources */,
 				D34BE7512C9F163400A3A3CA /* StudyAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,27 +8,11 @@
 import SwiftUI
 
 struct LaunchScreenView: View {
+    @State private var title: String = "Study"
+
     var body: some View {
             VStack(alignment: .center) {
-                HStack {
-                    ZStack {
-                        Rectangle()
-                            .frame(width: 30, height: 30)
-                            .cornerRadius(10)
-                            .foregroundColor(.white)
-                        Circle()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(.blue.opacity(0.8))
-                        Circle()
-                            .frame(width: 8, height: 8)
-                            .foregroundColor(.white)
-
-                    }
-                    Text("Study")
-                        .fontWeight(.heavy)
-                        .foregroundStyle(Color(.white))
-                }
-
+                TopIcon_Title(title: title)
                 Spacer() // Adds space at the top
                 // First Text
                 Text("Hello and \nwelcome here!")
@@ -61,7 +45,7 @@ struct LaunchScreenView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding() // Ensure content respects safe areas
             .background {
-                Image("smilingFemale")
+                Image("smilingFemale2")
                     .resizable()
                     .aspectRatio(contentMode: .fill) // Use aspectRatio to fill but avoid excessive scaling
                     .ignoresSafeArea() // Ensure it fills the entire screen without interfering with content layout

@@ -1,5 +1,5 @@
 //
-//  OnboardingView_1.swift
+//  OnboardingView.swift
 //  StudyApp
 //
 //  Created by Rajesh Mani on 28/09/24.
@@ -9,65 +9,113 @@ import SwiftUI
 
 struct OnboardingView: View {
     let pages = [
-        PageData1(imageName: "student5", title: "Find Your Favourite Class", description: "Find your favorite class. Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
-        PageData1(imageName: "student3", title: "Explore More Skills", description: "Learn from the best instructors and enhance your skills."),
-        PageData1(imageName: "thumbsUp", title: "Get the Best Class with Best Teacher", description: "Accelerate your learning journey and achieve your goals.")
+        PageData(imageName: "student5", title: "Find Your Favourite Class", description: "Find your favorite class. Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
+        PageData(imageName: "student3", title: "Explore More Skills", description: "Learn from the best instructors and enhance your skills."),
+        PageData(imageName: "thumbsUp", title: "Get the Best Class with Best Teacher", description: "Accelerate your learning journey and achieve your goals.")
     ]
 
     @State private var currentPage = 0
+    @State private var showSignUpView = false
+    @State private var showSignInView = false
 
     var body: some View {
-        VStack {
-            TabView(selection: $currentPage) {
-                ForEach(0..<pages.count, id: \.self) { index in
-                    OnboardingPageView(page: pages[index])
-                        .tag(index)
+        NavigationStack {
+            VStack {
+                TabView(selection: $currentPage) {
+                    ForEach(0..<pages.count, id: \.self) { index in
+                        OnboardingPageView(page: pages[index])
+                            .tag(index)
+                    }
                 }
-            }
-            .ignoresSafeArea()
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)) // Remove default dot pagination
-            // Custom Pagination Indicator
-            HStack(spacing: 8) {
-                ForEach(0..<pages.count) { index in
-                    Circle()
-                        .fill(currentPage == index ? Color.cyan : Color.gray.opacity(0.3))
-                        .frame(width: 8, height: 8)
+                .ignoresSafeArea()
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)) // Remove default dot pagination
+                // Custom Pagination Indicator
+                HStack(spacing: 8) {
+                    ForEach(0..<pages.count) { index in
+                        Circle()
+                            .fill(currentPage == index ? Color.cyan : Color.gray.opacity(0.3))
+                            .frame(width: 8, height: 8)
+                    }
                 }
-            }
-            Spacer()
-            
-            HStack {
-                Button(action: {
-                    // Skip button action
-                }) {
-                    Text("Skip")
-                        .foregroundColor(.cyan)
-                }
-                
                 Spacer()
                 
-                // Next Button
-                Button(action: {
-                    if currentPage < pages.count - 1 {
-                        currentPage += 1
+                HStack {
+                    Button(action: {
+                        if currentPage == 2 {
+                            showSignUpView = true
+                        } else {
+                            // Skip to last page when "Skip" is pressed
+                            currentPage = pages.count - 1
+                        }
+                    }) {
+                        Text(currentPage == 2 ? "Sign Up" : "Skip")
+                            .foregroundColor(.cyan)
                     }
-                }) {
-                    Image(systemName: "arrow.right")
-                        .foregroundColor(.white)
-                        .frame(width: 60, height: 60)
-                        .background(Color.cyan)
-                        .clipShape(Circle())
+                    
+                    NavigationLink(destination: SignUpView()
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button(action: { showSignUpView = false }) {
+                                    Image(systemName: "arrow.left")
+                                        .foregroundColor(.black)
+                                }
+                            }
+                        }
+                        .navigationBarBackButtonHidden(true),
+                        isActive: $showSignUpView
+                    ) {
+                        EmptyView()
+                    }
+                    
+                    NavigationLink(destination: SignInView()
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button(action: { showSignInView = false }) {
+                                    Image(systemName: "arrow.left")
+                                        .foregroundColor(.black)
+                                }
+                            }
+                        }
+                        .navigationBarBackButtonHidden(true),
+                        isActive: $showSignInView
+                    ) {
+                        EmptyView()
+                    }
+                    
+                    Spacer()
+                    
+                    // Next Button
+                    Button(action: {
+                        if currentPage == 2 {
+                            showSignInView = true
+                        } else {
+                            currentPage += 1
+                        }
+                    }) {
+                        if currentPage == 2 {
+                            Text("Sign In" )
+                                .foregroundColor(.cyan)
+                        } else {
+                            Image(systemName: "arrow.right")
+                                .foregroundColor(.white)
+                                .frame(width: 60, height: 60)
+                                .background(Color.cyan)
+                                .clipShape(Circle())
+                        }
+                        
+                    }
                 }
+                .padding(.horizontal, 40)
+                .padding(.bottom, 30)
             }
-            .padding(.horizontal, 40)
-            .padding(.bottom, 30)
+            .background(Color.white)
+            .navigationBarBackButtonHidden(false) // Show the default back button
         }
-        .background(Color.white)
     }
 }
 
 struct OnboardingPageView: View {
-   @State var page: PageData1
+   @State var page: PageData
     
     var body: some View {
         VStack {
@@ -110,13 +158,6 @@ struct OnboardingPageView: View {
             Spacer()
         }
     }
-}
-
-// Data Model for Onboarding Page
-struct PageData1 {
-    var imageName: String
-    var title: String
-    var description: String
 }
 
 struct OnboardingView_Previews: PreviewProvider {

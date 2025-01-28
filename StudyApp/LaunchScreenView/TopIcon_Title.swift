@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TopIcon_Title: View {
-    @Binding var title:String
+    var title:String
     var body: some View {
         HStack {
             ZStack {
@@ -18,7 +18,7 @@ struct TopIcon_Title: View {
                     .foregroundColor(.white)
                 Circle()
                     .frame(width: 20, height: 20)
-                    .foregroundColor(.blue.opacity(0.8))
+                    .foregroundColor(.cyan.opacity(0.8))
                 Circle()
                     .frame(width: 8, height: 8)
                     .foregroundColor(.white)

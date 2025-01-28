@@ -6,3 +6,9 @@
 //
 
 import Foundation
+// Data Model for Each Page
+struct PageData {
+    var imageName: String
+    var title: String
+    var description: String
+}
