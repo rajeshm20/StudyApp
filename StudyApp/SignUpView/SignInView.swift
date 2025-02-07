@@ -91,7 +91,7 @@ struct SignInView: View {
                 VStack{
                     Color.gray
                 }
-                .frame(width: 150, height: 1)
+                .frame(width: 150, height: 0.7)
                 .background(Color.gray.opacity(0.9))
                 Text("OR")
                     .font(.footnote)
@@ -100,8 +100,8 @@ struct SignInView: View {
                 VStack{
                     Color.gray
                 }
-                .frame(width: 150, height: 1)
-                .background(Color.gray.opacity(0.9))
+                .frame(width: 150, height: 0.8)
+                .background(Color.gray.opacity(0.7))
             }
             .padding(.vertical)
             

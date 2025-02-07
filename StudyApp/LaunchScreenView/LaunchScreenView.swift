@@ -9,8 +9,10 @@ import SwiftUI
 
 struct LaunchScreenView: View {
     @State private var title: String = "Study"
+    @State private var navigateToOnboard = false
 
     var body: some View {
+        NavigationStack {
             VStack(alignment: .center) {
                 TopIcon_Title(title: title)
                 Spacer() // Adds space at the top
@@ -31,7 +33,7 @@ struct LaunchScreenView: View {
                     .padding(.horizontal, 20) // Control the horizontal padding to avoid text overflow
                     .padding(.bottom, 30) // Adds space below text
                 Button(action: {
-                    
+                    navigateToOnboard = true
                 }, label: {
                     Text("Let's Start")
                         .font(.system(size: 20))
@@ -41,6 +43,10 @@ struct LaunchScreenView: View {
                         .background(Color.cyan)
                         .clipShape(.buttonBorder)
                 })
+                .navigationDestination(isPresented: $navigateToOnboard) {
+                    OnboardingView()
+//                        .navigationBarBackButtonHidden(true)
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding() // Ensure content respects safe areas
@@ -54,7 +60,7 @@ struct LaunchScreenView: View {
                     .ignoresSafeArea()
             }
         }
-        
+    }
 }
 
 #Preview {
