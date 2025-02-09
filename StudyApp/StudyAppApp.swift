@@ -25,7 +25,7 @@ struct StudyAppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            LaunchScreenView()
+            OTPVerificationView()
         }
         .modelContainer(sharedModelContainer)
     }

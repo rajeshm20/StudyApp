@@ -32,30 +32,41 @@ struct OTPVerificationView: View {
             // OTP Input Fields
             HStack(spacing: 16) {
                 ForEach(0..<4, id: \.self) { index in
-                    TextField("", text: $code[index])
-                        .frame(width: 60, height: 60)
-                        .background(Color.white.opacity(0.2))
-                        .foregroundColor(.white)
-                        .font(.title2)
-                        .multilineTextAlignment(.center)
-                        .keyboardType(.numberPad)
-                        .focused($focusedIndex, equals: index)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(focusedIndex == index ? Color.white : Color.clear, lineWidth: 2)
-                        )
-                        .cornerRadius(40)
-                        .onChange(of: code[index]) { newValue in
-                            if newValue.count == 1 {
-                                if index < 3 {
-                                    focusedIndex = index + 1
-                                } else {
-                                    focusedIndex = nil
+                    ZStack {
+                        // Background with conditional border
+                        RoundedRectangle(cornerRadius: 40)
+                            .fill(Color.white.opacity(0.2))
+                        
+                        // Active border
+                        RoundedRectangle(cornerRadius: 40)
+                            .stroke(Color.white, lineWidth: 2)
+                            .opacity(focusedIndex == index ? 1 : 0)
+                        
+                        TextField("", text: $code[index])
+                            .frame(width: 60, height: 60)
+                            .foregroundColor(.white)
+                            .font(.title2)
+                            .multilineTextAlignment(.center)
+                            .keyboardType(.numberPad)
+                            .focused($focusedIndex, equals: index)
+                            .onChange(of: code[index]) { newValue in
+                                if newValue.count == 1 {
+                                    if index < 3 {
+                                        focusedIndex = index + 1
+                                    } else {
+                                        focusedIndex = nil
+                                    }
+                                } else if newValue.count > 1 {
+                                    code[index] = String(newValue.prefix(1))
+                                } else if newValue.isEmpty {
+                                    // Handle backspace
+                                    if index > 0 {
+                                        focusedIndex = index - 1
+                                    }
                                 }
-                            } else if newValue.count > 1 {
-                                code[index] = String(newValue.prefix(1))
                             }
-                        }
+                    }
+                    .frame(width: 60, height: 60)
                 }
             }
             .padding(.top, 40)
