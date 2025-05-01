@@ -10,6 +10,7 @@ import SwiftUI
 struct TopIcon_Title: View {
     var title:String
     var body: some View {
+        
         HStack {
             ZStack {
                 Rectangle()
@@ -29,8 +30,9 @@ struct TopIcon_Title: View {
                 .foregroundStyle(Color(.white))
         }
     }
+        
 }
 
 #Preview {
-//    AppIcon_Title(title: "Study")
+    TopIcon_Title(title: "Study")
 }

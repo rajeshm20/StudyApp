@@ -51,37 +51,6 @@ struct OnboardingView: View {
                         Text(currentPage == 2 ? "Sign Up" : "Skip")
                             .foregroundColor(.cyan)
                     }
-                    
-                    NavigationLink(destination: SignUpView()
-                        .toolbar {
-                            ToolbarItem(placement: .navigationBarLeading) {
-                                Button(action: { showSignUpView = false }) {
-                                    Image(systemName: "arrow.left")
-                                        .foregroundColor(.black)
-                                }
-                            }
-                        }
-                        .navigationBarBackButtonHidden(true),
-                        isActive: $showSignUpView
-                    ) {
-                        EmptyView()
-                    }
-                    
-                    NavigationLink(destination: SignInView()
-                        .toolbar {
-                            ToolbarItem(placement: .navigationBarLeading) {
-                                Button(action: { showSignInView = false }) {
-                                    Image(systemName: "arrow.left")
-                                        .foregroundColor(.black)
-                                }
-                            }
-                        }
-                        .navigationBarBackButtonHidden(true),
-                        isActive: $showSignInView
-                    ) {
-                        EmptyView()
-                    }
-                    
                     Spacer()
                     
                     // Next Button
@@ -110,6 +79,31 @@ struct OnboardingView: View {
             }
             .background(Color.white)
             .navigationBarBackButtonHidden(false) // Show the default back button
+            .navigationDestination(isPresented: $showSignUpView) {
+                SignUpView()
+//                    .toolbar {
+//                        ToolbarItem(placement: .navigationBarLeading) {
+//                            Button(action: { showSignUpView = false }) {
+//                                Image(systemName: "arrow.left")
+//                                    .foregroundColor(.black)
+//                            }
+//                        }
+//                    }
+//                    .navigationBarBackButtonHidden(true)
+                }
+                    .navigationDestination(isPresented: $showSignInView) {
+                        SignInView()
+//                            .toolbar {
+//                                ToolbarItem(placement: .navigationBarLeading) {
+//                                    Button(action: { showSignInView = false }) {
+//                                        Image(systemName: "arrow.left")
+//                                            .foregroundColor(.black)
+//                                    }
+//                                }
+//                            }
+//                            .navigationBarBackButtonHidden(true)
+                }
+
         }
     }
 }

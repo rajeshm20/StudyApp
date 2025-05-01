@@ -45,7 +45,7 @@ struct LaunchScreenView: View {
                 })
                 .navigationDestination(isPresented: $navigateToOnboard) {
                     OnboardingView()
-//                        .navigationBarBackButtonHidden(true)
+                        .navigationBarBackButtonHidden(true)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)

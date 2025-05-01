@@ -3,15 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61252D2E2D98E5E70052B8CA /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61252D2D2D98E5E70052B8CA /* GridView.swift */; };
+		61357E262D997E150071C7AF /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61357E252D997E150071C7AF /* Helpers.swift */; };
+		6169B3502DB94DA20075AE28 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6169B34F2DB94DA20075AE28 /* DatePickerView.swift */; };
+		61BC6E182DC3E7D7005EFFD9 /* DatePickerView 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BC6E172DC3E7D7005EFFD9 /* DatePickerView 2.swift */; };
+		61BE27142DB3748D0000DB49 /* GenericBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BE27132DB3748D0000DB49 /* GenericBottomSheetView.swift */; };
+		61C8846D2D8FF66D00D566FC /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C8846C2D8FF66D00D566FC /* Item.swift */; };
+		61FEC0EF2DAD755C00535FB1 /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FEC0EE2DAD755C00535FB1 /* SheetView.swift */; };
 		D32DFA452CA881A8009B603E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32DFA442CA881A8009B603E /* OnboardingView.swift */; };
 		D32DFA4B2CA88235009B603E /* TopIcon_Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32DFA4A2CA88235009B603E /* TopIcon_Title.swift */; };
 		D34BE7512C9F163400A3A3CA /* StudyAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BE7502C9F163400A3A3CA /* StudyAppApp.swift */; };
 		D34BE7532C9F163400A3A3CA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BE7522C9F163400A3A3CA /* ContentView.swift */; };
-		D34BE7552C9F163400A3A3CA /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BE7542C9F163400A3A3CA /* Item.swift */; };
 		D34BE7572C9F163600A3A3CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D34BE7562C9F163600A3A3CA /* Assets.xcassets */; };
 		D34BE75A2C9F163600A3A3CA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D34BE7592C9F163600A3A3CA /* Preview Assets.xcassets */; };
 		D34BE7642C9F163600A3A3CA /* StudyAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BE7632C9F163600A3A3CA /* StudyAppTests.swift */; };
@@ -43,12 +49,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		61252D2D2D98E5E70052B8CA /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		61357E252D997E150071C7AF /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		6169B34F2DB94DA20075AE28 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		61BC6E172DC3E7D7005EFFD9 /* DatePickerView 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DatePickerView 2.swift"; sourceTree = "<group>"; };
+		61BE27132DB3748D0000DB49 /* GenericBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericBottomSheetView.swift; sourceTree = "<group>"; };
+		61C8846C2D8FF66D00D566FC /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		61FEC0EE2DAD755C00535FB1 /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
 		D32DFA442CA881A8009B603E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		D32DFA4A2CA88235009B603E /* TopIcon_Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopIcon_Title.swift; sourceTree = "<group>"; };
 		D34BE74D2C9F163400A3A3CA /* StudyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D34BE7502C9F163400A3A3CA /* StudyAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyAppApp.swift; sourceTree = "<group>"; };
 		D34BE7522C9F163400A3A3CA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		D34BE7542C9F163400A3A3CA /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		D34BE7562C9F163600A3A3CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D34BE7592C9F163600A3A3CA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D34BE75F2C9F163600A3A3CA /* StudyAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudyAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +75,10 @@
 		D3FDDE1E2CA92AFD00143D0D /* BackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImageView.swift; sourceTree = "<group>"; };
 		D3FDDE202CA9771600143D0D /* OnboardUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardUIModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		6162E7282DBC836B0012953F /* Navigation */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Navigation; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		D34BE74A2C9F163400A3A3CA /* Frameworks */ = {
@@ -89,6 +105,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		61357E242D997DFF0071C7AF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				61357E252D997E150071C7AF /* Helpers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		D32DFA432CA88150009B603E /* OnBoardingViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,12 +145,13 @@
 		D34BE74F2C9F163400A3A3CA /* StudyApp */ = {
 			isa = PBXGroup;
 			children = (
+				61357E242D997DFF0071C7AF /* Helpers */,
 				D34BE7502C9F163400A3A3CA /* StudyAppApp.swift */,
 				D34BE7522C9F163400A3A3CA /* ContentView.swift */,
+				6162E7282DBC836B0012953F /* Navigation */,
 				D34BE77C2C9F209000A3A3CA /* LaunchScreenView */,
 				D32DFA432CA88150009B603E /* OnBoardingViews */,
 				D39362062CA99760002C368B /* SignUpView */,
-				D34BE7542C9F163400A3A3CA /* Item.swift */,
 				D34BE7562C9F163600A3A3CA /* Assets.xcassets */,
 				D34BE7582C9F163600A3A3CA /* Preview Content */,
 			);
@@ -173,7 +198,13 @@
 			children = (
 				D39362072CA99770002C368B /* SignUpView.swift */,
 				D39362092CA99E62002C368B /* OTPVerificationView.swift */,
+				61C8846C2D8FF66D00D566FC /* Item.swift */,
 				D35B48852D32C04000AF3873 /* SignInView.swift */,
+				61252D2D2D98E5E70052B8CA /* GridView.swift */,
+				61FEC0EE2DAD755C00535FB1 /* SheetView.swift */,
+				61BE27132DB3748D0000DB49 /* GenericBottomSheetView.swift */,
+				6169B34F2DB94DA20075AE28 /* DatePickerView.swift */,
+				61BC6E172DC3E7D7005EFFD9 /* DatePickerView 2.swift */,
 			);
 			path = SignUpView;
 			sourceTree = "<group>";
@@ -192,6 +223,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				6162E7282DBC836B0012953F /* Navigation */,
 			);
 			name = StudyApp;
 			productName = StudyApp;
@@ -311,13 +345,19 @@
 				D34BE7532C9F163400A3A3CA /* ContentView.swift in Sources */,
 				D32DFA452CA881A8009B603E /* OnboardingView.swift in Sources */,
 				D3FDDE1F2CA92AFD00143D0D /* BackgroundImageView.swift in Sources */,
+				61BE27142DB3748D0000DB49 /* GenericBottomSheetView.swift in Sources */,
+				61BC6E182DC3E7D7005EFFD9 /* DatePickerView 2.swift in Sources */,
 				D34BE77E2C9F2CD800A3A3CA /* LaunchScreenView.swift in Sources */,
 				D3FDDE212CA9771600143D0D /* OnboardUIModel.swift in Sources */,
-				D34BE7552C9F163400A3A3CA /* Item.swift in Sources */,
+				6169B3502DB94DA20075AE28 /* DatePickerView.swift in Sources */,
 				D393620A2CA99E62002C368B /* OTPVerificationView.swift in Sources */,
+				61C8846D2D8FF66D00D566FC /* Item.swift in Sources */,
 				D32DFA4B2CA88235009B603E /* TopIcon_Title.swift in Sources */,
+				61FEC0EF2DAD755C00535FB1 /* SheetView.swift in Sources */,
 				D39362082CA99770002C368B /* SignUpView.swift in Sources */,
 				D35B48862D32C04000AF3873 /* SignInView.swift in Sources */,
+				61357E262D997E150071C7AF /* Helpers.swift in Sources */,
+				61252D2E2D98E5E70052B8CA /* GridView.swift in Sources */,
 				D34BE7512C9F163400A3A3CA /* StudyAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
