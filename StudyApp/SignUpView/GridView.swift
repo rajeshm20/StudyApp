@@ -36,13 +36,13 @@ struct GridView: View {
                 Text("ViewThatFits Example")
                     .font(.title)
                     .padding()
-                
-                ViewThatFits(in: .horizontal) {
+                    .dynamicTypeSize(.medium) // disables accessibility scaling
                     // First option (highest priority) - full view
                     HStack {
                         Image(systemName: "star.fill")
                             .foregroundColor(.yellow)
                         Text("This is the complete text that will be displayed if there's enough space")
+                            .dynamicTypeSize(.medium) // disables accessibility scaling
                         Image(systemName: "star.fill")
                             .foregroundColor(.yellow)
                     }
@@ -53,23 +53,24 @@ struct GridView: View {
                     HStack {
                         Image(systemName: "star.fill")
                             .foregroundColor(.yellow)
+                            .dynamicTypeSize(.medium) // disables accessibility scaling
                         Text("Shorter text")
+                            .dynamicTypeSize(.medium) // disables accessibility scaling
                     }
-                    .padding()
                     .background(RoundedRectangle(cornerRadius: 10).fill(Color.green.opacity(0.2)))
                     
                     // Third option - minimal view
                     Text("Minimal")
                         .padding()
-                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.red.opacity(0.2)))
-                }
-                .padding()
+                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.red.opacity(0.0)))
+                        .dynamicTypeSize(.medium) // disables accessibility scaling
                 
                 Spacer()
                 
                 Text("Try changing the screen size to see the view adapt")
                     .font(.caption)
                     .padding()
+                    .dynamicTypeSize(.medium) // disables accessibility scaling
             }
         }
 }

@@ -1,0 +1,13 @@
+//
+//  Debug.xcconfig
+//  StudyApp
+//
+//  Created by Rajesh Mani on 13/07/25.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+OTHER_SWIFT_FLAGS = $(inherited) \
+  -Xfrontend -strict-concurrency=complete \
+  -Xfrontend -warn-concurrency \
+  -Xfrontend -enable-actor-data-race-checks

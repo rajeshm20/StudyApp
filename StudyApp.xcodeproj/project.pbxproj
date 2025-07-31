@@ -9,10 +9,16 @@
 /* Begin PBXBuildFile section */
 		61252D2E2D98E5E70052B8CA /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61252D2D2D98E5E70052B8CA /* GridView.swift */; };
 		61357E262D997E150071C7AF /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61357E252D997E150071C7AF /* Helpers.swift */; };
+		615A76F32DC66146008F30E3 /* ReusableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615A76F22DC66146008F30E3 /* ReusableRow.swift */; };
+		615A76F52DC66193008F30E3 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615A76F42DC66193008F30E3 /* ListView.swift */; };
+		615A76F72DC66F3F008F30E3 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615A76F62DC66F3F008F30E3 /* AppTheme.swift */; };
 		6169B3502DB94DA20075AE28 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6169B34F2DB94DA20075AE28 /* DatePickerView.swift */; };
-		61BC6E182DC3E7D7005EFFD9 /* DatePickerView 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BC6E172DC3E7D7005EFFD9 /* DatePickerView 2.swift */; };
+		616BB57C2E2356B000B6E64E /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 616BB57B2E2356B000B6E64E /* Debug.xcconfig */; };
+		61BC6E1C2DC3EB80005EFFD9 /* DatePickerView 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BC6E1B2DC3EB80005EFFD9 /* DatePickerView 2.swift */; };
 		61BE27142DB3748D0000DB49 /* GenericBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BE27132DB3748D0000DB49 /* GenericBottomSheetView.swift */; };
 		61C8846D2D8FF66D00D566FC /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C8846C2D8FF66D00D566FC /* Item.swift */; };
+		61E4E3992E0DAB2800E08337 /* CounterFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4E3982E0DAB2800E08337 /* CounterFeature.swift */; };
+		61E4E39B2E0DAB4D00E08337 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4E39A2E0DAB4D00E08337 /* CounterView.swift */; };
 		61FEC0EF2DAD755C00535FB1 /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FEC0EE2DAD755C00535FB1 /* SheetView.swift */; };
 		D32DFA452CA881A8009B603E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32DFA442CA881A8009B603E /* OnboardingView.swift */; };
 		D32DFA4B2CA88235009B603E /* TopIcon_Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32DFA4A2CA88235009B603E /* TopIcon_Title.swift */; };
@@ -51,10 +57,17 @@
 /* Begin PBXFileReference section */
 		61252D2D2D98E5E70052B8CA /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		61357E252D997E150071C7AF /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		615A76F22DC66146008F30E3 /* ReusableRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableRow.swift; sourceTree = "<group>"; };
+		615A76F42DC66193008F30E3 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		615A76F62DC66F3F008F30E3 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		6169B34F2DB94DA20075AE28 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
-		61BC6E172DC3E7D7005EFFD9 /* DatePickerView 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DatePickerView 2.swift"; sourceTree = "<group>"; };
+		616BB57B2E2356B000B6E64E /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		616BB57D2E23573100B6E64E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		61BC6E1B2DC3EB80005EFFD9 /* DatePickerView 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DatePickerView 2.swift"; sourceTree = "<group>"; };
 		61BE27132DB3748D0000DB49 /* GenericBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericBottomSheetView.swift; sourceTree = "<group>"; };
 		61C8846C2D8FF66D00D566FC /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		61E4E3982E0DAB2800E08337 /* CounterFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterFeature.swift; sourceTree = "<group>"; };
+		61E4E39A2E0DAB4D00E08337 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		61FEC0EE2DAD755C00535FB1 /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
 		D32DFA442CA881A8009B603E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		D32DFA4A2CA88235009B603E /* TopIcon_Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopIcon_Title.swift; sourceTree = "<group>"; };
@@ -77,6 +90,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		6139CCD82E3BD58D00E5C477 /* SwifuiNavigationStackTutorial */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SwifuiNavigationStackTutorial; sourceTree = "<group>"; };
 		6162E7282DBC836B0012953F /* Navigation */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Navigation; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -109,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				61357E252D997E150071C7AF /* Helpers.swift */,
+				615A76F62DC66F3F008F30E3 /* AppTheme.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -125,6 +140,7 @@
 		D34BE7442C9F163400A3A3CA = {
 			isa = PBXGroup;
 			children = (
+				616BB57B2E2356B000B6E64E /* Debug.xcconfig */,
 				D34BE74F2C9F163400A3A3CA /* StudyApp */,
 				D34BE7622C9F163600A3A3CA /* StudyAppTests */,
 				D34BE76C2C9F163600A3A3CA /* StudyAppUITests */,
@@ -145,6 +161,7 @@
 		D34BE74F2C9F163400A3A3CA /* StudyApp */ = {
 			isa = PBXGroup;
 			children = (
+				616BB57D2E23573100B6E64E /* Info.plist */,
 				61357E242D997DFF0071C7AF /* Helpers */,
 				D34BE7502C9F163400A3A3CA /* StudyAppApp.swift */,
 				D34BE7522C9F163400A3A3CA /* ContentView.swift */,
@@ -204,7 +221,12 @@
 				61FEC0EE2DAD755C00535FB1 /* SheetView.swift */,
 				61BE27132DB3748D0000DB49 /* GenericBottomSheetView.swift */,
 				6169B34F2DB94DA20075AE28 /* DatePickerView.swift */,
-				61BC6E172DC3E7D7005EFFD9 /* DatePickerView 2.swift */,
+				61BC6E1B2DC3EB80005EFFD9 /* DatePickerView 2.swift */,
+				615A76F22DC66146008F30E3 /* ReusableRow.swift */,
+				615A76F42DC66193008F30E3 /* ListView.swift */,
+				61E4E3982E0DAB2800E08337 /* CounterFeature.swift */,
+				61E4E39A2E0DAB4D00E08337 /* CounterView.swift */,
+				6139CCD82E3BD58D00E5C477 /* SwifuiNavigationStackTutorial */,
 			);
 			path = SignUpView;
 			sourceTree = "<group>";
@@ -225,6 +247,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				6139CCD82E3BD58D00E5C477 /* SwifuiNavigationStackTutorial */,
 				6162E7282DBC836B0012953F /* Navigation */,
 			);
 			name = StudyApp;
@@ -276,7 +299,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					D34BE74C2C9F163400A3A3CA = {
 						CreatedOnToolsVersion = 16.0;
@@ -300,6 +323,9 @@
 				Base,
 			);
 			mainGroup = D34BE7442C9F163400A3A3CA;
+			packageReferences = (
+				6188C40E2E11985B00C9C2D4 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = D34BE74E2C9F163400A3A3CA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -318,6 +344,7 @@
 			files = (
 				D34BE75A2C9F163600A3A3CA /* Preview Assets.xcassets in Resources */,
 				D34BE7572C9F163600A3A3CA /* Assets.xcassets in Resources */,
+				616BB57C2E2356B000B6E64E /* Debug.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,20 +369,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				615A76F72DC66F3F008F30E3 /* AppTheme.swift in Sources */,
 				D34BE7532C9F163400A3A3CA /* ContentView.swift in Sources */,
 				D32DFA452CA881A8009B603E /* OnboardingView.swift in Sources */,
 				D3FDDE1F2CA92AFD00143D0D /* BackgroundImageView.swift in Sources */,
 				61BE27142DB3748D0000DB49 /* GenericBottomSheetView.swift in Sources */,
-				61BC6E182DC3E7D7005EFFD9 /* DatePickerView 2.swift in Sources */,
+				61BC6E1C2DC3EB80005EFFD9 /* DatePickerView 2.swift in Sources */,
+				61E4E39B2E0DAB4D00E08337 /* CounterView.swift in Sources */,
 				D34BE77E2C9F2CD800A3A3CA /* LaunchScreenView.swift in Sources */,
 				D3FDDE212CA9771600143D0D /* OnboardUIModel.swift in Sources */,
 				6169B3502DB94DA20075AE28 /* DatePickerView.swift in Sources */,
 				D393620A2CA99E62002C368B /* OTPVerificationView.swift in Sources */,
+				615A76F32DC66146008F30E3 /* ReusableRow.swift in Sources */,
 				61C8846D2D8FF66D00D566FC /* Item.swift in Sources */,
 				D32DFA4B2CA88235009B603E /* TopIcon_Title.swift in Sources */,
 				61FEC0EF2DAD755C00535FB1 /* SheetView.swift in Sources */,
 				D39362082CA99770002C368B /* SignUpView.swift in Sources */,
 				D35B48862D32C04000AF3873 /* SignInView.swift in Sources */,
+				61E4E3992E0DAB2800E08337 /* CounterFeature.swift in Sources */,
+				615A76F52DC66193008F30E3 /* ListView.swift in Sources */,
 				61357E262D997E150071C7AF /* Helpers.swift in Sources */,
 				61252D2E2D98E5E70052B8CA /* GridView.swift in Sources */,
 				D34BE7512C9F163400A3A3CA /* StudyAppApp.swift in Sources */,
@@ -397,6 +429,7 @@
 /* Begin XCBuildConfiguration section */
 		D34BE7712C9F163600A3A3CA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 616BB57B2E2356B000B6E64E /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -430,6 +463,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4TTDUWKTNV;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -452,6 +486,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -493,6 +528,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 4TTDUWKTNV;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -508,6 +544,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
@@ -519,12 +556,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"StudyApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 4TTDUWKTNV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StudyApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -537,8 +575,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rajeshmani.StudyApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -548,12 +587,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"StudyApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 4TTDUWKTNV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StudyApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -566,8 +606,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rajeshmani.StudyApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -578,7 +619,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4TTDUWKTNV;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
@@ -597,7 +637,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4TTDUWKTNV;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
@@ -615,7 +654,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4TTDUWKTNV;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rajeshmani.StudyAppUITests;
@@ -632,7 +670,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4TTDUWKTNV;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rajeshmani.StudyAppUITests;
@@ -684,6 +721,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6188C40E2E11985B00C9C2D4 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.20.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = D34BE7452C9F163400A3A3CA /* Project object */;
 }

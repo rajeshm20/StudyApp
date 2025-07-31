@@ -253,7 +253,7 @@ struct FormField: View {
                 SecureField(placeholder, text: $text, onCommit: {
                     completion()
                 })
-                .onChange(of: text) { _ in
+                .onChange(of: text) {
                     completion()
                 }
                 .padding()
@@ -265,7 +265,7 @@ struct FormField: View {
                 TextField(placeholder, text: $text, onCommit: {
                     completion()
                 })
-                .onChange(of: text) { newValue in
+                .onChange(of: text) { oldValue, newValue in
                     if isPhoneNumber {
                         text = formatPhoneNumber(newValue)
                     }

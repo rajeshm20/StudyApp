@@ -50,7 +50,7 @@ struct OTPVerificationView: View {
                             .multilineTextAlignment(.center)
                             .keyboardType(.numberPad)
                             .focused($focusedIndex, equals: index)
-                            .onChange(of: code[index]) { newValue in
+                            .onChange(of: code[index]) { oldValue, newValue in
                                 let filtered = newValue.filter { $0.isNumber }
                                 
                                 // Update field with filtered value if it changed

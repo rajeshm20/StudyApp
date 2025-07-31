@@ -10,10 +10,11 @@ import UIKit
 
 protocol Serializable {
     func serialize() -> String
+    func deserialize(_ json: String) -> Self
 }
 
 
-extension Serializable where Self: Encodable {
+extension Serializable where Self: Codable {
     func serialize() -> String {
         let encoder = JSONEncoder()
         guard let data = try? encoder.encode(self),
@@ -22,12 +23,19 @@ extension Serializable where Self: Encodable {
         }
         return json
     }
+    func deserialize(_ json: String) -> Self {
+        let decoder = JSONDecoder()
+        guard let data = json.data(using: .utf8) else {
+            fatalError("Invalid JSON string")
+        }
+        return try! decoder.decode(Self.self, from: data)
+    }
 }
 
 
 // MARK: Example
 
-struct User: Serializable, Encodable {
+struct User: Serializable, Codable {
     let id: Int
     let name: String
 }
@@ -38,11 +46,11 @@ let user = User(id: 1, name: "Alice")
 
 
 protocol Stylable {
-    func applyStyle()
+    func applyStyle() async
 }
 
 extension Stylable where Self: UILabel {
-    func applyStyle() {
+    @MainActor func applyStyle() {
         self.font = UIFont.systemFont(ofSize: 16)
         self.textColor = .gray
     }
@@ -50,5 +58,5 @@ extension Stylable where Self: UILabel {
 
 extension UILabel: Stylable { }
 
-let label = UILabel()
+@MainActor let label = UILabel()
 //label.applyStyle()

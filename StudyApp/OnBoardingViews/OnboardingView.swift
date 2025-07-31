@@ -31,7 +31,7 @@ struct OnboardingView: View {
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)) // Remove default dot pagination
                 // Custom Pagination Indicator
                 HStack(spacing: 8) {
-                    ForEach(0..<pages.count) { index in
+                    ForEach(0..<pages.count, id: \.self) { index in
                         Circle()
                             .fill(currentPage == index ? Color.cyan : Color.gray.opacity(0.3))
                             .frame(width: 8, height: 8)
@@ -108,6 +108,9 @@ struct OnboardingView: View {
     }
 }
 
+@MainActor let screenWidth = UIScreen.main.bounds.width
+@MainActor let screenHeight = UIScreen.main.bounds.height
+
 struct OnboardingPageView: View {
    @State var page: PageData
     
@@ -117,7 +120,7 @@ struct OnboardingPageView: View {
                 Image(page.imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(height: 500)
+                    .frame(height: screenHeight * 0.6)
                     .clipped()
                     .overlay(
                         LinearGradient(
@@ -125,7 +128,7 @@ struct OnboardingPageView: View {
                             startPoint: .top,
                             endPoint: .bottom
                         )
-                        .frame(height: 500)
+                        .frame(height: screenHeight * 0.6)
                     )
                     .overlay(
                         VStack {
@@ -135,7 +138,6 @@ struct OnboardingPageView: View {
                     )
                     .ignoresSafeArea(edges: .top)  // Ensures the image ignores the safe area at the top
             }
-
 
             VStack(spacing: 20) {
                 Text(page.title)
