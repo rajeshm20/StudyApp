@@ -16,11 +16,11 @@ struct ProfileHeader: View {
                 .scaledToFill()
                 .frame(width: 100, height: 100)
                 .clipShape(Circle())
-                .overlay(Circle().stroke(Color.themee.accent, lineWidth: 2))
+                .overlay(Circle().stroke(Color.accent, lineWidth: 2))
             
             Button(action: {}) {
                 Circle()
-                    .fill(Color.themee.primary)
+                    .fill(Color.primary)
                     .frame(width: 32, height: 32)
                     .overlay(Image(systemName: "camera.fill").foregroundColor(.white))
             }

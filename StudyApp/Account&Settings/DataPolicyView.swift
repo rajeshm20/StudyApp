@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct TermsAndConditionsView: View {
+struct DataPolicyView: View {
     @State private var acceptEnabled = false
     @State private var accepted = false
     var router = Router<MainRoute>()
@@ -70,7 +70,7 @@ struct TermsAndConditionsView: View {
             }
             .background(Color(UIColor.systemBackground))
         }
-        .navigationTitle("Terms & Conditions")
+        .navigationTitle("Data Policy")
         .edgesIgnoringSafeArea(.bottom)
     }
 }
@@ -91,8 +91,8 @@ Welcome to our app. Please read these Terms & Conditions carefully before using 
 private let sampleParagraph = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.\n\n"
 
 // MARK: - Preview
-struct TermsAndConditionsView_Previews: PreviewProvider {
+struct DataPolicyView_Previews: PreviewProvider {
     static var previews: some View {
-        TermsAndConditionsView()
+        DataPolicyView()
     }
 }

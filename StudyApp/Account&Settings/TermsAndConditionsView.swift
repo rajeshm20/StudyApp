@@ -1,20 +1,20 @@
+//
+//  TermsAndConditionsView.swift
+//  StudyApp
+//
+//  Created by Rajesh Mani on 24/10/25.
+//
+
+
 import SwiftUI
 
 struct TermsAndConditionsView: View {
     @State private var acceptEnabled = false
     @State private var accepted = false
+    var router = Router<MainRoute>()
 
     var body: some View {
         VStack(spacing: 0) {
-            // Title
-            HStack {
-                Text("Terms & Conditions")
-                    .font(.title2)
-                    .bold()
-                Spacer()
-            }
-            .padding()
-
             // Scrollable terms content
             GeometryReader { outerProxy in
                 ScrollView {
@@ -70,13 +70,14 @@ struct TermsAndConditionsView: View {
             }
             .background(Color(UIColor.systemBackground))
         }
+        .navigationTitle("Terms & Conditions")
         .edgesIgnoringSafeArea(.bottom)
     }
 }
 
 // PreferenceKey that carries the bottom geometry's minY in the named coordinate space
-private struct BottomMinYPreferenceKey: PreferenceKey {
-    static var defaultValue: CGFloat = .infinity
+private struct BottomMinYPreferenceKey: @MainActor PreferenceKey {
+    static let defaultValue: CGFloat = .infinity
     static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
         value = nextValue()
     }

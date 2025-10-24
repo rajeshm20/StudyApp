@@ -5,12 +5,18 @@
 //  Created by Rajesh Mani on 14/10/25.
 //
 
-
 import SwiftUI
 
 struct SettingsHomeView: View {
+    var img: ImageResource?
+    @State private var profileUIImage: UIImage?
+    @State private var profile = Profile()
+    @State private var navigationManager = NavigationManager()
+    var router: Router<MainRoute>
+    @EnvironmentObject var coordinator: AppCoordinator
+
     var body: some View {
-        NavigationView {
+//        NavigationStack(path: $navigationManager.path) {
             VStack(spacing: 0) {
                 
                 // MARK: - Header
@@ -20,27 +26,48 @@ struct SettingsHomeView: View {
                     
                     // User Info
                     HStack(spacing: 14) {
-                        Image(systemName: "person.crop.circle.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 48, height: 48)
-                            .clipShape(Circle())
-                            .foregroundColor(Color.primaryBlue.opacity(0.9))
-                        
+                        if let uiImage = profileUIImage {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 54, height: 54)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(style: StrokeStyle(lineWidth: 1)))
+                        } else if let image = img {
+                            Image(image)
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(Color("themeColor"))
+                                .font(.system(size: 18))
+                                .frame(width: 54, height: 54)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(style: StrokeStyle(lineWidth: 1)))
+                        }
+                        else {
+                            Image(systemName: "person.crop.circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 54, height: 54)
+                                .clipShape(Circle())
+                                .foregroundColor(Color.primaryBlue.opacity(0.9))
+                        }
                         VStack(alignment: .leading, spacing: 3) {
                             Text("Welcome")
                                 .font(.system(size: 14))
                                 .foregroundColor(Color.gray)
-                            Text("Marvin McKinney")
+                            Text(profile.name)
                                 .font(.system(size: 17, weight: .semibold))
                                 .foregroundColor(.primary)
                         }
                         
                         Spacer()
-                        
-                        Image(systemName: "arrow.right.circle")
-                            .font(.system(size: 22))
-                            .foregroundColor(Color.gray.opacity(0.7))
+                        Button(action: {
+                            coordinator.switchToAuth()
+                        }) {
+                            Image(systemName: "arrow.right.circle")
+                                .font(.system(size: 22))
+                                .foregroundColor(Color.gray.opacity(0.7))
+                        }
                     }
                     .padding(.horizontal, 24)
                 }
@@ -50,41 +77,37 @@ struct SettingsHomeView: View {
                     .padding(.horizontal, 24)
                 
                 // MARK: - Menu List
-                VStack(spacing: 20) {
-                    NavigationLink(destination: ProfileView11()) {
+                Group {
+                    Button(action: {
+                        router.push(.profile)
+                    }, label: {
                         SettingsRow(icon: "person", title: "Profile")
-                    }
-                    NavigationLink(destination: AccountView()) {
+                    })
+                    Button(action: {
+                        router.push(.account)
+                    }, label: {
                         SettingsRow(icon: "shield", title: "Account")
-                    }
-                    NavigationLink(destination: SettingView()) {
+                    })
+                    Button(action: {
+                        router.push(.settings)
+                    }, label: {
                         SettingsRow(icon: "gearshape", title: "Setting")
-                    }
-                    NavigationLink(destination: AboutView()) {
+                    })
+                    Button(action: {
+                        router.push(.aboutus)
+                    }, label: {
                         SettingsRow(icon: "questionmark.circle", title: "About")
-                    }
+                    })
                 }
                 .padding(.top, 28)
                 
-                Spacer(minLength: 100)
-
+                Spacer(minLength: 50)
+                
                 // MARK: - Help Card
                 HelpCardView()
-//                VStack {
-//                    HStack(spacing: 10) {
-//                        Image(systemName: "headphones")
-//                            .font(.system(size: 20, weight: .medium))
-//                        Text("How can we help you?")
-//                            .font(.system(size: 16, weight: .semibold))
-//                    }
-//                    .padding()
-//                    .frame(maxWidth: .infinity)
-//                    .foregroundColor(.white)
-//                    .background(Color("themeColor"))
-//                    .cornerRadius(12)
-//                }
-//                .padding(.horizontal, 24)
-//                .padding(.top, 10)
+                    .onTapGesture(perform: {
+                        router.push(.aboutus)
+                    })
                 
                 Spacer(minLength: 100)
                 // MARK: - Footer
@@ -107,14 +130,66 @@ struct SettingsHomeView: View {
                     .font(.system(size: 13))
                     .foregroundColor(Color.gray)
                     .padding(.bottom, 8)
-                Spacer()
+                    Spacer()
                 }
                 .padding(.bottom, 8)
             }
             .navigationBarHidden(true)
             .background(Color.white.ignoresSafeArea())
+            .onAppear {
+                loadSavedProfileImage()
+            }
+//        }
+    }
+
+    // MARK: - Persistence helpers (match ProfilePictureView)
+    private var profileImageURL: URL? {
+        do {
+            let documents = try FileManager.default.url(
+                for: .documentDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: true
+            )
+            return documents.appendingPathComponent("profile.jpg")
+        } catch {
+            print("❌ Could not get Documents directory:", error)
+            return nil
         }
     }
+
+    private func loadSavedProfileImage() {
+        guard let fileURL = profileImageURL else { return }
+        guard FileManager.default.fileExists(atPath: fileURL.path) else {
+            profileUIImage = nil
+            return
+        }
+        do {
+            let data = try Data(contentsOf: fileURL)
+            profileUIImage = UIImage(data: data)
+        } catch {
+            print("❌ Failed to load saved profile image:", error)
+        }
+    }
+    
+//    @ViewBuilder
+//    private func destinationView(for destination: AppDestination) -> some View {
+//        switch destination {
+//        case .profile(_):
+//            ProfilePageView()
+//        case .account:
+//            AccountView()
+//        case .settings:
+//            SettingsView()
+//        case .about:
+//            AboutUsView()
+//        case .help:
+//            EmptyView()
+//        default:
+//            EmptyView()
+//        }
+//    }
+
 }
 
 // MARK: - Settings Row
@@ -146,39 +221,6 @@ struct SettingsRow: View {
     }
 }
 
-// MARK: - Dummy Pages
-struct ProfileView11: View {
-    var body: some View {
-        Text("Profile Page")
-            .font(.title2)
-            .navigationTitle("Profile")
-    }
-}
-
-struct AccountView: View {
-    var body: some View {
-        Text("Account Page")
-            .font(.title2)
-            .navigationTitle("Account")
-    }
-}
-
-struct SettingView: View {
-    var body: some View {
-        Text("Setting Page")
-            .font(.title2)
-            .navigationTitle("Setting")
-    }
-}
-
-struct AboutView: View {
-    var body: some View {
-        Text("About Page")
-            .font(.title2)
-            .navigationTitle("About")
-    }
-}
-
 // MARK: - Custom Color Extension
 extension Color {
     static let primaryBlue = Color("themeColor")
@@ -187,9 +229,12 @@ extension Color {
 // MARK: - Preview
 struct SettingsHomeView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsHomeView()
-            .environment(\.colorScheme, .light)
-            .preferredColorScheme(.light)
+        NavigationStack {
+            SettingsHomeView(img: .student3, router: Router<MainRoute>())
+                .environment(\.colorScheme, .light)
+                .preferredColorScheme(.light)
+                .environmentObject(PopupManager())
+        }
     }
 }
 
@@ -199,14 +244,14 @@ struct HelpCardView: View {
             // MARK: - Gradient Background
             LinearGradient(
                 gradient: Gradient(colors: [
-                    Color.theme,
-                    Color.theme.opacity(0.9)
+                    Color.cyan,
+                    Color.gray.opacity(0.9)
                 ]),
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
             .cornerRadius(14)
-            .shadow(color: Color.theme.opacity(0.2), radius: 6, x: 0, y: 2)
+            .shadow(color: Color.yellow.opacity(0.2), radius: 6, x: 0, y: 2)
 
             // MARK: - Decorative Circles
             GeometryReader { geo in
@@ -214,31 +259,16 @@ struct HelpCardView: View {
                     Circle()
                         .fill(Color.white.opacity(0.12))
                         .frame(width: geo.size.width * 0.35)
-                        .offset(x: geo.size.width * 0.65, y: -geo.size.height * 0.25)
-                    
-                    Circle()
-                        .fill(Color.white.opacity(0.2))
-                        .frame(width: geo.size.width * 0.25)
-                        .offset(x: geo.size.width * 0.6, y: geo.size.height * 0.2)
-                    
-                    Circle()
-                        .fill(Color.white.opacity(0.24))
-                        .frame(width: geo.size.width * 0.18)
-                        .offset(x: -geo.size.width * 0.6, y: geo.size.height * 0.3)
-                    
-                    Circle()
-                        .fill(Color.white.opacity(0.6))
-                        .frame(width: geo.size.width * 0.1)
-                        .offset(x: -geo.size.width * 0.4, y: -geo.size.height * 0.25)
+                        .offset(x: geo.size.width * 0.65, y: -geo.size.height * 0.20)
                 }
             }
             .clipped()
             .cornerRadius(14)
 
-            // MARK: - Foreground Content
+            // MARK: - Ad Content
             HStack(spacing: 14) {
                 ZStack {
-                    DottedArc(startAngle: .degrees(190), endAngle: .degrees(-60))
+                    DottedArc(startAngle: .degrees(180), endAngle: .degrees(-90))
                         .fill(Color.white.opacity(0.9))
                         .frame(width: 56, height: 56)
                     Image(systemName: "headphones")

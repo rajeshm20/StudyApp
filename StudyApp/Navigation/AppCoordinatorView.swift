@@ -1,3 +1,35 @@
+//
+//  AppCoordinatorView.swift
+//  StudyApp
+//
+//  Created by Rajesh Mani on 24/10/25.
+//
+import SwiftUI
+import Observation
+
+@MainActor
+final class AppCoordinator: ObservableObject {
+    enum Flow {
+        case auth
+        case main
+    }
+
+    @Published var currentFlow: Flow = .auth
+
+    func switchToMain() {
+        withAnimation {
+            currentFlow = .main
+        }
+    }
+
+    func switchToAuth() {
+        withAnimation {
+            currentFlow = .auth
+        }
+    }
+}
+
+
 struct AppCoordinatorView: View {
     @StateObject private var coordinator = AppCoordinator()
 

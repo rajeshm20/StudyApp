@@ -141,9 +141,14 @@ class StudentDataService: ObservableObject {
 struct StudentDashboardView: View {
     @StateObject private var dataService = StudentDataService()
     @State private var selectedTab: TabSelection = .dashboard
-    
+    @EnvironmentObject var popupManager: PopupManager
+    // Shared NavigationManager for Option A (single stack at parent)
+    @State private var navigationManager = NavigationManager()
+    var router: Router<MainRoute>
+    @EnvironmentObject var coordinator: AppCoordinator
+
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
                 // Main Content
                 Group {
@@ -161,7 +166,8 @@ struct StudentDashboardView: View {
                     case .assignments:
                         AssignmentsView()
                     case .profile:
-                        SettingsHomeView()
+                        // SettingsHomeView will use the same NavigationManager via environment
+                        SettingsHomeView(router: router)
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -169,9 +175,12 @@ struct StudentDashboardView: View {
                 // Bottom Tab Bar
                 BottomTabBar(selectedTab: $selectedTab)
             }
+            .navigationTitle("Dashboard")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(false)
         }
     }
+
 }
 
 // MARK: - Loading View
@@ -407,6 +416,7 @@ struct CalendarView: View {
                 Spacer()
             }
         }
+        .navigationTitle("Calendar")
         .background(Color(.systemGroupedBackground))
     }
 }
@@ -449,11 +459,12 @@ struct AssignmentsView: View {
                 Spacer()
             }
         }
+        .navigationTitle("Assignments")
         .background(Color(.systemGroupedBackground))
     }
 }
 
-struct ProfileVieww: View {
+struct ProfileViewAlternate: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
@@ -502,6 +513,9 @@ struct ProfileVieww: View {
         }
         .background(Color(.systemGroupedBackground))
     }
+}
+#Preview {
+    ProfileViewAlternate()
 }
 
 // MARK: - Helper Views
@@ -791,10 +805,6 @@ struct TabBarItem: View {
 }
 
 #Preview("Dashboard") {
-    StudentDashboardView()
+    StudentDashboardView(router: Router<MainRoute>())
         .environmentObject(PopupManager())
-}
-
-#Preview("Profile Mock") {
-    ProfileVieww()
 }

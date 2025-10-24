@@ -3,7 +3,7 @@
 //  SchoolStudentApp
 //
 //  Created by Rajesh Mani on 31/07/25.
-//
+// reference: https://swift-pal.com
 import SwiftUI
 
 struct ContentVieww: View {
@@ -40,15 +40,19 @@ struct ContentVieww: View {
     private func destinationView(for destination: AppDestination) -> some View {
         switch destination {
         case .profile(let userID):
-            ProfileView(userID: userID)
+            ProfileVu(userID: userID)
         case .settings:
-            SettingsView()
+            SettingsHomeView(img: .student3, router: Router<MainRoute>())
         case .cart:
             CartView()
         case .productDetail(let products):
             ProductDetailView(products: products)
         case .orderHistory(let userID, let page):
             OrderHistoryView(userID: userID, initialPage: page)
+        case .dashboard:
+            StudentDashboardView(router: Router<MainRoute>())
+        default:
+            EmptyView()
         }
     }
 }
@@ -58,7 +62,7 @@ struct ContentVieww: View {
 }
 
 
-struct ProfileView: View {
+struct ProfileVu: View {
     let userID: String
 
     var body: some View {
@@ -73,7 +77,7 @@ struct ProfileView: View {
 }
 
 
-struct SettingsView: View {
+struct SettingsView2: View {
     var body: some View {
         Form {
             Section(header: Text("Preferences")) {

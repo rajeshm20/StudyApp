@@ -1,8 +1,16 @@
+//
+//  BadExpression.swift
+//  StudyApp
+//
+//  Created by Rajesh Mani on 31/08/25.
+//
+import Foundation
+
 // ❌ This won't compile - infinite size
-enum BadExpression {
-    case number(Int)
-    case addition(BadExpression, BadExpression) // Error: recursive enum case
-}
+//enum BadExpression {
+//    case number(Int)
+//    case addition(BadExpression, BadExpression) // Error: recursive enum case
+//}
 
 // ✅ This works - indirect cases are heap-allocated
 indirect enum Expression {
@@ -33,4 +41,4 @@ let expression = Expression.addition(
     .multiplication(.number(2), .number(3)),
     .division(.number(10), .number(2))
 )
-print(expression.evaluate()) // Prints: 11
+//print(expression.evaluate()) // Prints: 11

@@ -8,6 +8,7 @@
 // fix compile time errors.
 
 import SwiftUI
+import Combine
 
 enum Title: String {
     case name = "Name"
@@ -35,26 +36,37 @@ struct SignUpView: View {
 
     // Add this new state variable for navigation
     @State private var navigateToOTP: Bool = false
+    var router = Router<AuthRoute>()
 
     var body: some View {
-        NavigationStack {  // Wrap the main content in NavigationStack
             ZStack {
                 ScrollView {
                     VStack {
-                        // Navigation Bar
-                        HStack {
-                            Spacer()
-                            Text("Sign up")
-                                .font(.title2)
-                                .fontWeight(.semibold)
-                            Spacer()
-                        }
-                        .padding()
                         // Form Fields with Validation Errors
-                        FormField(title: "Name", placeholder: "Your name", text: $name, error: $nameError, completion: { self.validateFields(title: .name) })
-                        FormField(title: "Email", placeholder: "study@email.com", text: $email, keyboardType: .emailAddress, error: $emailError, completion: { self.validateFields(title: .email) })
-                        FormField(title: "Password", placeholder: "Your password", text: $password, isSecure: true, error: $passwordError, completion: { self.validateFields(title:.password) })
-                        FormField(title: "Phone Number", placeholder: "0334 xxxx xxxx", text: $phoneNumber, keyboardType: .numberPad, error: $phoneNumberError, isPhoneNumber: true, completion: { self.validateFields(title: .phoneNumber) })
+                        FormField(title: "Name",
+                                  placeholder: "Your name",
+                                  text: $name,
+                                  error: $nameError,
+                                  completion: { self.validateFields(title: .name) })
+                        FormField(title: "Email",
+                                  placeholder: "study@email.com",
+                                  text: $email,
+                                  keyboardType: .emailAddress,
+                                  error: $emailError,
+                                  completion: { self.validateFields(title: .email) })
+                        FormField(title: "Password",
+                                  placeholder: "Your password",
+                                  text: $password,
+                                  isSecure: true,
+                                  error: $passwordError,
+                                  completion: { self.validateFields(title:.password) })
+                        FormField(title: "Phone Number",
+                                  placeholder: "0334 xxxx xxxx",
+                                  text: $phoneNumber,
+                                  keyboardType: .numberPad,
+                                  error: $phoneNumberError,
+                                  isPhoneNumber: true,
+                                  completion: { self.validateFields(title: .phoneNumber) })
 
                         // Terms and Conditions Checkbox
                         HStack(alignment: .top) {
@@ -86,22 +98,27 @@ struct SignUpView: View {
 
                         Spacer()
 
-                        // Sign-Up Button
-                        Button(action: {
+                        // Sign-Up Button (Reusable)
+                        AppButton(
+                            title: "Sign Up",
+                            style: .filled,
+                            foregroundColor: .white,
+                            backgroundColor: .cyan,
+                            cornerRadius: 8,
+                            font: .system(size: 18, weight: .bold),
+                            fullWidth: true,
+                            isLoading: false,
+                            isDisabled: false
+                        ) {
                             validateAllFields()
-                        }) {
-                            Text("Sign Up")
-                                .foregroundColor(.white)
-                                .font(.system(size: 18, weight: .bold))
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.cyan)
-                                .cornerRadius(8)
                         }
                         .padding()
 
                         Spacer()
                     }
+                    .navigationTitle("Sign Up")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarBackButtonHidden(true)
                     .padding(.horizontal)
                 }
 
@@ -132,6 +149,7 @@ struct SignUpView: View {
                             Button(action: {
                                 showPopup = false
                                 navigateToOTP = true  // Trigger navigation
+                                router.push(.otp)
                             }) {
                                 Text("Accept")
                                     .foregroundColor(.white)
@@ -150,10 +168,10 @@ struct SignUpView: View {
                     }
                 }
             }
-            .navigationDestination(isPresented: $navigateToOTP) {
-                OTPVerificationView()
-            }
-        }
+            .simultaneousGesture(
+                TapGesture().onEnded { self.hideKeyboard() }
+            )
+
     }
 
     // Add this new function
@@ -187,127 +205,26 @@ struct SignUpView: View {
         case .name:
             nameError = name.isEmpty ? "Name cannot be empty" : nil
         case .email:
-            emailError = isValidEmail(email) ? nil : "Please enter a valid email"
+            emailError = ValidationHelper.isValidEmail(email) ? nil : "Please enter a valid email"
         case .password:
             if password.isEmpty {
                 passwordError = "Password cannot be empty"
             } else if password.count < 6 {
                 passwordError = "Password must be at least 6 characters"
-            } else if !isValidPassword(password) {
+            } else if !ValidationHelper.isValidPassword(password) {
                 passwordError = "Password must contain both letters and numbers"
             } else {
                 passwordError = nil
             }
         case .phoneNumber:
-            phoneNumberError = isValidPhoneNumber(phoneNumber) ? nil : "Please enter a valid phone number"
+            phoneNumberError = ValidationHelper.isValidPhoneNumber(phoneNumber) ? nil : "Please enter a valid phone number"
         case .terms:
             termsError = agreeToTerms ? nil : "You must agree to the terms"
         }
         // Remove the automatic popup showing logic from here
     }
-
-    // Email validation function
-    func isValidEmail(_ email: String) -> Bool {
-        // Simple email validation (you can make it more complex)
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
-    }
-
-    // Phone number validation function
-    func isValidPhoneNumber(_ number: String) -> Bool {
-        // Updated regex to ensure exactly 12 digits with proper spacing
-        let phoneRegex = "^\\d{4} \\d{4} \\d{4}$"
-        let phonePred = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
-        return phonePred.evaluate(with: number)
-    }
-
-    // Add this new password validation function
-    func isValidPassword(_ password: String) -> Bool {
-        let hasLetters = password.contains { $0.isLetter }
-        let hasNumbers = password.contains { $0.isNumber }
-        return hasLetters && hasNumbers
-    }
-
 }
 
-// MARK: - Reusable Form Field View with Validation
-struct FormField: View {
-    var title: String
-    var placeholder: String
-    @Binding var text: String
-    var isSecure: Bool = false
-    var keyboardType: UIKeyboardType = .default
-    @Binding var error: String?
-    var isPhoneNumber: Bool = false
-    var completion: () -> Void
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(title)
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .foregroundColor(.black)
-
-            if isSecure {
-                SecureField(placeholder, text: $text, onCommit: {
-                    completion()
-                })
-                .onChange(of: text) {
-                    completion()
-                }
-                .padding()
-                .background(Color.gray.opacity(0.1))
-                .background(RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray, lineWidth: 0.5)) // Border
-                .cornerRadius(8)
-            } else {
-                TextField(placeholder, text: $text, onCommit: {
-                    completion()
-                })
-                .onChange(of: text) { oldValue, newValue in
-                    if isPhoneNumber {
-                        text = formatPhoneNumber(newValue)
-                    }
-                    completion()
-                }
-                .keyboardType(keyboardType)
-                .textInputAutocapitalization(keyboardType == .emailAddress ? .never : .sentences)
-                .padding()
-                .background(Color.gray.opacity(0.1))
-                .background(RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray, lineWidth: 0.5)) // Border
-                .cornerRadius(8)
-            }
-
-            // Display validation error if exists
-            if let error = error {
-                Text(error)
-                    .foregroundColor(.red)
-                    .font(.caption)
-                    .padding(.top, 5)
-            }
-        }
-        .padding(.vertical, 5)
-        
-    }
-    
-    func formatPhoneNumber(_ number: String) -> String {
-        let digits = number.filter { $0.isNumber }
-        // Limit to 12 digits (4+4+4)
-        let truncatedDigits = String(digits.prefix(12))
-        
-        var formatted = ""
-        for (index, digit) in truncatedDigits.enumerated() {
-            if index == 4 || index == 8 {
-                formatted += " "
-            }
-            formatted += String(digit)
-        }
-        return formatted
-    }
-
-}
 
 // MARK: - Custom Checkbox Style
 struct CheckboxToggleStyle: ToggleStyle {
