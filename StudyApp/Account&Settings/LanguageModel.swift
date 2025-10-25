@@ -7,6 +7,7 @@
 
 
 import Foundation
+import SwiftUI
 
 struct Language: Identifiable, Codable {
     let id = UUID()
@@ -19,5 +20,28 @@ struct Language: Identifiable, Codable {
             .compactMap(UnicodeScalar.init)
             .map(String.init)
             .joined()
+    }
+}
+
+@MainActor
+class LanguageViewModel: ObservableObject {
+    @Published var languages: [Language] = []
+    @Published var searchText: String = ""
+    @Published var selectedLanguage: Language?
+
+    var filteredLanguages: [Language] {
+        if searchText.isEmpty {
+            return languages
+        } else {
+            return languages.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+        }
+    }
+
+    func loadLanguages() {
+        if let url = Bundle.main.url(forResource: "countries", withExtension: "json"),
+           let data = try? Data(contentsOf: url),
+           let decoded = try? JSONDecoder().decode([Language].self, from: data) {
+            languages = decoded
+        }
     }
 }

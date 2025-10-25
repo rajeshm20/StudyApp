@@ -1,36 +1,18 @@
+//
+//  NotificationPermissionView.swift
+//  StudyApp
+//
+//  Created by Rajesh Mani on 24/10/25.
+//
+
+
 import SwiftUI
 
 struct NotificationPermissionView: View {
+    var router = Router<AuthRoute>()
+
     var body: some View {
         VStack {
-            // Top bar
-            HStack {
-                Button(action: {
-                    // Handle back action
-                }) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(.black)
-                }
-
-                Spacer()
-
-                // Progress dots
-                HStack(spacing: 6) {
-                    Circle().fill(Color.gray.opacity(0.4)).frame(width: 6, height: 6)
-                    Circle().fill(Color.gray.opacity(0.4)).frame(width: 6, height: 6)
-                    Circle().fill(Color.blue).frame(width: 6, height: 6)
-                }
-
-                Spacer()
-                // Empty placeholder for alignment
-                Color.clear.frame(width: 24, height: 24)
-            }
-            .padding(.horizontal)
-            .padding(.top, 8)
-
-            Spacer()
-
             // Title and subtitle
             VStack(spacing: 10) {
                 Text("Give me notifications")
@@ -58,6 +40,7 @@ struct NotificationPermissionView: View {
             VStack(spacing: 16) {
                 Button(action: {
                     // Request notification permissions
+                    router.push(.signIn)
                 }) {
                     Text("Turn On Notifications")
                         .font(.headline)
@@ -71,6 +54,7 @@ struct NotificationPermissionView: View {
 
                 Button(action: {
                     // Remind me later action
+                    router.push(.signIn)
                 }) {
                     Text("Remind me later")
                         .font(.headline)

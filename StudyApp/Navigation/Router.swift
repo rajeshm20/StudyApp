@@ -1,3 +1,13 @@
+//
+//  Router.swift
+//  StudyApp
+//
+//  Created by Rajesh Mani on 24/10/25.
+//
+
+import SwiftUI
+import Observation
+
 @MainActor
 final class Router<Route: Hashable>: ObservableObject {
     @Published var path = NavigationPath()
@@ -21,9 +31,19 @@ enum AuthRoute: Hashable {
     case onboard
     case signUp
     case otp
+    case userOnboard
     case signIn
 }
 enum MainRoute: Hashable {
     case dashboard
     case profile
+    case account
+    case settings
+    case aboutus
+    case notifications
+    case countries
+    case termsConditions
+    case datapolicy
 }
+//enum SettingsRoute: Hashable {
+//}

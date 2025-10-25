@@ -1,3 +1,11 @@
+//
+//  ChooseTopicInterestView.swift
+//  StudyApp
+//
+//  Created by Rajesh Mani on 24/10/25.
+//
+
+
 import SwiftUI
 
 struct ChooseTopicInterestView: View {
@@ -10,39 +18,9 @@ struct ChooseTopicInterestView: View {
         Topic(name: "Biology", subtitle: "Cells, Plants, Animals", icon: "leaf.fill", color: Color.green.opacity(0.2)),
         Topic(name: "Geography", subtitle: "Maps, Climate, Earth", icon: "chart.pie.fill", color: Color.gray.opacity(0.2))
     ]
-
+    
     var body: some View {
         VStack(spacing: 24) {
-            // Header
-            HStack {
-                Button(action: {
-                    // Back action
-                }) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(.black)
-                }
-
-                Spacer()
-
-                // Progress dots
-                HStack(spacing: 6) {
-                    Circle().fill(Color.gray.opacity(0.4)).frame(width: 6, height: 6)
-                    Circle().fill(Color.blue).frame(width: 6, height: 6)
-                    Circle().fill(Color.gray.opacity(0.4)).frame(width: 6, height: 6)
-                }
-
-                Spacer()
-
-                Button("Skip") {
-                    // Skip action
-                }
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundColor(.gray)
-            }
-            .padding(.horizontal)
-            .padding(.top)
-
             // Title
             VStack(spacing: 6) {
                 Text("Choose your topic interest")

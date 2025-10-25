@@ -1,3 +1,11 @@
+//
+//  CreateProfileView.swift
+//  StudyApp
+//
+//  Created by Rajesh Mani on 24/10/25.
+//
+
+
 import SwiftUI
 
 struct CreateProfileView: View {
@@ -7,36 +15,6 @@ struct CreateProfileView: View {
 
     var body: some View {
         VStack(spacing: 24) {
-            // Top navigation section
-            HStack {
-                Button(action: {
-                    // Handle back action
-                }) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(.black)
-                }
-
-                Spacer()
-
-                // Page indicator dots
-                HStack(spacing: 6) {
-                    Circle().fill(Color.gray.opacity(0.4)).frame(width: 6, height: 6)
-                    Circle().fill(Color.blue).frame(width: 6, height: 6)
-                    Circle().fill(Color.gray.opacity(0.4)).frame(width: 6, height: 6)
-                }
-
-                Spacer()
-
-                Button("Skip") {
-                    // Handle skip action
-                }
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundColor(.gray)
-            }
-            .padding(.horizontal)
-            .padding(.top)
-
             // Title and subtitle
             VStack(spacing: 8) {
                 Text("Create your profile")

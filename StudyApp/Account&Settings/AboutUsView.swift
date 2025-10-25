@@ -8,8 +8,32 @@
 import SwiftUI
 
 struct AboutUsView: View {
+    var router = Router<MainRoute>()
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            List {
+                Button(action: { }) {
+                    Text("About Us")
+                }
+                Button(action: { }) {
+                    Text("Help")
+                }
+                Button(action: {
+                    router.push(.termsConditions)
+                }) {
+                    Text("Terms and Condition")
+                }
+                Button(action: {
+                    router.push(.datapolicy)
+                }) {
+                    Text("Data Policy")
+                }
+            }
+            .font(.headline)
+            .foregroundStyle(.black)
+        }
+        .navigationTitle("Account")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

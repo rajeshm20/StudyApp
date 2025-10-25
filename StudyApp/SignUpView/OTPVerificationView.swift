@@ -8,12 +8,12 @@
 import SwiftUI
 import Combine
 
-
 struct OTPVerificationView: View {
     @State private var code: [String] = ["", "", "", ""]
     @FocusState private var focusedIndex: Int?
     @State private var navigateToLogin: Bool = false
     @State private var enableVerifyBtn: Bool = false
+    var router: Router<AuthRoute>
     var body: some View {
         VStack {
             // Header
@@ -85,7 +85,7 @@ struct OTPVerificationView: View {
             Button(action: {
                 // Handle verification logic
                 if enableVerifyBtn {
-                    navigateToLogin = true
+                    router.push(.userOnboard)
                 }
             }) {
                 Text("Verify")
@@ -111,21 +111,19 @@ struct OTPVerificationView: View {
             .padding(.top, 20)
             
         }
-        .navigationDestination(isPresented: $navigateToLogin) {
-            SignInView()
-        }
+        .navigationBarBackButtonHidden(true)
         .padding()
         .background(
             LinearGradient(gradient: Gradient(colors: [Color.blue, Color.cyan]),
                            startPoint: .top,
                            endPoint: .bottom)
-                .ignoresSafeArea()
+            .ignoresSafeArea()
         )
     }
 }
 
 struct OTPVerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        OTPVerificationView()
+        OTPVerificationView(router: Router<AuthRoute>())
     }
 }

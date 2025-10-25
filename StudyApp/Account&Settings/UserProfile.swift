@@ -1,3 +1,11 @@
+//
+//  UserProfile.swift
+//  StudyApp
+//
+//  Created by Rajesh Mani on 15/10/25.
+//
+
+
 import Foundation
 
 struct UserProfile: Codable {

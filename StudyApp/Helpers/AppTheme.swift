@@ -47,3 +47,56 @@ struct AppFont {
 extension Color {
     static let brandPrimary = Color("themeColor")
 }
+
+
+enum AppTheme1: String, CaseIterable, Codable {
+    case system = "system"
+    case light = "light"
+    case dark = "dark"
+    case cosmic = "cosmic"
+    
+    var displayName: String {
+        switch self {
+        case .system: return "System"
+        case .light: return "Light"
+        case .dark: return "Dark"
+        case .cosmic: return "Cosmic Purple"
+        }
+    }
+    
+    var colorScheme: ColorScheme? {
+        switch self {
+        case .system: return nil
+        case .light: return .light
+        case .dark, .cosmic: return .dark
+        }
+    }
+    
+    var accentColor: Color {
+        switch self {
+        case .system, .light: return .blue
+        case .dark: return .cyan
+        case .cosmic: return .purple
+        }
+    }
+}
+
+struct ThemeSettings: View {
+    @AppStorage("selectedTheme") private var selectedTheme: AppTheme1 = .system
+    
+    var body: some View {
+        Form {
+            Section("Appearance") {
+                Picker("Theme", selection: $selectedTheme) {
+                    ForEach(AppTheme1.allCases, id: \.self) { theme in
+                        Text(theme.displayName)
+                            .tag(theme)
+                    }
+                }
+                .pickerStyle(.segmented)
+            }
+        }
+        .preferredColorScheme(selectedTheme.colorScheme)
+        .accentColor(selectedTheme.accentColor)
+    }
+}

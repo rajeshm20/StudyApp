@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import Combine
 
 struct LaunchScreenView: View {
     @State private var title: String = "Study"
     @State private var navigateToOnboard = false
+    var router: Router<AuthRoute>
 
     var body: some View {
         NavigationStack {
@@ -34,6 +36,7 @@ struct LaunchScreenView: View {
                     .padding(.bottom, 30) // Adds space below text
                 Button(action: {
                     navigateToOnboard = true
+                    router.push(.onboard)
                 }, label: {
                     Text("Let's Start")
                         .font(.system(size: 20))
@@ -43,10 +46,10 @@ struct LaunchScreenView: View {
                         .background(Color.cyan)
                         .clipShape(.buttonBorder)
                 })
-                .navigationDestination(isPresented: $navigateToOnboard) {
-                    OnboardingView()
-                        .navigationBarBackButtonHidden(true)
-                }
+//                .navigationDestination(isPresented: $navigateToOnboard) {
+//                    OnboardingView()
+//                        .navigationBarBackButtonHidden(true)
+//                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding() // Ensure content respects safe areas
@@ -55,8 +58,7 @@ struct LaunchScreenView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill) // Use aspectRatio to fill but avoid excessive scaling
                     .ignoresSafeArea() // Ensure it fills the entire screen without interfering with content layout
-                LinearGradient(gradient: Gradient(colors: [.green, .blue]), startPoint: .top, endPoint: .bottom)
-                    .opacity(0.8)
+                LinearGradient(gradient: Gradient(colors: [.black.opacity(0.2), .blue.opacity(0.6), .blue]), startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
             }
         }
@@ -64,5 +66,6 @@ struct LaunchScreenView: View {
 }
 
 #Preview {
-    LaunchScreenView()
+    @Previewable var router: Router<AuthRoute> = Router<AuthRoute>()
+    LaunchScreenView(router: router)
 }

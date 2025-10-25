@@ -6,30 +6,35 @@
 //
 
 import SwiftUI
+import Combine
+
+@MainActor let screenWidth = UIScreen.main.bounds.width
+@MainActor let screenHeight = UIScreen.main.bounds.height
 
 struct OnboardingView: View {
     let pages = [
-        PageData(imageName: "student5", title: "Find Your Favourite Class", description: "Find your favorite class. Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
+        PageData(imageName: "StudyingFemale", title: "Find Your Favourite Class", description: "Find your favorite class. Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
         PageData(imageName: "student3", title: "Explore More Skills", description: "Learn from the best instructors and enhance your skills."),
-        PageData(imageName: "thumbsUp", title: "Get the Best Class with Best Teacher", description: "Accelerate your learning journey and achieve your goals.")
+        PageData(imageName: "student5", title: "Get the Best Class with Best Teacher", description: "Accelerate your learning journey and achieve your goals.")
     ]
 
     @State private var currentPage = 0
     @State private var showSignUpView = false
     @State private var showSignInView = false
-
+    var router = Router<AuthRoute>()
+    
     var body: some View {
-        NavigationStack {
             VStack {
                 TabView(selection: $currentPage) {
                     ForEach(0..<pages.count, id: \.self) { index in
                         OnboardingPageView(page: pages[index])
                             .tag(index)
+                            .ignoresSafeArea(.container, edges: .top)
                     }
                 }
-                .ignoresSafeArea()
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)) // Remove default dot pagination
-                // Custom Pagination Indicator
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .ignoresSafeArea(.container, edges: .top)
+
                 HStack(spacing: 8) {
                     ForEach(0..<pages.count, id: \.self) { index in
                         Circle()
@@ -38,13 +43,13 @@ struct OnboardingView: View {
                     }
                 }
                 Spacer()
-                
+
                 HStack {
                     Button(action: {
                         if currentPage == 2 {
                             showSignUpView = true
+                            router.push(.signUp)
                         } else {
-                            // Skip to last page when "Skip" is pressed
                             currentPage = pages.count - 1
                         }
                     }) {
@@ -52,11 +57,11 @@ struct OnboardingView: View {
                             .foregroundColor(.cyan)
                     }
                     Spacer()
-                    
-                    // Next Button
+
                     Button(action: {
                         if currentPage == 2 {
                             showSignInView = true
+                            router.push(.signIn)
                         } else {
                             currentPage += 1
                         }
@@ -71,87 +76,72 @@ struct OnboardingView: View {
                                 .background(Color.cyan)
                                 .clipShape(Circle())
                         }
-                        
                     }
                 }
                 .padding(.horizontal, 40)
                 .padding(.bottom, 30)
             }
             .background(Color.white)
-            .navigationBarBackButtonHidden(false) // Show the default back button
-            .navigationDestination(isPresented: $showSignUpView) {
-                SignUpView()
-//                    .toolbar {
-//                        ToolbarItem(placement: .navigationBarLeading) {
-//                            Button(action: { showSignUpView = false }) {
-//                                Image(systemName: "arrow.left")
-//                                    .foregroundColor(.black)
-//                            }
-//                        }
-//                    }
-//                    .navigationBarBackButtonHidden(true)
-                }
-                    .navigationDestination(isPresented: $showSignInView) {
-                        SignInView()
-//                            .toolbar {
-//                                ToolbarItem(placement: .navigationBarLeading) {
-//                                    Button(action: { showSignInView = false }) {
-//                                        Image(systemName: "arrow.left")
-//                                            .foregroundColor(.black)
-//                                    }
-//                                }
-//                            }
-//                            .navigationBarBackButtonHidden(true)
-                }
-
-        }
+            .ignoresSafeArea(.container, edges: .top) // ensure root content can draw under the notch
+            .navigationBarBackButtonHidden(true)
     }
 }
 
-@MainActor let screenWidth = UIScreen.main.bounds.width
-@MainActor let screenHeight = UIScreen.main.bounds.height
-
 struct OnboardingPageView: View {
-   @State var page: PageData
-    
-    var body: some View {
-        VStack {
-            ZStack(alignment: .top) {
-                Image(page.imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: screenHeight * 0.6)
-                    .clipped()
-                    .overlay(
-                        LinearGradient(
-                            gradient: Gradient(colors: [.clear, .cyan.opacity(0.7)]),
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                        .frame(height: screenHeight * 0.6)
-                    )
-                    .overlay(
-                        VStack {
-                            TopIcon_Title(title: "Study")
-                        }
-                        .offset(y: 180)
-                    )
-                    .ignoresSafeArea(edges: .top)  // Ensures the image ignores the safe area at the top
-            }
+    @State var page: PageData
 
-            VStack(spacing: 20) {
-                Text(page.title)
-                    .font(.system(size: 25, weight: .bold))
-                    .multilineTextAlignment(.center)
-                    .frame(height:60)
-                Text(page.description)
-                    .font(.body)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 40)
-                    .frame(height:50)
+    var body: some View {
+        GeometryReader { geo in
+            // Visible hero portion ~60% of screen height, but we add top inset so it extends under the notch.
+            let baseHeroHeight = geo.size.height * 0.6
+            let heroHeightWithInset = baseHeroHeight + geo.safeAreaInsets.top
+
+            VStack(spacing: 0) {
+                ZStack() {
+                    Image(page.imageName)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geo.size.width, height: heroHeightWithInset)
+                        .overlay(
+                            LinearGradient(
+                                gradient: Gradient(colors: [.clear, .cyan.opacity(0.7)]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                            .frame(width: geo.size.width, height: heroHeightWithInset)
+                        )
+                    TopIcon_Title(title: "Study")
+                        .padding(.top, geo.safeAreaInsets.top + 400)
+                        .padding(.leading, 20)
+                        .padding(.bottom, geo.safeAreaInsets.bottom + 50)
+
+                }
+                // Important: the container uses the extended height, so it truly occupies the area under the status bar
+                .frame(width: geo.size.width, height: heroHeightWithInset)
+                .contentShape(Rectangle())
+                .ignoresSafeArea(.container, edges: .top)
+                .clipped()
+
+                VStack(spacing: 20) {
+                    Text(page.title)
+                        .font(.system(size: 25, weight: .bold))
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.horizontal, 24)
+
+                    Text(page.description)
+                        .font(.body)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.horizontal, 40)
+                }
+                .padding(.top, 20)
+                .padding(.bottom, 30)
+
+                Spacer(minLength: 0)
             }
-            .padding(.bottom, 50)
-            Spacer()
+            .frame(width: geo.size.width, height: geo.size.height)
         }
     }
 }
@@ -159,5 +149,7 @@ struct OnboardingPageView: View {
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingView()
+            .previewDevice("iPhone 15 Pro")
+            .environmentObject(AppCoordinator())
     }
 }

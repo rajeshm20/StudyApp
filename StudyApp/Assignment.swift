@@ -1,4 +1,6 @@
 import SwiftUI
+import EventKit
+import EventKitUI
 import Foundation
 
 // MARK: - Data Models
@@ -9,6 +11,7 @@ struct Assignment: Codable, Identifiable {
     let status: AssignmentStatus
     let category: String
     let daysLeft: Int
+    var eventIdentifier: String?
 }
 
 enum AssignmentStatus: String, Codable, CaseIterable {
@@ -43,21 +46,95 @@ struct CalendarData: Codable {
     let assignments: [Assignment]
 }
 
+// MARK: - EventKit Manager
+@MainActor
+class EventKitManager: ObservableObject {
+    private let eventStore = EKEventStore()
+    @Published var hasCalendarAccess = false
+    @Published var events: [EKEvent] = []
+    
+    init() {
+        requestCalendarAccess()
+    }
+    
+    func requestCalendarAccess() {
+        switch EKEventStore.authorizationStatus(for: .event) {
+        case .authorized:
+            hasCalendarAccess = true
+            loadEvents()
+        case .notDetermined:
+            eventStore.requestAccess(to: .event) { [weak self] granted, error in
+                DispatchQueue.main.async {
+                    self?.hasCalendarAccess = granted
+                    if granted {
+                        self?.loadEvents()
+                    }
+                }
+            }
+        case .denied, .restricted:
+            hasCalendarAccess = false
+        @unknown default:
+            hasCalendarAccess = false
+        }
+    }
+    
+    private func loadEvents() {
+        let calendar = Calendar.current
+        let startDate = calendar.startOfDay(for: Date())
+        let endDate = calendar.date(byAdding: .month, value: 1, to: startDate) ?? Date()
+        
+        let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: nil)
+        events = eventStore.events(matching: predicate)
+    }
+    
+    func addAssignmentToCalendar(_ assignment: Assignment, completion: @escaping (Bool) -> Void) {
+        guard hasCalendarAccess else {
+            completion(false)
+            return
+        }
+        
+        let event = EKEvent(eventStore: eventStore)
+        event.title = assignment.title
+        event.notes = "Assignment - \(assignment.category)"
+        
+        // Parse due date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        if let dueDate = dateFormatter.date(from: assignment.dueDate) {
+            event.startDate = dueDate
+            event.endDate = Calendar.current.date(byAdding: .hour, value: 1, to: dueDate) ?? dueDate
+        }
+        
+        event.calendar = eventStore.defaultCalendarForNewEvents
+        
+        do {
+            try eventStore.save(event, span: .thisEvent)
+            completion(true)
+        } catch {
+            print("Failed to save event: \(error)")
+            completion(false)
+        }
+    }
+}
+
 // MARK: - Data Manager
+@MainActor
 class AssignmentDataManager: ObservableObject {
     @Published var calendarData: CalendarData?
     @Published var isLoading = true
+    @Published var selectedDate = Date()
     
     init() {
-        loadMockData()
+        Task {
+            await loadMockData()
+        }
     }
     
-    func loadMockData() {
+    func loadMockData() async {
         // Simulate network delay
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.calendarData = self.getMockData()
-            self.isLoading = false
-        }
+        try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
+        self.calendarData = self.getMockData()
+        self.isLoading = false
     }
     
     private func getMockData() -> CalendarData {
@@ -113,7 +190,6 @@ class AssignmentDataManager: ObservableObject {
         
         guard let data = mockJSON.data(using: .utf8),
               let calendarData = try? JSONDecoder().decode(CalendarData.self, from: data) else {
-            // Fallback data
             return CalendarData(
                 currentMonth: "August",
                 currentYear: 2021,
@@ -126,9 +202,63 @@ class AssignmentDataManager: ObservableObject {
     }
 }
 
+// MARK: - Native iOS Calendar View
+struct NativeCalendarView: UIViewRepresentable {
+    @Binding var selectedDate: Date
+    let onDateSelected: (Date) -> Void
+    
+    func makeUIView(context: Context) -> UICalendarView {
+        let calendarView = UICalendarView()
+        calendarView.delegate = context.coordinator
+        calendarView.calendar = Calendar(identifier: .gregorian)
+        calendarView.availableDateRange = DateInterval(start: .distantPast, end: .distantFuture)
+        calendarView.fontDesign = .default
+        
+        let selection = UICalendarSelectionSingleDate(delegate: context.coordinator)
+        selection.selectedDate = Calendar.current.dateComponents([.year, .month, .day], from: selectedDate)
+        calendarView.selectionBehavior = selection
+        
+        return calendarView
+    }
+    
+    func updateUIView(_ uiView: UICalendarView, context: Context) {
+        if let selection = uiView.selectionBehavior as? UICalendarSelectionSingleDate {
+            selection.selectedDate = Calendar.current.dateComponents([.year, .month, .day], from: selectedDate)
+        }
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    class Coordinator: NSObject, UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
+        let parent: NativeCalendarView
+        
+        init(_ parent: NativeCalendarView) {
+            self.parent = parent
+        }
+        
+        func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
+            guard let dateComponents = dateComponents,
+                  let date = Calendar.current.date(from: dateComponents) else { return }
+            
+            parent.selectedDate = date
+            parent.onDateSelected(date)
+        }
+        
+        func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
+            // Add decorations for dates with assignments
+            return nil
+        }
+    }
+}
+
 // MARK: - Main View
 struct AssignmentCalendarView: View {
     @StateObject private var dataManager = AssignmentDataManager()
+    @StateObject private var eventKitManager = EventKitManager()
+    @State private var showingEventController = false
+    @State private var selectedAssignment: Assignment?
     
     var body: some View {
         NavigationView {
@@ -172,30 +302,39 @@ struct AssignmentCalendarView: View {
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else if let calendarData = dataManager.calendarData {
-                    // Calendar Section
+                    // Native iOS Calendar
                     VStack(alignment: .leading, spacing: 16) {
                         HStack {
-                            Text(calendarData.currentMonth)
+                            Text(DateFormatter.monthFormatter.string(from: dataManager.selectedDate))
                                 .font(.title2)
                                 .fontWeight(.medium)
                             
                             Spacer()
                             
                             HStack(spacing: 20) {
-                                Button(action: {}) {
+                                Button(action: {
+                                    let newDate = Calendar.current.date(byAdding: .month, value: -1, to: dataManager.selectedDate) ?? dataManager.selectedDate
+                                    dataManager.selectedDate = newDate
+                                }) {
                                     Image(systemName: "chevron.left")
                                         .foregroundColor(.gray)
                                 }
                                 
-                                Button(action: {}) {
+                                Button(action: {
+                                    let newDate = Calendar.current.date(byAdding: .month, value: 1, to: dataManager.selectedDate) ?? dataManager.selectedDate
+                                    dataManager.selectedDate = newDate
+                                }) {
                                     Image(systemName: "chevron.right")
                                         .foregroundColor(.gray)
                                 }
                             }
                         }
                         
-                        // Calendar Grid
-                        CalendarGridView(selectedDate: calendarData.selectedDate)
+                        // Native iOS Calendar View
+                        NativeCalendarView(selectedDate: $dataManager.selectedDate) { date in
+                            dataManager.selectedDate = date
+                        }
+                        .frame(height: 300)
                     }
                     .padding(.horizontal, 20)
                     .padding(.top, 24)
@@ -208,9 +347,17 @@ struct AssignmentCalendarView: View {
                             .cornerRadius(2)
                             .padding(.vertical, 16)
                         
-                        LazyVStack(spacing: 0) {
-                            ForEach(calendarData.assignments) { assignment in
-                                AssignmentRowView(assignment: assignment)
+                        ScrollView {
+                            LazyVStack(spacing: 0) {
+                                ForEach(calendarData.assignments) { assignment in
+                                    AssignmentRowView(
+                                        assignment: assignment,
+                                        onAddToCalendar: {
+                                            selectedAssignment = assignment
+                                            addToCalendar(assignment)
+                                        }
+                                    )
+                                }
                             }
                         }
                     }
@@ -225,105 +372,24 @@ struct AssignmentCalendarView: View {
         }
         .navigationBarHidden(true)
     }
-}
-
-// MARK: - Calendar Grid View
-struct CalendarGridView: View {
-    let selectedDate: Int
     
-    var body: some View {
-        VStack(spacing: 12) {
-            // Week days header
-            HStack {
-                ForEach(["S", "M", "T", "W", "T", "F", "S"], id: \.self) { day in
-                    Text(day)
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(.gray)
-                        .frame(maxWidth: .infinity)
-                }
-            }
-            
-            // Calendar days
-            VStack(spacing: 16) {
-                // Week 1
-                HStack {
-                    CalendarDayView(day: 1, isSelected: selectedDate == 1)
-                    CalendarDayView(day: 2, isSelected: selectedDate == 2)
-                    CalendarDayView(day: 3, isSelected: selectedDate == 3)
-                    CalendarDayView(day: 4, isSelected: selectedDate == 4)
-                    CalendarDayView(day: 5, isSelected: selectedDate == 5)
-                    CalendarDayView(day: 6, isSelected: selectedDate == 6)
-                    CalendarDayView(day: 7, isSelected: selectedDate == 7)
-                }
-                
-                // Week 2
-                HStack {
-                    CalendarDayView(day: 8, isSelected: selectedDate == 8)
-                    CalendarDayView(day: 9, isSelected: selectedDate == 9)
-                    CalendarDayView(day: 10, isSelected: selectedDate == 10)
-                    CalendarDayView(day: 11, isSelected: selectedDate == 11)
-                    CalendarDayView(day: 12, isSelected: selectedDate == 12)
-                    CalendarDayView(day: 13, isSelected: selectedDate == 13)
-                    CalendarDayView(day: 14, isSelected: selectedDate == 14)
-                }
-                
-                // Week 3
-                HStack {
-                    CalendarDayView(day: 15, isSelected: selectedDate == 15)
-                    CalendarDayView(day: 16, isSelected: selectedDate == 16)
-                    CalendarDayView(day: 17, isSelected: selectedDate == 17)
-                    CalendarDayView(day: 18, isSelected: selectedDate == 18)
-                    CalendarDayView(day: 19, isSelected: selectedDate == 19)
-                    CalendarDayView(day: 20, isSelected: selectedDate == 20)
-                    CalendarDayView(day: 21, isSelected: selectedDate == 21)
-                }
-                
-                // Week 4
-                HStack {
-                    CalendarDayView(day: 22, isSelected: selectedDate == 22)
-                    CalendarDayView(day: 23, isSelected: selectedDate == 23)
-                    CalendarDayView(day: 24, isSelected: selectedDate == 24)
-                    CalendarDayView(day: 25, isSelected: selectedDate == 25)
-                    CalendarDayView(day: 26, isSelected: selectedDate == 26)
-                    CalendarDayView(day: 27, isSelected: selectedDate == 27)
-                    CalendarDayView(day: 28, isSelected: selectedDate == 28)
-                }
-                
-                // Week 5
-                HStack {
-                    CalendarDayView(day: 29, isSelected: selectedDate == 29)
-                    CalendarDayView(day: 30, isSelected: selectedDate == 30)
-                    CalendarDayView(day: 31, isSelected: selectedDate == 31)
-                    CalendarDayView(day: 1, isNextMonth: true)
-                    CalendarDayView(day: 2, isNextMonth: true)
-                    CalendarDayView(day: 3, isNextMonth: true)
-                    CalendarDayView(day: 4, isNextMonth: true)
-                }
+    private func addToCalendar(_ assignment: Assignment) {
+        eventKitManager.addAssignmentToCalendar(assignment) { success in
+            if success {
+                // Show success feedback
+                print("Assignment added to calendar successfully")
+            } else {
+                // Show error feedback
+                print("Failed to add assignment to calendar")
             }
         }
-    }
-}
-
-// MARK: - Calendar Day View
-struct CalendarDayView: View {
-    let day: Int
-    var isSelected: Bool = false
-    var isNextMonth: Bool = false
-    
-    var body: some View {
-        Text("\(day)")
-            .font(.system(size: 16, weight: .medium))
-            .foregroundColor(isNextMonth ? .gray.opacity(0.4) : (isSelected ? .white : .primary))
-            .frame(width: 40, height: 40)
-            .background(isSelected ? Color.blue : Color.clear)
-            .clipShape(Circle())
-            .frame(maxWidth: .infinity)
     }
 }
 
 // MARK: - Assignment Row View
 struct AssignmentRowView: View {
     let assignment: Assignment
+    let onAddToCalendar: () -> Void
     
     var body: some View {
         HStack(spacing: 16) {
@@ -351,9 +417,17 @@ struct AssignmentRowView: View {
             
             Spacer()
             
-            Text(daysLeftText)
-                .font(.system(size: 14, weight: .medium))
-                .foregroundColor(daysLeftColor)
+            VStack(alignment: .trailing, spacing: 4) {
+                Text(daysLeftText)
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundColor(daysLeftColor)
+                
+                Button(action: onAddToCalendar) {
+                    Image(systemName: "plus.circle.fill")
+                        .foregroundColor(.blue)
+                        .font(.system(size: 16))
+                }
+            }
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 16)
@@ -385,10 +459,10 @@ struct AssignmentRowView: View {
 struct TabBarView: View {
     var body: some View {
         HStack {
-            TabBarItem(icon: "square.grid.2x2", isSelected: false)
-            TabBarItem(icon: "calendar", isSelected: true)
-            TabBarItem(icon: "doc.text", isSelected: false)
-            TabBarItem(icon: "person", isSelected: false)
+            TabBarItemm(icon: "square.grid.2x2", isSelected: false)
+            TabBarItemm(icon: "calendar", isSelected: true)
+            TabBarItemm(icon: "doc.text", isSelected: false)
+            TabBarItemm(icon: "person", isSelected: false)
         }
         .padding(.horizontal, 40)
         .padding(.vertical, 20)
@@ -397,7 +471,7 @@ struct TabBarView: View {
 }
 
 // MARK: - Tab Bar Item
-struct TabBarItem: View {
+struct TabBarItemm: View {
     let icon: String
     let isSelected: Bool
     
@@ -411,13 +485,22 @@ struct TabBarItem: View {
     }
 }
 
+// MARK: - Extensions
+extension DateFormatter {
+    static let monthFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM"
+        return formatter
+    }()
+}
+
 // MARK: - Content View
-struct ContentView: View {
+struct AssignmentContentView: View {
     var body: some View {
         AssignmentCalendarView()
     }
 }
 
 #Preview {
-    ContentView()
+    AssignmentContentView()
 }

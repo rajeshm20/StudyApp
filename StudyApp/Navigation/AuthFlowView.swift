@@ -1,3 +1,11 @@
+//
+//  AuthFlowView.swift
+//  StudyApp
+//
+//  Created by Rajesh Mani on 24/10/25.
+//
+
+
 import SwiftUI
 import Observation
 
@@ -16,6 +24,8 @@ struct AuthFlowView: View {
                         SignUpView(router: router)
                     case .otp:
                         OTPVerificationView(router: router)
+                    case .userOnboard:
+                        OnboardingTabView(router: router)
                     case .signIn:
                         SignInView(router: router)
                     }

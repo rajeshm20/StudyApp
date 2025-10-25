@@ -8,8 +8,29 @@
 import SwiftUI
 
 struct SettingsView: View {
+    var router = Router<MainRoute>()
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            List {
+                Button(action: {
+                    router.push(.countries)
+                }) {
+                    Text("App language")
+                }
+                Button(action: {
+                    router.push(.notifications)
+                }) {
+                    Text("Notification")
+                }
+                Button(action: { }) {
+                    Text("Update version")
+                }
+            }
+            .font(.headline)
+            .foregroundStyle(.black)
+        }
+        .navigationTitle("Account")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
