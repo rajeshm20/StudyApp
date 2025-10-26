@@ -1,0 +1,48 @@
+{
+  "source": "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/OTPVerificationView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Verification Code",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 20
+        }
+      },
+      {
+        "comment": "",
+        "key": "Enter the code sent by SMS to verify your phone number",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 26
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 46
+        }
+      },
+      {
+        "comment": "",
+        "key": "Verify",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 91
+        }
+      },
+      {
+        "comment": "",
+        "key": "Resend Code",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 107
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -11,7 +11,7 @@ import SwiftUI
 struct DataPolicyView: View {
     @State private var acceptEnabled = false
     @State private var accepted = false
-    var router = Router<MainRoute>()
+    var router: Router<MainRoute>
 
     var body: some View {
         VStack(spacing: 0) {
@@ -93,6 +93,6 @@ private let sampleParagraph = "Lorem ipsum dolor sit amet, consectetur adipiscin
 // MARK: - Preview
 struct DataPolicyView_Previews: PreviewProvider {
     static var previews: some View {
-        DataPolicyView()
+        DataPolicyView(router: Router<MainRoute>())
     }
 }

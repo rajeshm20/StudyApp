@@ -1,0 +1,24 @@
+{
+  "source": "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/NotificationsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 26
+        }
+      },
+      {
+        "comment": "",
+        "key": "Account",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 67
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,40 @@
+{
+  "source": "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/GenericBottomSheetView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Selection Mode",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 140
+        }
+      },
+      {
+        "comment": "",
+        "key": "Show Bottom Sheet",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 147
+        }
+      },
+      {
+        "comment": "",
+        "key": "Single",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 141
+        }
+      },
+      {
+        "comment": "",
+        "key": "Multiple",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 142
+        }
+      }
+    ]
+  },
+  "version": 1
+}

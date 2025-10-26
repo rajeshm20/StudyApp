@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import AuthenticationKit
 
 @main
 struct StudyAppApp: App {
@@ -30,6 +31,7 @@ struct StudyAppApp: App {
         WindowGroup {
             AppCoordinatorView() // <-- Pass router here
                 .environmentObject(popupManager)
+                .environmentObject(AppCoordinator())
                 .overlay(alignment: .center) {
                     if popupManager.isVisible {
                         ZStack {

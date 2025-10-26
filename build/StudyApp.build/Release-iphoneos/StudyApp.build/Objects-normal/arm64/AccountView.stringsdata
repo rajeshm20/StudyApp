@@ -1,0 +1,16 @@
+{
+  "source": "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/AccountView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Account",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 98
+        }
+      }
+    ]
+  },
+  "version": 1
+}

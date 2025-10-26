@@ -162,7 +162,7 @@ struct StudentDashboardView: View {
                             ErrorView()
                         }
                     case .calendar:
-                        CalendarView()
+                        AssignmentContainerView()
                     case .assignments:
                         AssignmentsView()
                     case .profile:
@@ -175,9 +175,10 @@ struct StudentDashboardView: View {
                 // Bottom Tab Bar
                 BottomTabBar(selectedTab: $selectedTab)
             }
-            .navigationTitle("Dashboard")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden(false)
+//            .navigationTitle("Dashboard")
+//            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
         }
     }
 

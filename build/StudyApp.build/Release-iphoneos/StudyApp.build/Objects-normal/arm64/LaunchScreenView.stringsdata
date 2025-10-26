@@ -1,0 +1,32 @@
+{
+  "source": "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/LaunchScreenView/LaunchScreenView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Hello and \nwelcome here!",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 22
+        }
+      },
+      {
+        "comment": "",
+        "key": "Get an overview of how you are performing \nand motivate yourself to achieve even more!",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 30
+        }
+      },
+      {
+        "comment": "",
+        "key": "Let's Start",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 41
+        }
+      }
+    ]
+  },
+  "version": 1
+}

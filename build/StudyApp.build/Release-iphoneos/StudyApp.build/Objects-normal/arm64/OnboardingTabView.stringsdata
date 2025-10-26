@@ -1,0 +1,40 @@
+{
+  "source": "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/OnboardingTabView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Skip",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 35
+        }
+      },
+      {
+        "comment": "",
+        "key": "Profile",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 49
+        }
+      },
+      {
+        "comment": "",
+        "key": "Topics",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 54
+        }
+      },
+      {
+        "comment": "",
+        "key": "Notifications",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 59
+        }
+      }
+    ]
+  },
+  "version": 1
+}

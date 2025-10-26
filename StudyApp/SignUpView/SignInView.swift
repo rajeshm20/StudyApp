@@ -20,7 +20,6 @@ struct SignInView: View {
     @EnvironmentObject var coordinator: AppCoordinator
 
     var body: some View {
-//        NavigationStack(path: $navigationManager.path) {
             ScrollView {
                 VStack(spacing: 20) {
                     // Email Field
@@ -49,9 +48,7 @@ struct SignInView: View {
                         isLoading: false,
                         isDisabled: false
                     ) {
-                        coordinator.switchToMain()
-//                        navigationManager.navigate(to: .dashboard)
-                        
+                        coordinator.switchToMain()                        
                     }
                     .padding()
 
@@ -114,23 +111,16 @@ struct SignInView: View {
                                 .frame(width: 40, height: 40)
                         }
                     }
-                    AppButton(title: "Sign Up",
-                              style: .outline,
-                              backgroundColor: .primaryBlue) {}
-                        .padding(.top, 50)
-                        .padding(.horizontal, 10)
                 }
                 .padding(horizontalSizeClass == .compact ? 25 : 160)
                 .background(Color.white.ignoresSafeArea())
             }
+            .navigationBarBackButtonHidden(false)
             .navigationTitle("Sign In")
             .navigationBarTitleDisplayMode(.large)
-//            .navigationDestination(for: AppDestination.self) { destination in
-//                destinationView(for: destination)
-//                    .navigationBarBackButtonHidden(true)
-//            }
-//        }
-//        .environment(navigationManager)
+            .onDisappear {
+                router.pop()
+            }
     }
     // Modify the existing validateFields function
     func validateFields(title: Title) {
@@ -151,27 +141,6 @@ struct SignInView: View {
            break
         }
     }
-//    @ViewBuilder
-//    private func destinationView(for destination: AppDestination) -> some View {
-//        switch destination {
-//        case .dashboard:
-//            StudentDashboardView()
-//                .navigationBarBackButtonHidden(true)
-//        case .profile(_):
-//            ProfilePageView()
-//        case .settings:
-//            SettingsHomeView(img: .student3)
-//        case .cart:
-//            CartView()
-//        case .productDetail(let products):
-//            ProductDetailView(products: products)
-//        case .orderHistory(let userID, let page):
-//            OrderHistoryView(userID: userID, initialPage: page)
-//        default:
-//            EmptyView()
-//        }
-//    }
-
 }
 
 struct SignInView_Previews: PreviewProvider {
@@ -179,29 +148,3 @@ struct SignInView_Previews: PreviewProvider {
         SignInView(router: Router<AuthRoute>())
     }
 }
-
-
-
-struct BorderedButton<Content: View>: View {
-    let action: () -> Void
-    @ViewBuilder let label: () -> Content
-    var buttonWithStrok: Bool = true
-    var body: some View {
-        Button(action: action) {
-            label()
-                .frame(maxWidth: .infinity, maxHeight: 50)
-                .padding()
-                .foregroundColor(.white)
-                .cornerRadius(8)
-                .overlay {
-                    if buttonWithStrok {
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(style: StrokeStyle(lineWidth: 2))
-                            .foregroundStyle(.buttoncolor)
-                            .frame(maxWidth: .infinity, maxHeight: 50)
-                    }
-                }
-          }
-    }
-}
-

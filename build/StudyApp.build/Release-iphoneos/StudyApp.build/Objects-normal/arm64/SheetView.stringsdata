@@ -1,0 +1,16 @@
+{
+  "source": "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/SheetView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Toggle the Sheet",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 15
+        }
+      }
+    ]
+  },
+  "version": 1
+}

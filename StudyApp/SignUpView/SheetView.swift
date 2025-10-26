@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AuthenticationKit
 
 struct SheetView: View {
     @State var isShowingMyCustomSheet = false

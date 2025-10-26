@@ -1,0 +1,72 @@
+{
+  "source": "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Helpers/Extensions.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Welcome Back",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 21
+        }
+      },
+      {
+        "comment": "",
+        "key": "Please sign in",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 22
+        }
+      },
+      {
+        "comment": "",
+        "key": "Sign In is required",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 23
+        }
+      },
+      {
+        "comment": "",
+        "key": "copyright @iOS Coding 2025",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 41
+        }
+      },
+      {
+        "comment": "",
+        "key": "Email",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 26
+        }
+      },
+      {
+        "comment": "",
+        "key": "Password",
+        "location": {
+          "startingColumn": 33,
+          "startingLine": 29
+        }
+      },
+      {
+        "comment": "",
+        "key": "Tap here to Sign In",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 32
+        }
+      },
+      {
+        "comment": "",
+        "key": "Move to Next Screen",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 36
+        }
+      }
+    ]
+  },
+  "version": 1
+}

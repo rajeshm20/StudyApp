@@ -1,0 +1,16 @@
+{
+  "source": "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/DatePickerView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Selected From Date: %@",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 37
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,24 @@
+{
+  "source": "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/ReusableRow.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Footer text",
+        "location": {
+          "startingColumn": 1,
+          "startingLine": 49
+        }
+      },
+      {
+        "comment": "",
+        "key": "Action",
+        "location": {
+          "startingColumn": 1,
+          "startingLine": 49
+        }
+      }
+    ]
+  },
+  "version": 1
+}

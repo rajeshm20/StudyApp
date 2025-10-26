@@ -1,11 +1,7 @@
-//
-//  SignUpView.swift
 //  StudyApp
 //
 //  Created by Rajesh Mani on 29/09/24.
 //
-// Fix errors in this below entire code
-// fix compile time errors.
 
 import SwiftUI
 import Combine
@@ -35,8 +31,8 @@ struct SignUpView: View {
     @State private var showPopup: Bool = false
 
     // Add this new state variable for navigation
-    @State private var navigateToOTP: Bool = false
-    var router = Router<AuthRoute>()
+//    @State private var navigateToOTP: Bool = false
+    var router: Router<AuthRoute>
 
     var body: some View {
             ZStack {
@@ -148,7 +144,6 @@ struct SignUpView: View {
 
                             Button(action: {
                                 showPopup = false
-                                navigateToOTP = true  // Trigger navigation
                                 router.push(.otp)
                             }) {
                                 Text("Accept")
@@ -168,10 +163,13 @@ struct SignUpView: View {
                     }
                 }
             }
+            .navigationBarBackButtonHidden(false)
             .simultaneousGesture(
                 TapGesture().onEnded { self.hideKeyboard() }
             )
-
+            .onDisappear {
+                router.pop()
+            }
     }
 
     // Add this new function
@@ -244,6 +242,6 @@ struct CheckboxToggleStyle: ToggleStyle {
 // MARK: - Preview
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        SignUpView(router: Router<AuthRoute>())
     }
 }

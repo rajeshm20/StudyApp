@@ -1,0 +1,10 @@
+{
+  "name": "Marvin McKinney",
+  "email": "marvin@email.com",
+  "dateOfBirth": "1997-11-08",
+  "phoneNumber": "702-889-5347",
+  "studentID": "#87654",
+  "gender": "Male",
+  "address": "1106 Sunrise Road Las Vegas, NV 89102",
+  "profileImage": "profile_sample"
+}

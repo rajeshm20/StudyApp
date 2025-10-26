@@ -1,0 +1,32 @@
+{
+  "source": "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/TermsAndConditionsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Terms & Conditions",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 73
+        }
+      },
+      {
+        "comment": "",
+        "key": "Accepted",
+        "location": {
+          "startingColumn": 37,
+          "startingLine": 62
+        }
+      },
+      {
+        "comment": "",
+        "key": "Accept",
+        "location": {
+          "startingColumn": 50,
+          "startingLine": 62
+        }
+      }
+    ]
+  },
+  "version": 1
+}

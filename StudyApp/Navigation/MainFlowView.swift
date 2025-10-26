@@ -24,8 +24,8 @@ struct MainFlowView: View {
                         AccountView(router: router)
                     case .settings:
                         SettingsView(router: router)
-                    case .aboutus:
-                        AboutUsView(router: router)
+                    case .about:
+                        AboutView(router: router)
                     case .notifications:
                         NotificationsView(router: router)
                     case .countries:
@@ -34,6 +34,8 @@ struct MainFlowView: View {
                         TermsAndConditionsView(router: router)
                     case .datapolicy:
                         DataPolicyView(router: router)
+                    case .aboutUs:
+                        AboutUsView(router: router)
                     }
                 }
            }

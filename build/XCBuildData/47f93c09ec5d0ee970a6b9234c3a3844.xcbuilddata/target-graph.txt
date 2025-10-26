@@ -1,0 +1,2 @@
+Target dependency graph (1 target)
+Target 'StudyApp' in project 'StudyApp' (no dependencies)

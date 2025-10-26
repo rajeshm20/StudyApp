@@ -21,7 +21,7 @@ struct OnboardingView: View {
     @State private var currentPage = 0
     @State private var showSignUpView = false
     @State private var showSignInView = false
-    var router = Router<AuthRoute>()
+    var router: Router<AuthRoute>
     
     var body: some View {
             VStack {
@@ -78,12 +78,12 @@ struct OnboardingView: View {
                         }
                     }
                 }
+                .navigationBarBackButtonHidden(true)
                 .padding(.horizontal, 40)
                 .padding(.bottom, 30)
             }
             .background(Color.white)
             .ignoresSafeArea(.container, edges: .top) // ensure root content can draw under the notch
-            .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -148,7 +148,7 @@ struct OnboardingPageView: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView()
+        OnboardingView(router: Router<AuthRoute>())
             .previewDevice("iPhone 15 Pro")
             .environmentObject(AppCoordinator())
     }

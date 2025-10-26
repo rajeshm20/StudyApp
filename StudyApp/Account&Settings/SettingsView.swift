@@ -29,7 +29,7 @@ struct SettingsView: View {
             .font(.headline)
             .foregroundStyle(.black)
         }
-        .navigationTitle("Account")
+        .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
     }
 }

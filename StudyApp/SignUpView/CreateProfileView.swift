@@ -12,6 +12,7 @@ struct CreateProfileView: View {
     @State private var fullName: String = ""
     @State private var profileImage: UIImage?
     @State private var isImagePickerPresented = false
+    var router: Router<AuthRoute> // <-- Take as parameter, don't create new
 
     var body: some View {
         VStack(spacing: 24) {
@@ -133,5 +134,5 @@ struct ImagePicker: UIViewControllerRepresentable {
 }
 
 #Preview {
-    CreateProfileView()
+    CreateProfileView(router: Router<AuthRoute>())
 }

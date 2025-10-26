@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 protocol Serializable {
     func serialize() -> String
@@ -60,3 +61,27 @@ extension UILabel: Stylable { }
 
 @MainActor let label = UILabel()
 //label.applyStyle()
+
+
+struct BorderedButton<Content: View>: View {
+    let action: () -> Void
+    @ViewBuilder let label: () -> Content
+    var buttonWithStrok: Bool = true
+    var body: some View {
+        Button(action: action) {
+            label()
+                .frame(maxWidth: .infinity, maxHeight: 50)
+                .padding()
+                .foregroundColor(.white)
+                .cornerRadius(8)
+                .overlay {
+                    if buttonWithStrok {
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(style: StrokeStyle(lineWidth: 2))
+                            .foregroundStyle(.buttoncolor)
+                            .frame(maxWidth: .infinity, maxHeight: 50)
+                    }
+                }
+          }
+    }
+}

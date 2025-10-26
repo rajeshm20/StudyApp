@@ -1,0 +1,24 @@
+{
+  "source": "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Assignment.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "All Assignments",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 268
+        }
+      },
+      {
+        "comment": "",
+        "key": "Loading assignments...",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 298
+        }
+      }
+    ]
+  },
+  "version": 1
+}

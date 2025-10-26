@@ -1,0 +1,12 @@
+{
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Helpers/AppTheme.swift" : {
+    "abi-baseline-json" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyApp.abi.json",
+    "const-values" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyApp-primary.swiftconstvalues",
+    "dependencies" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyApp-primary.d",
+    "diagnostics" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyApp-primary.dia",
+    "objc-header" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyApp-Swift.h",
+    "swiftdoc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyApp.swiftdoc",
+    "swiftmodule" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyApp.swiftmodule",
+    "swiftsourceinfo" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyApp.swiftsourceinfo"
+  }
+}

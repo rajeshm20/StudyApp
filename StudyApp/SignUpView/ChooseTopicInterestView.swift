@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ChooseTopicInterestView: View {
     @State private var selectedTopics: Set<String> = ["Mathematics", "Economy"]
+    var router: Router<AuthRoute> // <-- Take as parameter, don't create new
 
     let topics: [Topic] = [
         Topic(name: "Mathematics", subtitle: "Geometry, Algorithm", icon: "x.squareroot", color: Color.red.opacity(0.2)),
@@ -140,5 +141,5 @@ struct TopicRow: View {
 }
 
 #Preview {
-    ChooseTopicInterestView()
+    ChooseTopicInterestView(router: Router<AuthRoute>())
 }

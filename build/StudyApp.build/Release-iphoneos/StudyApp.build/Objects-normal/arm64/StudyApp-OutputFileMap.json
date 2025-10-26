@@ -1,0 +1,336 @@
+{
+  "" : {
+    "const-values" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyApp-primary.swiftconstvalues",
+    "dependencies" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyApp-primary.d",
+    "diagnostics" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyApp-primary.dia",
+    "emit-module-dependencies" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyApp-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyApp-primary-emit-module.dia",
+    "pch" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyApp-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyApp-primary.swiftdeps"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/AboutUsView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AboutUsView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AboutUsView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AboutUsView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/AccountView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AccountView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AccountView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AccountView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/ChooseLanguageView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ChooseLanguageView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ChooseLanguageView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ChooseLanguageView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/DataPolicyView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/DataPolicyView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/DataPolicyView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/DataPolicyView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/LanguageModel.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/LanguageModel.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/LanguageModel.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/LanguageModel.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/NotificationsView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/NotificationsView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/NotificationsView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/NotificationsView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/PopupView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/PopupView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/PopupView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/PopupView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/ProfileHeader.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ProfileHeader.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ProfileHeader.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ProfileHeader.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/ProfilePageView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ProfilePageView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ProfilePageView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ProfilePageView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/ProfileViewModel.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ProfileViewModel.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ProfileViewModel.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ProfileViewModel.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/SettingsHomeView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/SettingsHomeView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/SettingsHomeView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/SettingsHomeView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/SettingsView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/SettingsView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/SettingsView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/SettingsView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/TermsAndConditionsView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/TermsAndConditionsView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/TermsAndConditionsView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/TermsAndConditionsView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/TextEditorWithCompletion.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/TextEditorWithCompletion.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/TextEditorWithCompletion.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/TextEditorWithCompletion.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Account&Settings/UserProfile.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/UserProfile.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/UserProfile.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/UserProfile.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Assignment.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Assignment.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Assignment.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Assignment.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Dashboard/StudentDashboardView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudentDashboardView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudentDashboardView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudentDashboardView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Helpers/APIResponse.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/APIResponse.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/APIResponse.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/APIResponse.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Helpers/AppTheme.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AppTheme.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AppTheme.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AppTheme.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Helpers/BadExpression.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/BadExpression.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/BadExpression.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/BadExpression.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Helpers/ColorTheme.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ColorTheme.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ColorTheme.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ColorTheme.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Helpers/Extensions.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Extensions.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Extensions.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Extensions.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Helpers/Helpers.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Helpers.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Helpers.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Helpers.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Helpers/NetworkResponseClass.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/NetworkResponseClass.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/NetworkResponseClass.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/NetworkResponseClass.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Helpers/PopupManager.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/PopupManager.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/PopupManager.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/PopupManager.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Helpers/StateManager.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StateManager.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StateManager.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StateManager.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Helpers/UserStatus.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/UserStatus.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/UserStatus.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/UserStatus.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Helpers/ViewState.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ViewState.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ViewState.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ViewState.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/LaunchScreenView/BackgroundImageView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/BackgroundImageView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/BackgroundImageView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/BackgroundImageView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/LaunchScreenView/LaunchScreenView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/LaunchScreenView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/LaunchScreenView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/LaunchScreenView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/LaunchScreenView/TopIcon_Title.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/TopIcon_Title.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/TopIcon_Title.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/TopIcon_Title.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Navigation/AppCoordinatorView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AppCoordinatorView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AppCoordinatorView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AppCoordinatorView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Navigation/AuthFlowView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AuthFlowView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AuthFlowView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AuthFlowView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Navigation/MainFlowView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/MainFlowView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/MainFlowView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/MainFlowView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Navigation/NavigationRouter+AppCoordinator_Example.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/NavigationRouter+AppCoordinator_Example.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/NavigationRouter+AppCoordinator_Example.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/NavigationRouter+AppCoordinator_Example.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Navigation/Router.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Router.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Router.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Router.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/Navigation/StudyAppApp.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyAppApp.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyAppApp.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/StudyAppApp.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/OnBoardingViews/OnboardUIModel.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/OnboardUIModel.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/OnboardUIModel.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/OnboardUIModel.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/OnBoardingViews/OnboardingView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/OnboardingView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/OnboardingView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/OnboardingView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/AppButton.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AppButton.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AppButton.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AppButton.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/AuthTabView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AuthTabView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AuthTabView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AuthTabView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/ChooseTopicInterestView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ChooseTopicInterestView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ChooseTopicInterestView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ChooseTopicInterestView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/CounterFeature.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/CounterFeature.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/CounterFeature.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/CounterFeature.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/CounterView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/CounterView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/CounterView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/CounterView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/CreateProfileView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/CreateProfileView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/CreateProfileView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/CreateProfileView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/DatePickerView 2.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/DatePickerView 2.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/DatePickerView 2.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/DatePickerView 2.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/DatePickerView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/DatePickerView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/DatePickerView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/DatePickerView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/FormField.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/FormField.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/FormField.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/FormField.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/GenericBottomSheetView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/GenericBottomSheetView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/GenericBottomSheetView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/GenericBottomSheetView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/GridView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/GridView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/GridView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/GridView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/Item.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Item.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Item.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Item.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/ListView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ListView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ListView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ListView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/NotificationPermissionView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/NotificationPermissionView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/NotificationPermissionView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/NotificationPermissionView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/OTPVerificationView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/OTPVerificationView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/OTPVerificationView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/OTPVerificationView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/OnboardingTabView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/OnboardingTabView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/OnboardingTabView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/OnboardingTabView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/ReusableRow.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ReusableRow.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ReusableRow.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ReusableRow.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/SheetView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/SheetView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/SheetView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/SheetView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/SignInView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/SignInView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/SignInView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/SignInView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/SignUpView.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/SignUpView.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/SignUpView.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/SignUpView.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/SwifuiNavigationStackTutorial/AppDestination.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AppDestination.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AppDestination.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/AppDestination.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/SwifuiNavigationStackTutorial/ContentViewqqq.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ContentViewqqq.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ContentViewqqq.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ContentViewqqq.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/SwifuiNavigationStackTutorial/NavigationManager.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/NavigationManager.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/NavigationManager.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/NavigationManager.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/SwifuiNavigationStackTutorial/Product.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Product.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Product.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/Product.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/StudyApp/SignUpView/ValidationHelper.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ValidationHelper.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ValidationHelper.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/ValidationHelper.o"
+  },
+  "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "index-unit-output-path" : "/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/omnamorajesh/Documents/2025/StudyApp/build/StudyApp.build/Release-iphoneos/StudyApp.build/Objects-normal/arm64/GeneratedAssetSymbols.o"
+  }
+}

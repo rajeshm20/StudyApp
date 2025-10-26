@@ -39,10 +39,11 @@ enum MainRoute: Hashable {
     case profile
     case account
     case settings
-    case aboutus
+    case about
     case notifications
     case countries
     case termsConditions
+    case aboutUs
     case datapolicy
 }
 //enum SettingsRoute: Hashable {

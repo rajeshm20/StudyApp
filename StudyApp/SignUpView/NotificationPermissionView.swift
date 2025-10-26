@@ -1,25 +1,15 @@
-//
-//  NotificationPermissionView.swift
-//  StudyApp
-//
-//  Created by Rajesh Mani on 24/10/25.
-//
-
-
 import SwiftUI
 
 struct NotificationPermissionView: View {
-    var router = Router<AuthRoute>()
+    var router: Router<AuthRoute> // <-- Take as parameter, don't create new
 
     var body: some View {
         VStack {
-            // Title and subtitle
             VStack(spacing: 10) {
                 Text("Give me notifications")
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.black)
-
                 Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit enim, ac amet ultrices.")
                     .font(.subheadline)
                     .foregroundColor(.gray)
@@ -28,7 +18,6 @@ struct NotificationPermissionView: View {
             }
             .padding(.bottom, 40)
 
-            // Illustration (replace with your asset if available)
             VStack(spacing: 12) {
                 NotificationIllustration()
                     .padding(.bottom, 10)
@@ -36,10 +25,9 @@ struct NotificationPermissionView: View {
 
             Spacer()
 
-            // Buttons
             VStack(spacing: 16) {
                 Button(action: {
-                    // Request notification permissions
+                    router.popToRoot() // Optional: reset stack first
                     router.push(.signIn)
                 }) {
                     Text("Turn On Notifications")
@@ -53,7 +41,7 @@ struct NotificationPermissionView: View {
                 }
 
                 Button(action: {
-                    // Remind me later action
+                    router.pop() // Optional: reset stack first
                     router.push(.signIn)
                 }) {
                     Text("Remind me later")
@@ -102,5 +90,7 @@ struct NotificationIllustration: View {
 }
 
 #Preview {
-    NotificationPermissionView()
+    NotificationPermissionView(router: Router<AuthRoute>())
 }
+
+// ... rest of the file unchanged ...

@@ -46,10 +46,6 @@ struct LaunchScreenView: View {
                         .background(Color.cyan)
                         .clipShape(.buttonBorder)
                 })
-//                .navigationDestination(isPresented: $navigateToOnboard) {
-//                    OnboardingView()
-//                        .navigationBarBackButtonHidden(true)
-//                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding() // Ensure content respects safe areas

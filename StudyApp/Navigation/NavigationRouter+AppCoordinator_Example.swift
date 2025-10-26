@@ -60,7 +60,7 @@ struct AppCoordinatorView_ex: View {
 
 #Preview {
     AppCoordinatorView_ex()
-        .environmentObject(AppCoordinator())
+        .environmentObject(AppCoordinator_ex())
 }
 
 struct AuthFlowView_ex: View {
@@ -102,7 +102,7 @@ struct SetupView: View {
         VStack(spacing: 20) {
             Text("⚙️ Setup Screen").font(.title)
             Button("Go to Verify") { router.push(.signIn) }
-            Button("Back") { router.pop() }
+//            Button("Back") { router.pop() }
         }
         .padding()
     }

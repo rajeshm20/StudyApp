@@ -13,6 +13,9 @@ struct OTPVerificationView: View {
     @FocusState private var focusedIndex: Int?
     @State private var navigateToLogin: Bool = false
     @State private var enableVerifyBtn: Bool = false
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
+
     var router: Router<AuthRoute>
     var body: some View {
         VStack {
@@ -111,6 +114,7 @@ struct OTPVerificationView: View {
             .padding(.top, 20)
             
         }
+        .padding(horizontalSizeClass == .compact ? 25 : 160)
         .navigationBarBackButtonHidden(true)
         .padding()
         .background(

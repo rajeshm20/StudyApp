@@ -62,6 +62,7 @@ struct SettingsHomeView: View {
                         
                         Spacer()
                         Button(action: {
+                            // Logout
                             coordinator.switchToAuth()
                         }) {
                             Image(systemName: "arrow.right.circle")
@@ -94,7 +95,7 @@ struct SettingsHomeView: View {
                         SettingsRow(icon: "gearshape", title: "Setting")
                     })
                     Button(action: {
-                        router.push(.aboutus)
+                        router.push(.about)
                     }, label: {
                         SettingsRow(icon: "questionmark.circle", title: "About")
                     })
@@ -106,7 +107,7 @@ struct SettingsHomeView: View {
                 // MARK: - Help Card
                 HelpCardView()
                     .onTapGesture(perform: {
-                        router.push(.aboutus)
+                        router.push(.about)
                     })
                 
                 Spacer(minLength: 100)
