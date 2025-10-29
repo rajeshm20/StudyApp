@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AboutView: View {
-    var router = Router<MainRoute>()
+    var router:Router<MainRoute>
     var body: some View {
         VStack {
             List {
@@ -40,5 +40,5 @@ struct AboutView: View {
 }
 
 #Preview {
-    AboutView()
+    AboutView(router: Router<MainRoute>())
 }

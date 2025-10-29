@@ -5,14 +5,13 @@
 //  Created by Rajesh Mani on 24/10/25.
 //
 
-
 import SwiftUI
 import Observation
 
 struct AuthFlowView: View {
     @EnvironmentObject var coordinator: AppCoordinator
     @StateObject private var router = Router<AuthRoute>()
-
+    
     var body: some View {
         NavigationStack(path: $router.path) {
             LaunchScreenView(router: router)
@@ -32,4 +31,9 @@ struct AuthFlowView: View {
                 }
         }
     }
+}
+
+#Preview {
+    AuthFlowView()
+        .environmentObject(AppCoordinator())
 }

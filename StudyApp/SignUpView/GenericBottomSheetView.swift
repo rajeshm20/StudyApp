@@ -13,7 +13,6 @@ protocol BottomSheetDisplayable: Identifiable, Hashable {
     var displaySubtitle: String? { get }
     var displayNote1: String? { get }
     var displayNote2: String? { get }
-
 }
 
 enum SelectionMode {
@@ -45,7 +44,7 @@ struct SelectableBottomSheet<T: BottomSheetDisplayable>: View {
                 Color.clear.frame(width: 32)
             }
             .padding()
-            .frame(width: .infinity, height: 70)
+            .frame(maxWidth: .infinity, minHeight: 70, maxHeight: 70)
             
             Divider()
             
@@ -94,14 +93,21 @@ struct SelectableBottomSheet<T: BottomSheetDisplayable>: View {
                                 .foregroundColor(.accentColor)
                         }
                     }
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background {
+                        Rectangle()
+                            .foregroundStyle(selected.contains(item) ? Color.accentColor.opacity(0.1) : .clear)
+                            .cornerRadius(18)
+                    }
                 }
-                .listRowBackground(Color.clear)
             }
+            .listRowSeparator(.hidden, edges: .all) // Hides all separators
             .scrollContentBackground(.hidden)
-            .listStyle(.inset)
+            .listStyle(.plain)
         }
         .cornerRadius(20)
-        .background(Color.green.opacity(0.09))
+        .background(Color.white)
     }
 }
 
@@ -113,13 +119,12 @@ struct Portfolio: BottomSheetDisplayable {
     var displaySubtitle: String?
     var displayNote1: String?
     var displayNote2: String?
-
 }
-
 
 #Preview {
     GenericBottomSheetView()
 }
+
 struct GenericBottomSheetView: View {
     @State private var showSheet = false
     @State private var selectedItems = Set<Portfolio>()
@@ -129,10 +134,6 @@ struct GenericBottomSheetView: View {
         Portfolio(id: UUID(), displayTitle: "1876-76765-19876", displaySubtitle: "Portfolio", displayNote1: "Sell Order", displayNote2: ""),
         Portfolio(id: UUID(), displayTitle: "1876-76765-19676", displaySubtitle: "Portfolio", displayNote1: "Sell Order", displayNote2: ""),
         Portfolio(id: UUID(), displayTitle: "1876-76765-37487", displaySubtitle: "", displayNote1: "Sell Order", displayNote2: ""),
-        Portfolio(id: UUID(), displayTitle: "1876-76765-37487", displaySubtitle: "", displayNote1: "Sell Order", displayNote2: ""),
-        Portfolio(id: UUID(), displayTitle: "1876-76765-37487", displaySubtitle: "Portfolio", displayNote1: "", displayNote2: "Buy Order"),
-        Portfolio(id: UUID(), displayTitle: "1876-76765-37487", displaySubtitle: "Portfolio", displayNote1: "", displayNote2: "Buy Order"),
-        Portfolio(id: UUID(), displayTitle: "1876-76765-37487", displaySubtitle: "Portfolio", displayNote1: "Sell Order", displayNote2: "Buy Order")
     ]
 
     var body: some View {
@@ -159,6 +160,7 @@ struct GenericBottomSheetView: View {
                 selectionMode: selectionMode
             )
             .presentationDetents([.medium, .large])
+            .presentationDragIndicator(.hidden) // Optional: hide handle gap
         }
     }
 }

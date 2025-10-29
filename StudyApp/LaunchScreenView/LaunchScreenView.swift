@@ -6,15 +6,13 @@
 //
 
 import SwiftUI
-import Combine
+import Observation
 
 struct LaunchScreenView: View {
     @State private var title: String = "Study"
-    @State private var navigateToOnboard = false
     var router: Router<AuthRoute>
 
     var body: some View {
-        NavigationStack {
             VStack(alignment: .center) {
                 TopIcon_Title(title: title)
                 Spacer() // Adds space at the top
@@ -35,7 +33,6 @@ struct LaunchScreenView: View {
                     .padding(.horizontal, 20) // Control the horizontal padding to avoid text overflow
                     .padding(.bottom, 30) // Adds space below text
                 Button(action: {
-                    navigateToOnboard = true
                     router.push(.onboard)
                 }, label: {
                     Text("Let's Start")
@@ -57,7 +54,6 @@ struct LaunchScreenView: View {
                 LinearGradient(gradient: Gradient(colors: [.black.opacity(0.2), .blue.opacity(0.6), .blue]), startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
             }
-        }
     }
 }
 

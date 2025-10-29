@@ -36,7 +36,7 @@ struct NotificationsView: View {
     @State private var appsUpdate = true
     @State private var recommendations = false
     @State private var messages = true
-    var router = Router<MainRoute>()
+    var router:Router<MainRoute>
     
     var body: some View {
         VStack {

@@ -162,7 +162,7 @@ struct StudentDashboardView: View {
                             ErrorView()
                         }
                     case .calendar:
-                        AssignmentContainerView()
+                        AssignmentContainerView(router: router)
                     case .assignments:
                         AssignmentsView()
                     case .profile:

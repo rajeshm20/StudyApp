@@ -176,3 +176,24 @@ extension Font {
     static let appBody = Font.system(size: 16, weight: .regular, design: .default)
     static let appCaption = Font.system(size: 12, weight: .light, design: .default)
 }
+
+
+import SwiftUI
+
+extension Color {
+    var isDark: Bool {
+        #if canImport(UIKit)
+        let uiColor = UIColor(self)
+        var white: CGFloat = 0
+        uiColor.getWhite(&white, alpha: nil)
+        if white < 0.001 || white > 0.999 {
+            var brightness: CGFloat = 0
+            uiColor.getHue(nil, saturation: nil, brightness: &brightness, alpha: nil)
+            return brightness < 0.7
+        }
+        return white < 0.7
+        #else
+        return false
+        #endif
+    }
+}

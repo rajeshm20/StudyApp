@@ -35,16 +35,14 @@ enum AuthRoute: Hashable {
     case signIn
 }
 enum MainRoute: Hashable {
-    case dashboard
     case profile
     case account
     case settings
     case about
+    case assignmentDetails
     case notifications
     case countries
     case termsConditions
     case aboutUs
     case datapolicy
 }
-//enum SettingsRoute: Hashable {
-//}

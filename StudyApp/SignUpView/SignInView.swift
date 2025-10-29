@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Observation
 
 struct SignInView: View {
     @State private var email: String = ""
@@ -30,6 +31,7 @@ struct SignInView: View {
                         Spacer()
                         Button(action: {
                             // Handle forgot password
+                            //router.push(.forgotPass)
                         }) {
                             Text("Forgot Password?")
                                 .font( horizontalSizeClass == .regular ? .title3 : .footnote )
@@ -59,6 +61,7 @@ struct SignInView: View {
                             .foregroundColor(.gray)
                         Button(action: {
                             // Handle sign-up action
+                            router.push(.signUp)
                         }) {
                             Text("Sign Up")
                                 .font( horizontalSizeClass == .regular ? .title3 : .footnote )
@@ -118,9 +121,9 @@ struct SignInView: View {
             .navigationBarBackButtonHidden(false)
             .navigationTitle("Sign In")
             .navigationBarTitleDisplayMode(.large)
-            .onDisappear {
-                router.pop()
-            }
+//            .onDisappear {
+//                router.pop()
+//            }
     }
     // Modify the existing validateFields function
     func validateFields(title: Title) {

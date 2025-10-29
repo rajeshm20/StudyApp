@@ -20,7 +20,7 @@ struct AccountView: View {
     @State private var newPasswordError: String? = nil
     @State private var confirmPasswordError: String? = nil
     @EnvironmentObject var popupManager: PopupManager
-    var router = Router<MainRoute>()
+    var router:Router<MainRoute>
 
     // Computed property for form validation
     var isFormValid: Bool {
@@ -146,7 +146,6 @@ struct AccountView: View {
 // MARK: - Preview
 struct AccountVieww_Previews: PreviewProvider {
     static var previews: some View {
-        AccountView()
-            .environmentObject(PopupManager())
+        AccountView(router: Router<MainRoute>())
     }
 }

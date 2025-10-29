@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Combine
+import Observation
 
 struct OTPVerificationView: View {
     @State private var code: [String] = ["", "", "", ""]
@@ -15,8 +15,8 @@ struct OTPVerificationView: View {
     @State private var enableVerifyBtn: Bool = false
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
-
     var router: Router<AuthRoute>
+    
     var body: some View {
         VStack {
             // Header
@@ -86,7 +86,6 @@ struct OTPVerificationView: View {
             Spacer()
             // Verify Button
             Button(action: {
-                // Handle verification logic
                 if enableVerifyBtn {
                     router.push(.userOnboard)
                 }

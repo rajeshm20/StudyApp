@@ -4,7 +4,7 @@
 //
 
 import SwiftUI
-import Combine
+import Observation
 
 enum Title: String {
     case name = "Name"
@@ -26,7 +26,7 @@ struct SignUpView: View {
     @State private var passwordError: String? = nil
     @State private var phoneNumberError: String? = nil
     @State private var termsError: String? = nil
-    
+    @EnvironmentObject var popupManager: PopupManager
     // Popup visibility
     @State private var showPopup: Bool = false
 
@@ -119,57 +119,54 @@ struct SignUpView: View {
                 }
 
                 // Popup overlay
-                if showPopup {
-                    ZStack {
-                        Color.black.opacity(0.4)
-                            .edgesIgnoringSafeArea(.all)
-                            .onTapGesture {
-                                showPopup = false
-                            }
-                        
-                        VStack(spacing: 20) {
-                            Image(systemName: "checkmark.circle.fill") // Replace with your custom icon
-                                .font(.system(size: 50))
-                                .foregroundColor(.cyan)
-
-                            Text("Account information is correct?")
-                                .font(.headline)
-                                .fontWeight(.semibold)
-                                .multilineTextAlignment(.center)
-
-                            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fames velit.")
-                                .font(.subheadline)
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.gray)
-
-                            Button(action: {
-                                showPopup = false
-                                router.push(.otp)
-                            }) {
-                                Text("Accept")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 18, weight: .bold))
-                                    .frame(maxWidth: .infinity)
-                                    .padding()
-                                    .background(Color.cyan)
-                                    .cornerRadius(8)
-                            }
-                        }
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(16)
-                        .shadow(radius: 20)
-                        .padding(.horizontal, 20)
-                    }
-                }
+//                if showPopup {
+//                    ZStack {
+//                        Color.black.opacity(0.4)
+//                            .edgesIgnoringSafeArea(.all)
+//                            .onTapGesture {
+//                                showPopup = false
+//                            }
+//                        
+//                        VStack(spacing: 20) {
+//                            Image(systemName: "checkmark.circle.fill") // Replace with your custom icon
+//                                .font(.system(size: 50))
+//                                .foregroundColor(.cyan)
+//
+//                            Text("Account information is correct?")
+//                                .font(.headline)
+//                                .fontWeight(.semibold)
+//                                .multilineTextAlignment(.center)
+//
+//                            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fames velit.")
+//                                .font(.subheadline)
+//                                .multilineTextAlignment(.center)
+//                                .foregroundColor(.gray)
+//
+//                            Button(action: {
+//                                showPopup = false
+//                                router.push(.otp)
+//                            }) {
+//                                Text("Accept")
+//                                    .foregroundColor(.white)
+//                                    .font(.system(size: 18, weight: .bold))
+//                                    .frame(maxWidth: .infinity)
+//                                    .padding()
+//                                    .background(Color.cyan)
+//                                    .cornerRadius(8)
+//                            }
+//                        }
+//                        .padding()
+//                        .background(Color.white)
+//                        .cornerRadius(16)
+//                        .shadow(radius: 20)
+//                        .padding(.horizontal, 20)
+//                    }
+//                }
             }
             .navigationBarBackButtonHidden(false)
             .simultaneousGesture(
                 TapGesture().onEnded { self.hideKeyboard() }
             )
-            .onDisappear {
-                router.pop()
-            }
     }
 
     // Add this new function
@@ -194,6 +191,11 @@ struct SignUpView: View {
 
         if allFieldsValid {
             showPopup = true
+            popupManager.show(title: "Account information is correct?", image: "SucessTick", message: "Tap accept button to confirm entered details are correct.")
+            Task {
+                try? await Task.sleep(nanoseconds: 1_000_000_000) // 2 seconds delay
+                router.push(.otp)
+            }
         }
     }
 

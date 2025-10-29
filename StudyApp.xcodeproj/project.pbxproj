@@ -15,7 +15,9 @@
 		6113C40B2EA9843D00A0B639 /* ChooseLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6113C40A2EA9843D00A0B639 /* ChooseLanguageView.swift */; };
 		6113C40F2EA9864D00A0B639 /* NavigationRouter+AppCoordinator_Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6113C40D2EA9864D00A0B639 /* NavigationRouter+AppCoordinator_Example.swift */; };
 		6113E72C2E71C61200048063 /* StudentDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6113E72B2E71C61100048063 /* StudentDashboardView.swift */; };
+		6121A4972EAFAECF00039344 /* NavigationKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6121A4962EAFAECF00039344 /* NavigationKit */; };
 		61252D2E2D98E5E70052B8CA /* GridView_Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61252D2D2D98E5E70052B8CA /* GridView_Example.swift */; };
+		612D8B612EAFBB45007BDC5C /* NavigationKit in Frameworks */ = {isa = PBXBuildFile; productRef = 612D8B602EAFBB45007BDC5C /* NavigationKit */; };
 		61357E262D997E150071C7AF /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61357E252D997E150071C7AF /* Helpers.swift */; };
 		614E72B02EAB037A00E2D448 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614E72AF2EAB037A00E2D448 /* Router.swift */; };
 		614E72B22EAB03AE00E2D448 /* AppCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614E72B12EAB03AE00E2D448 /* AppCoordinatorView.swift */; };
@@ -38,6 +40,8 @@
 		6164E5182EABF84300D0FBE6 /* OnboardingTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6164E5172EABF84300D0FBE6 /* OnboardingTabView.swift */; };
 		6164FCCD2EAD6AFE0050B364 /* AuthenticationKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6164FCCC2EAD6AFE0050B364 /* AuthenticationKit */; };
 		6169B3502DB94DA20075AE28 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6169B34F2DB94DA20075AE28 /* DatePickerView.swift */; };
+		617D7ADB2EB27C180034150D /* FilterBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617D7ADA2EB27C180034150D /* FilterBottomSheet.swift */; };
+		617D7ADF2EB281700034150D /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617D7ADE2EB281700034150D /* TaskDetailView.swift */; };
 		61879BA52EA4E37C00901114 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61879BA42EA4E37C00901114 /* PopupView.swift */; };
 		61879BA72EA4FF5500901114 /* PopupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61879BA62EA4FF5500901114 /* PopupManager.swift */; };
 		61879BA92EA517E900901114 /* TextEditorWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61879BA82EA517E900901114 /* TextEditorWithCompletion.swift */; };
@@ -128,6 +132,8 @@
 		6169B34F2DB94DA20075AE28 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		616BB57B2E2356B000B6E64E /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		616BB57D2E23573100B6E64E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		617D7ADA2EB27C180034150D /* FilterBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBottomSheet.swift; sourceTree = "<group>"; };
+		617D7ADE2EB281700034150D /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
 		61879BA42EA4E37C00901114 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		61879BA62EA4FF5500901114 /* PopupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupManager.swift; sourceTree = "<group>"; };
 		61879BA82EA517E900901114 /* TextEditorWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorWithCompletion.swift; sourceTree = "<group>"; };
@@ -182,6 +188,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6164FCCD2EAD6AFE0050B364 /* AuthenticationKit in Frameworks */,
+				6121A4972EAFAECF00039344 /* NavigationKit in Frameworks */,
+				612D8B612EAFBB45007BDC5C /* NavigationKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +308,8 @@
 			children = (
 				6113C40E2EA9864D00A0B639 /* Navigation */,
 				61BF54732E77286800826236 /* AllAssignmentView.swift */,
+				617D7ADE2EB281700034150D /* TaskDetailView.swift */,
+				617D7ADA2EB27C180034150D /* FilterBottomSheet.swift */,
 				6159CEED2EAE551B00AD6119 /* AssignmentsListView.swift */,
 				6159CEEF2EAE555400AD6119 /* AssignmentModel.swift */,
 				6159CEF12EAE559D00AD6119 /* AssignmentContainerView.swift */,
@@ -474,6 +484,7 @@
 			packageReferences = (
 				6188C40E2E11985B00C9C2D4 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				6164FCCB2EAD6AFE0050B364 /* XCLocalSwiftPackageReference "../../script_generate_tree/AuthenticationKit" */,
+				612D8B5F2EAFBB45007BDC5C /* XCLocalSwiftPackageReference "../../script_generate_tree/NavigationKit" */,
 			);
 			productRefGroup = D34BE74E2C9F163400A3A3CA /* Products */;
 			projectDirPath = "";
@@ -531,6 +542,7 @@
 				6164E5122EABF70800D0FBE6 /* ChooseTopicInterestView.swift in Sources */,
 				6164E5142EABF77100D0FBE6 /* NotificationPermissionView.swift in Sources */,
 				61879BA72EA4FF5500901114 /* PopupManager.swift in Sources */,
+				617D7ADF2EB281700034150D /* TaskDetailView.swift in Sources */,
 				D34BE77E2C9F2CD800A3A3CA /* LaunchScreenView.swift in Sources */,
 				6110EEE12EAB7754004E5471 /* DataPolicyView.swift in Sources */,
 				61DAFC222E6454AC0037B1DF /* StateManager.swift in Sources */,
@@ -559,6 +571,7 @@
 				61FB0CD92EA6B8AB00398063 /* AboutView.swift in Sources */,
 				6160AD482E9FF914001C4899 /* ProfileViewModel.swift in Sources */,
 				6159CEEC2EAE417100AD6119 /* AboutUsView.swift in Sources */,
+				617D7ADB2EB27C180034150D /* FilterBottomSheet.swift in Sources */,
 				D32DFA4B2CA88235009B603E /* TopIcon_Title.swift in Sources */,
 				61879BA52EA4E37C00901114 /* PopupView.swift in Sources */,
 				6113C40F2EA9864D00A0B639 /* NavigationRouter+AppCoordinator_Example.swift in Sources */,
@@ -914,6 +927,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		612D8B5F2EAFBB45007BDC5C /* XCLocalSwiftPackageReference "../../script_generate_tree/NavigationKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../script_generate_tree/NavigationKit;
+		};
 		6164FCCB2EAD6AFE0050B364 /* XCLocalSwiftPackageReference "../../script_generate_tree/AuthenticationKit" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../script_generate_tree/AuthenticationKit;
@@ -932,6 +949,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6121A4962EAFAECF00039344 /* NavigationKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NavigationKit;
+		};
+		612D8B602EAFBB45007BDC5C /* NavigationKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NavigationKit;
+		};
 		6164FCCC2EAD6AFE0050B364 /* AuthenticationKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AuthenticationKit;

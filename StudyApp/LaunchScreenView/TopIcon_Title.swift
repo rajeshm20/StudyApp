@@ -25,7 +25,7 @@ struct TopIcon_Title: View {
             }
             Text(title)
                 .fontWeight(.heavy)
-                .foregroundStyle(Color.black)
+                .foregroundStyle(Color.cyan.opacity(0.8))
                 .foregroundStyle(Color(.white))
         }
         .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 0)

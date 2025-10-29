@@ -9,9 +9,20 @@ import SwiftUI
 // MARK: - List View
 
 struct AssignmentsListView: View {
+    @State private var showSheet = false
     @Binding var showListView: Bool
     @State private var categories: [AssignmentCategory] = []
-    
+    @State private var selectedItems = Set<Portfolio>()
+    @State private var selectionMode: SelectionMode = .single // Default to multiple selection
+    var router: Router<MainRoute>
+
+    let data = [
+        Portfolio(id: UUID(), displayTitle: "See all assignments"),
+        Portfolio(id: UUID(), displayTitle: "New assignments"),
+        Portfolio(id: UUID(), displayTitle: "Ongoing assignments"),
+        Portfolio(id: UUID(), displayTitle: "Completed assignments")
+    ]
+
     var body: some View {
             VStack(alignment: .leading, spacing: 0) {
                 // Header
@@ -47,7 +58,9 @@ struct AssignmentsListView: View {
                         .font(.title3)
                         .fontWeight(.medium)
                     Spacer()
-                    Button(action: {}) {
+                    Button(action: {
+                        showSheet = true
+                    }) {
                         Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
                             .font(.system(size: 15, weight: .medium))
                             .foregroundColor(.gray)
@@ -62,6 +75,9 @@ struct AssignmentsListView: View {
                             AssignmentCategoryCard(category: category)
                         }
                     }
+                    .onTapGesture(perform: {
+                        router.push(.assignmentDetails)
+                    })
                     .padding(.horizontal, 16)
                     .padding(.bottom, 20)
                 }
@@ -69,6 +85,23 @@ struct AssignmentsListView: View {
             .onAppear(perform: loadMockData)
             .background(Color(.systemGroupedBackground))
             .navigationBarHidden(true)
+            .sheet(isPresented: $showSheet) {
+                FilterBottomSheet()
+                    .presentationDetents([.fraction(0.35)])
+                    .presentationDragIndicator(.hidden)
+                    .background(Color.black.opacity(0.2))
+//                SelectableBottomSheet(
+//                    title: "Choose your filter",
+//                    items: data,
+//                    selected: $selectedItems,
+//                    onClose: {
+//                        showSheet = false
+//                    },
+//                    selectionMode: selectionMode
+//                )
+//                .presentationDetents([.medium, .large])
+            }
+
     }
     
     private func loadMockData() {
@@ -175,5 +208,5 @@ extension Color {
 }
 
 #Preview {
-    AssignmentContainerView()
+    AssignmentsListView(showListView: .constant(true), router: Router<MainRoute>())
 }

@@ -10,10 +10,11 @@ import SwiftUI
 
 struct AssignmentContainerView: View {
     @State private var showListView = false
-    
+    var router: Router<MainRoute>
+
     var body: some View {
         if showListView {
-            AssignmentsListView(showListView: $showListView)
+            AssignmentsListView(showListView: $showListView, router: router)
         } else {
             AssignmentCalendarScreen(showListView: $showListView)
         }
@@ -21,5 +22,5 @@ struct AssignmentContainerView: View {
 }
 
 #Preview {
-    AssignmentContainerView()
+    AssignmentContainerView(router: Router<MainRoute>())
 }

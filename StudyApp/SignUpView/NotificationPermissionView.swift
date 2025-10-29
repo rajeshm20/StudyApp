@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct NotificationPermissionView: View {
-    var router: Router<AuthRoute> // <-- Take as parameter, don't create new
+    var router: Router<AuthRoute>
 
     var body: some View {
         VStack {
@@ -27,7 +27,6 @@ struct NotificationPermissionView: View {
 
             VStack(spacing: 16) {
                 Button(action: {
-                    router.popToRoot() // Optional: reset stack first
                     router.push(.signIn)
                 }) {
                     Text("Turn On Notifications")
@@ -41,7 +40,6 @@ struct NotificationPermissionView: View {
                 }
 
                 Button(action: {
-                    router.pop() // Optional: reset stack first
                     router.push(.signIn)
                 }) {
                     Text("Remind me later")

@@ -17,7 +17,7 @@ struct ChooseTopicInterestView: View {
         Topic(name: "Economy", subtitle: "Stock, Property, News", icon: "chart.bar.fill", color: Color.yellow.opacity(0.2)),
         Topic(name: "English", subtitle: "Grammar, Literature", icon: "book.fill", color: Color.blue.opacity(0.2)),
         Topic(name: "Biology", subtitle: "Cells, Plants, Animals", icon: "leaf.fill", color: Color.green.opacity(0.2)),
-        Topic(name: "Geography", subtitle: "Maps, Climate, Earth", icon: "chart.pie.fill", color: Color.gray.opacity(0.2))
+        Topic(name: "Geography", subtitle: "Maps, Climate, Earth", icon: "globe.fill", color: Color.gray.opacity(0.2))
     ]
     
     var body: some View {

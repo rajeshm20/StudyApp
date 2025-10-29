@@ -12,7 +12,6 @@ struct ChooseLanguageView: View {
     var router = Router<MainRoute>()
 
     var body: some View {
-        NavigationView {
             VStack {
                 // Search bar with search lens icon
                 HStack {
@@ -60,7 +59,6 @@ struct ChooseLanguageView: View {
             .onAppear {
                 viewModel.loadLanguages()
             }
-        }
     }
 }
 #Preview {

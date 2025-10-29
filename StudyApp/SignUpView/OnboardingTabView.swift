@@ -1,4 +1,5 @@
 import SwiftUI
+import Observation
 
 struct OnboardingTabView: View {
     @State private var selectedTab = 0

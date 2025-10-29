@@ -7,12 +7,12 @@
 
 import SwiftUI
 import SwiftData
-import AuthenticationKit
+import Observation
 
 @main
 struct StudyAppApp: App {
     @StateObject var popupManager: PopupManager = PopupManager()
-    @StateObject var authRouter = Router<AuthRoute>() // <-- Add this line
+    @StateObject private var coordinator = AppCoordinator()
 
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -29,9 +29,9 @@ struct StudyAppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppCoordinatorView() // <-- Pass router here
+            AppCoordinatorView()
+                .environmentObject(coordinator)
                 .environmentObject(popupManager)
-                .environmentObject(AppCoordinator())
                 .overlay(alignment: .center) {
                     if popupManager.isVisible {
                         ZStack {

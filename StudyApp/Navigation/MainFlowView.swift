@@ -16,8 +16,6 @@ struct MainFlowView: View {
             StudentDashboardView(router: router)
                 .navigationDestination(for: MainRoute.self) { route in
                     switch route {
-                    case .dashboard:
-                        StudentDashboardView(router: router)
                     case .profile:
                         ProfilePageView(router: router)
                     case .account:
@@ -36,6 +34,8 @@ struct MainFlowView: View {
                         DataPolicyView(router: router)
                     case .aboutUs:
                         AboutUsView(router: router)
+                    case .assignmentDetails:
+                        TaskDetailView(router: router)
                     }
                 }
            }

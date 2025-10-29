@@ -51,7 +51,7 @@ struct ProfilePageView: View {
     // A placeholder text binding for FormField API (unused in date mode)
     @State private var dobText: String = ""
     @EnvironmentObject var popupManager: PopupManager
-    var router = Router<MainRoute>()
+    var router:Router<MainRoute>
 
     // Computed property for form validation
     var isFormValid: Bool {
@@ -390,7 +390,7 @@ struct GenderSelectorView: View {
 
 struct ProfilePageView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfilePageView()
+        ProfilePageView(router: Router<MainRoute>())
             .environmentObject(PopupManager())
     }
 }

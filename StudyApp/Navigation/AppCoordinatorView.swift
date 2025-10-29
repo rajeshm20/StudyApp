@@ -13,15 +13,15 @@ final class AppCoordinator: ObservableObject {
         case auth
         case main
     }
-
+    
     @Published var currentFlow: Flow = .auth
-
+    
     func switchToMain() {
         withAnimation {
             currentFlow = .main
         }
     }
-
+    
     func switchToAuth() {
         withAnimation {
             currentFlow = .auth
@@ -31,8 +31,7 @@ final class AppCoordinator: ObservableObject {
 
 
 struct AppCoordinatorView: View {
-    @StateObject private var coordinator = AppCoordinator()
-
+    @EnvironmentObject var coordinator: AppCoordinator
     var body: some View {
         Group {
             switch coordinator.currentFlow {
@@ -42,7 +41,6 @@ struct AppCoordinatorView: View {
                 MainFlowView()
             }
         }
-        .environmentObject(coordinator) // 🔥 Inject coordinator into environment
         .animation(.easeInOut, value: coordinator.currentFlow)
     }
 }
