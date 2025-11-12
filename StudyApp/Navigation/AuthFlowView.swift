@@ -9,7 +9,7 @@ import SwiftUI
 import Observation
 
 struct AuthFlowView: View {
-    @EnvironmentObject var coordinator: AppCoordinator
+//    @EnvironmentObject var coordinator: AppCoordinator
     @StateObject private var router = Router<AuthRoute>()
     
     var body: some View {
@@ -27,6 +27,10 @@ struct AuthFlowView: View {
                         OnboardingTabView(router: router)
                     case .signIn:
                         SignInView(router: router)
+                    case .forgotPassword:
+                        ForgotPasswordView(router: router)
+                    case .resetPassword:
+                        ResetPasswordView(router: router)
                     }
                 }
         }

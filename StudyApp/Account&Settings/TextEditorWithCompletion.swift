@@ -38,3 +38,8 @@ struct TextEditorWithCompletion: View {
             }
     }
 }
+
+
+#Preview {
+    TextEditorWithCompletion(completion: {})
+}

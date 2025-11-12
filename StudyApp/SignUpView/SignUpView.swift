@@ -10,6 +10,7 @@ enum Title: String {
     case name = "Name"
     case email =  "Email"
     case password = "Password"
+    case confirmPassword = "Confirm Password"
     case phoneNumber = "Phone number"
     case terms = "Terms"
 }
@@ -190,12 +191,16 @@ struct SignUpView: View {
                             agreeToTerms
 
         if allFieldsValid {
-            showPopup = true
-            popupManager.show(title: "Account information is correct?", image: "SucessTick", message: "Tap accept button to confirm entered details are correct.")
-            Task {
-                try? await Task.sleep(nanoseconds: 1_000_000_000) // 2 seconds delay
-                router.push(.otp)
-            }
+            popupManager.show(
+                title: "Account information is correct?",
+                image: "SucessTick",
+                message: "Tap accept button to confirm entered details are correct.",
+                onClose: {
+                    // Dynamic navigation or any logic goes here:
+                    router.push(.otp)
+                    popupManager.isVisible = false // Also dismiss the popup
+                }
+            )
         }
     }
 
@@ -220,6 +225,8 @@ struct SignUpView: View {
             phoneNumberError = ValidationHelper.isValidPhoneNumber(phoneNumber) ? nil : "Please enter a valid phone number"
         case .terms:
             termsError = agreeToTerms ? nil : "You must agree to the terms"
+        default:
+            break
         }
         // Remove the automatic popup showing logic from here
     }

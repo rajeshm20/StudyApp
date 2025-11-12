@@ -38,10 +38,25 @@ class LanguageViewModel: ObservableObject {
     }
 
     func loadLanguages() {
-        if let url = Bundle.main.url(forResource: "countries", withExtension: "json"),
-           let data = try? Data(contentsOf: url),
-           let decoded = try? JSONDecoder().decode([Language].self, from: data) {
-            languages = decoded
+        guard let url = Bundle.main.url(forResource: "countries", withExtension: "json") else {
+            print("❌ Error: countries.json file not found in bundle.")
+            return
+        }
+        do {
+            let data = try Data(contentsOf: url)
+            do {
+                let decoded = try JSONDecoder().decode([Language].self, from: data)
+                languages = decoded
+                print("✅ Successfully loaded \(languages.count) languages.")
+            } catch {
+                print("❌ JSON decode error:", error)
+                // Optionally also log the raw JSON:
+                if let raw = String(data: data, encoding: .utf8) {
+                    print("Raw JSON:", raw)
+                }
+            }
+        } catch {
+            print("❌ Failed to load countries.json file data:", error)
         }
     }
 }

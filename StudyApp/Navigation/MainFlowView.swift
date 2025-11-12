@@ -8,7 +8,7 @@ import SwiftUI
 import Observation
 
 struct MainFlowView: View {
-    @EnvironmentObject var coordinator: AppCoordinator
+//    @EnvironmentObject var coordinator: AppCoordinator
     @StateObject private var router = Router<MainRoute>()
     
     var body: some View {
@@ -25,7 +25,7 @@ struct MainFlowView: View {
                     case .about:
                         AboutView(router: router)
                     case .notifications:
-                        NotificationsView(router: router)
+                        NotificationsSettingsView(router: router)
                     case .countries:
                         ChooseLanguageView(router: router)
                     case .termsConditions:
@@ -36,6 +36,16 @@ struct MainFlowView: View {
                         AboutUsView(router: router)
                     case .assignmentDetails:
                         TaskDetailView(router: router)
+                    case .courses:
+                        CourseView(router: router)
+                    case .courseDetails:
+                        CourseDetailsView(router: router)
+                    case .mycourse:
+                        MyCourseView(router: router)
+                    case .myClasses:
+                        MyClassView(router: router)
+                    case .myPresence:
+                        PresenceView(router: router)
                     }
                 }
            }

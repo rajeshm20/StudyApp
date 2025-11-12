@@ -13,6 +13,7 @@ struct SignInView: View {
     @State private var password: String = ""
     @State private var emailError: String? = nil
     @State private var passwordError: String? = nil
+    @EnvironmentObject var popupManager: PopupManager
 
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
@@ -24,14 +25,16 @@ struct SignInView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     // Email Field
-                    FormField(title: "Email", placeholder: "study@email.com", text: $email, keyboardType: .emailAddress, error: $emailError, completion: { self.validateFields(title: .email) })
+                    FormField(title: "Email", placeholder: "study@email.com", text: $email, keyboardType: .emailAddress, error: $emailError, completion: {
+                        self.validateFields(title: .email)
+                    })
                     FormField(title: "Password", placeholder: "Your password", text: $password, isSecure: true, error: $passwordError, completion: { self.validateFields(title:.password) })
                     // Forgot Password
                     HStack {
                         Spacer()
                         Button(action: {
                             // Handle forgot password
-                            //router.push(.forgotPass)
+                            router.push(.forgotPassword)
                         }) {
                             Text("Forgot Password?")
                                 .font( horizontalSizeClass == .regular ? .title3 : .footnote )
@@ -50,7 +53,7 @@ struct SignInView: View {
                         isLoading: false,
                         isDisabled: false
                     ) {
-                        coordinator.switchToMain()                        
+                        validateAllFields()
                     }
                     .padding()
 
@@ -144,6 +147,30 @@ struct SignInView: View {
            break
         }
     }
+    
+    // Add this new function
+    func validateAllFields() {
+        validateFields(title: .email)
+        validateFields(title: .password)
+
+        // Check if all fields are valid
+        let allFieldsValid =
+        emailError == nil && passwordError == nil
+
+        if allFieldsValid {
+            popupManager.show(
+                title: "Account information is correct?",
+                image: "tick_round",
+                message: "Tap accept button to confirm entered details are correct.",
+                onClose: {
+                    // Dynamic navigation or any logic goes here:
+                    coordinator.switchToMain()
+                    popupManager.isVisible = false // Also dismiss the popup
+                }
+            )
+        }
+    }
+
 }
 
 struct SignInView_Previews: PreviewProvider {

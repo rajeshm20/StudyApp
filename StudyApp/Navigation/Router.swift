@@ -33,6 +33,8 @@ enum AuthRoute: Hashable {
     case otp
     case userOnboard
     case signIn
+    case forgotPassword
+    case resetPassword
 }
 enum MainRoute: Hashable {
     case profile
@@ -45,4 +47,9 @@ enum MainRoute: Hashable {
     case termsConditions
     case aboutUs
     case datapolicy
+    case courses
+    case courseDetails
+    case mycourse
+    case myClasses
+    case myPresence
 }

@@ -28,7 +28,7 @@ struct PopupView: View {
                         .fill(.clear)
                     Image(image)
                         .resizable()
-                        .frame(width: 160, height: 120)
+                        .frame(width: 160, height: 160)
                         .font(.system(size: 40, weight: .bold))
                         .foregroundColor(Color.blue)
                         .scaledToFill()

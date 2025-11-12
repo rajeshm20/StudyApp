@@ -157,7 +157,7 @@ struct StudentDashboardView: View {
                         if dataService.isLoading {
                             LoadingView()
                         } else if let studentData = dataService.studentData {
-                            DashboardContentView(studentData: studentData)
+                            DashboardContentView(studentData: studentData, router: router)
                         } else {
                             ErrorView()
                         }
@@ -219,7 +219,8 @@ struct ErrorView: View {
 // MARK: - Dashboard Content
 struct DashboardContentView: View {
     let studentData: StudentData
-    
+    var router: Router<MainRoute>
+
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
@@ -233,7 +234,7 @@ struct DashboardContentView: View {
                 StatsCardsView(stats: studentData.stats)
                 
                 // Navigation Icons
-                NavigationIconsView(items: studentData.navigationItems)
+                NavigationIconsView(items: studentData.navigationItems, router: router)
                 
                 // Schedule Section
                 ScheduleView(classes: studentData.schedule)
@@ -319,11 +320,12 @@ struct StatsCardsView: View {
 // MARK: - Navigation Icons
 struct NavigationIconsView: View {
     let items: [NavigationItem]
-    
+    var router: Router<MainRoute>
+
     var body: some View {
         HStack(spacing: 40) {
             ForEach(items) { item in
-                NavigationIconView(item: item)
+                NavigationIconView(item: item, router: router)
             }
         }
         .padding(.horizontal, 20)
@@ -465,59 +467,6 @@ struct AssignmentsView: View {
     }
 }
 
-struct ProfileViewAlternate: View {
-    var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                // Profile Header
-                VStack(spacing: 15) {
-                    Circle()
-                        .fill(Color.blue.opacity(0.2))
-                        .frame(width: 100, height: 100)
-                        .overlay(
-                            Text("JW")
-                                .font(.largeTitle)
-                                .fontWeight(.bold)
-                                .foregroundColor(.blue)
-                        )
-                    
-                    Text("Jenny Wilson")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    
-                    Text("Student ID: 2023001234")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-                .padding(.top, 30)
-                
-                // Profile Stats
-                HStack(spacing: 20) {
-                    ProfileStatView(title: "GPA", value: "3.85", color: .green)
-                    ProfileStatView(title: "Credits", value: "24", color: .blue)
-                    ProfileStatView(title: "Semester", value: "Fall '25", color: .orange)
-                }
-                .padding(.horizontal, 20)
-                
-                // Profile Options
-                VStack(spacing: 12) {
-                    ProfileOptionRow(icon: "gear", title: "Settings", color: .gray)
-                    ProfileOptionRow(icon: "bell", title: "Notifications", color: .orange)
-                    ProfileOptionRow(icon: "questionmark.circle", title: "Help & Support", color: .blue)
-                    ProfileOptionRow(icon: "rectangle.portrait.and.arrow.right", title: "Sign Out", color: .red)
-                }
-                .padding(.horizontal, 20)
-                .padding(.top, 20)
-                
-                Spacer()
-            }
-        }
-        .background(Color(.systemGroupedBackground))
-    }
-}
-#Preview {
-    ProfileViewAlternate()
-}
 
 // MARK: - Helper Views
 struct CalendarEventCard: View {
@@ -681,10 +630,29 @@ struct StatsCard: View {
 
 struct NavigationIconView: View {
     let item: NavigationItem
+    var router: Router<MainRoute>
     
     var body: some View {
         VStack(spacing: 8) {
-            Button(action: {}) {
+            Button(action: {
+                switch item.title
+                {
+                case "Course":
+                    router.push(.courses)
+                    print("course tapped")
+                case "Subjects":
+                    router.push(.courseDetails)
+                    print("Subjects tapped")
+                case "Class":
+                    router.push(.myClasses)
+                    print("Class tapped")
+                case "Presence":
+                    router.push(.myPresence)
+                    print("Presence tapped")
+                default:
+                    break
+                }
+            }) {
                 Image(systemName: item.icon)
                     .font(.title2)
                     .foregroundColor(.white)

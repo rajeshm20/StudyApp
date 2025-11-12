@@ -32,7 +32,26 @@ extension Serializable where Self: Codable {
         return try! decoder.decode(Self.self, from: data)
     }
 }
-
+//    .gesture(
+//        DragGesture()
+//            .onEnded { value in
+//                // Manual velocity calculation
+//                let deltaX = value.location.x - value.startLocation.x
+//                let deltaY = value.location.y - value.startLocation.y
+//                let duration = value.time.timeIntervalSince(value.startTime)
+//                let velocityX = deltaX / duration
+//                let velocityY = deltaY / duration
+//                print("Velocity: \(velocityX), \(velocityY)")
+//            }
+//    )
+//After SwiftUI 2025:
+//    .gesture(
+//        DragGesture()
+//            .onEnded { value in
+//                let velocity = value.velocity
+//                print("Velocity: \(velocity.width), \(velocity.height)")
+//            }
+//    )
 
 // MARK: Example
 

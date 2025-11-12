@@ -193,9 +193,16 @@ struct ProfilePageView: View {
                             if isFormValid {
                                 // Logic to save/update profile goes here
                                 alertMessage = "Profile updated successfully!"
-                                popupManager.show(title: "Update Success", image: "SucessTick", message: alertMessage)
-                                // Dismiss keyboard after update
-                                self.hideKeyboard()
+                                popupManager.show(
+                                    title: "Profile updated",
+                                    image: "tick_round",
+                                    message: "Tap accept button to confirm entered details are correct.",
+                                    onClose: {
+                                        // Dynamic navigation or any logic goes here:
+                                        router.pop()
+                                        popupManager.isVisible = false // Also dismiss the popup
+                                    }
+                                )
                             }
                         }
                         .padding(.horizontal, 10)

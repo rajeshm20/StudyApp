@@ -99,6 +99,13 @@ struct FormField: View {
                     .environment(\.locale, Locale.current)
                     .onChange(of: date) { _, _ in
                         // can add extra validation if needed
+                        if let min = minimumDate, let current = date, current < min {
+                            date = min
+                        }
+                        if let max = maximumDate, let current = date, current > max {
+                            date = max
+                        }
+
                     }
                     .onAppear {
                         // Clamp initial date within bounds if provided

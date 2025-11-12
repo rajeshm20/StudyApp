@@ -14,18 +14,23 @@ class PopupManager: ObservableObject {
     @Published var title = ""
     @Published var image = ""
     @Published var message = ""
-    
-    func show(title: String, image: String, message: String) {
+    var onClose: (() -> Void)? // <-- Add this
+
+    func show(title: String, image: String, message: String, onClose: (() -> Void)? = nil) {
         withAnimation {
             self.title = title
             self.image = image
             self.message = message
+            self.onClose = onClose
             self.isVisible = true
         }
-        // Auto dismiss after 2 seconds
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-            guard let self else { return }
-            withAnimation { self.isVisible = false }
+        // Optional: keep auto-dismiss for legacy cases
+        // If you want to auto-dismiss ONLY if onClose is nil, use:
+        if onClose == nil {
+            DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
+                guard let self else { return }
+                withAnimation { self.isVisible = false }
+            }
         }
     }
 }

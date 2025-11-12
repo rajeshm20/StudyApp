@@ -81,7 +81,17 @@ struct AccountView: View {
                                 if isFormValid {
                                     // Logic to save/update profile goes here
                                     alertMessage = "Password updated successfully!"
-                                    popupManager.show(title: "Password Updated", image: "key", message: alertMessage)
+                                    popupManager.show(
+                                        title: "Password Updated",
+                                        image: "key",
+                                        message: alertMessage,
+                                        onClose: {
+                                            // Dynamic navigation or any logic goes here:
+                                            router.pop()
+                                            popupManager.isVisible = false // Also dismiss the popup
+                                        }
+                                    )
+
                                     self.hideKeyboard()
                                 } else {
                                     validateFields(title: .oldPassword)

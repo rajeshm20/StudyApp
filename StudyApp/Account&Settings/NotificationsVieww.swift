@@ -31,7 +31,7 @@ struct NotificationToggleRow: View {
 }
 
 // MARK: - Notifications View
-struct NotificationsView: View {
+struct NotificationsSettingsView: View {
     @State private var emailNotifications = true
     @State private var appsUpdate = true
     @State private var recommendations = false
@@ -70,5 +70,5 @@ struct NotificationsView: View {
 }
 
 #Preview {
-    NotificationsView(router: Router<MainRoute>())
+    NotificationsSettingsView(router: Router<MainRoute>())
 }

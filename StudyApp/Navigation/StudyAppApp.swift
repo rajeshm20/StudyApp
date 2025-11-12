@@ -26,7 +26,6 @@ struct StudyAppApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
-
     var body: some Scene {
         WindowGroup {
             AppCoordinatorView()
@@ -35,9 +34,21 @@ struct StudyAppApp: App {
                 .overlay(alignment: .center) {
                     if popupManager.isVisible {
                         ZStack {
-                            PopupView(title: popupManager.title, image: popupManager.image, message: popupManager.message, onClose: {
-                                popupManager.isVisible = false
-                            })
+                            PopupView(
+                                title: popupManager.title,
+                                image: popupManager.image,
+                                message: popupManager.message,
+                                onClose: {
+                                    // Call dynamic action if set, otherwise just dismiss
+                                    if let close = popupManager.onClose {
+                                        close()
+                                    } else {
+                                        popupManager.isVisible = false
+                                    }
+                                    // Always clear handler after running
+                                    popupManager.onClose = nil
+                                }
+                            )
                         }
                         .transition(.scale)
                     }
