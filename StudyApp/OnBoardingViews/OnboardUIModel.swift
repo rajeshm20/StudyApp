@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 // Data Model for Each Page
 struct PageData {
     var imageName: String

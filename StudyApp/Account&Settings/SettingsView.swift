@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    var router:Router<MainRoute>
+    var router: Router<MainRoute>
     var body: some View {
         VStack {
             List {
@@ -22,7 +22,7 @@ struct SettingsView: View {
                 }) {
                     Text("Notification")
                 }
-                Button(action: { }) {
+                Button(action: {}) {
                     Text("Update version")
                 }
             }

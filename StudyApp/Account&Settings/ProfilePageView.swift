@@ -1,7 +1,7 @@
 // MARK: - 1. Profile Data Model & Utility
 
-import SwiftUI
 import PhotosUI
+import SwiftUI
 
 /// Defines the structure for the user's profile data.
 struct Profile {
@@ -24,7 +24,7 @@ enum Gender: String, CaseIterable {
 extension String {
     var isValidEmail: Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegex)
+        let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         return emailTest.evaluate(with: self)
     }
 }
@@ -51,7 +51,7 @@ struct ProfilePageView: View {
     // A placeholder text binding for FormField API (unused in date mode)
     @State private var dobText: String = ""
     @EnvironmentObject var popupManager: PopupManager
-    var router:Router<MainRoute>
+    var router: Router<MainRoute>
 
     // Computed property for form validation
     var isFormValid: Bool {
@@ -60,34 +60,34 @@ struct ProfilePageView: View {
             alertMessage = "Name is required."
             return false
         }
-        
+
         // Email must be non-empty and valid
         guard profile.email.isValidEmail else {
             alertMessage = "Please enter a valid email address."
             return false
         }
-        
+
         // Date of Birth: Simple check to ensure it's not in the future (optional: you could add an age check)
         guard profile.dateOfBirth < Date() else {
             alertMessage = "Date of Birth cannot be in the future."
             dobError = alertMessage
             return false
         }
-        
+
         // Phone number: Simple check for non-emptiness (a more robust regex is usually needed)
         guard !profile.phoneNumber.trimmingCharacters(in: .whitespaces).isEmpty else {
             alertMessage = "Phone Number is required."
             phoneNoError = alertMessage
             return false
         }
-        
+
         // Address must not be empty
         guard !profile.address.trimmingCharacters(in: .whitespaces).isEmpty else {
             alertMessage = "Address is required."
             addressError = alertMessage
             return false
         }
-        
+
         // If all checks pass
         return true
     }
@@ -97,7 +97,7 @@ struct ProfilePageView: View {
         ZStack(alignment: .top) {
             // White background for the form
             Color.white.edgesIgnoringSafeArea(.all)
-            
+
             // Outer blue border/background color from the image
             VStack {
                 Spacer()
@@ -106,18 +106,21 @@ struct ProfilePageView: View {
                     .frame(height: 100)
             }
             .edgesIgnoringSafeArea(.bottom)
-            
+
             VStack(spacing: 0) {
                 // MARK: Scrollable Form Content
+
                 ScrollView {
                     VStack(spacing: 15) {
-                        
                         // MARK: Profile Picture
+
 //                        ProfileHeader(imageName: "student3")
 //                            .padding(.bottom, 20)
                         ProfilePictureView()
                             .padding([.top, .bottom], 20)
+
                         // MARK: Form Fields
+
                         FormField(title: "Name", placeholder: "Your name", text: $profile.name, error: $nameError, completion: {
                             // Example inline validation to update nameError
                             nameError = profile.name.trimmingCharacters(in: .whitespaces).isEmpty ? "Name is required" : nil
@@ -127,10 +130,10 @@ struct ProfilePageView: View {
                                   text: $profile.email,
                                   error: $emailError,
                                   completion: {
-                            // Example inline validation to update emailError
-                            emailError = profile.email.trimmingCharacters(in: .whitespaces).isEmpty ? "Email is required" : (profile.email.isValidEmail ? nil : "Please enter a valid email")
-                        })
-                        
+                                      // Example inline validation to update emailError
+                                      emailError = profile.email.trimmingCharacters(in: .whitespaces).isEmpty ? "Email is required" : (profile.email.isValidEmail ? nil : "Please enter a valid email")
+                                  })
+
                         // Date of Birth using FormField date mode
                         FormField(
                             title: "Date of Birth",
@@ -151,34 +154,39 @@ struct ProfilePageView: View {
                                 }
                             }
                         )
-                        
+
                         FormField(title: "Phone Number",
                                   placeholder: "Your name",
                                   text: $profile.phoneNumber,
                                   error: $phoneNoError,
                                   isPhoneNumber: true,
                                   completion: {
-                            // Example inline validation to update phone error
-                            phoneNoError = profile.phoneNumber.trimmingCharacters(in: .whitespaces).isEmpty ? "Phone number is required" : nil
-                        })
+                                      // Example inline validation to update phone error
+                                      phoneNoError = profile.phoneNumber.trimmingCharacters(in: .whitespaces).isEmpty ? "Phone number is required" : nil
+                                  })
                         FormField(title: "Student ID",
                                   placeholder: "",
                                   text: $profile.studentID,
                                   error: $dobError,
-                                  isBackgroundColorEnabled: true ,
+                                  isBackgroundColorEnabled: true,
                                   completion: {
-                            dobError = alertMessage
-                        })
-                            .disabled(true)
+                                      dobError = alertMessage
+                                  })
+                                  .disabled(true)
                         // Student ID Field (Read-only appearance with no text field style)
-                        
+
                         // MARK: Gender Selection
+
                         GenderSelectorView(selectedGender: $profile.gender)
                             .padding(.horizontal, 10)
+
                         // MARK: Address Text Area
+
                         FormField(title: "Address", placeholder: "", text: $profile.address, error: $addressError, isTextEditorEnabled: true, completion: {})
                             .padding(.top, 10)
+
                         // MARK: Update Button
+
                         AppButton(
                             title: "Update Profile",
                             style: .filled,
@@ -209,6 +217,7 @@ struct ProfilePageView: View {
                     }
                     .padding(.horizontal, 25) // Horizontal padding for the form content
                 }
+                .scrollDismissesKeyboard(.interactively)
             }
         }
         .navigationTitle("Profile")
@@ -217,9 +226,9 @@ struct ProfilePageView: View {
             // initialize dob state from profile
             dob = profile.dateOfBirth
         }
-        // Keyboard dismiss gesture for entire screen
+//         Keyboard dismiss gesture for entire screen
         .simultaneousGesture(
-            TapGesture().onEnded { self.hideKeyboard() }
+            TapGesture().onEnded { hideKeyboard() }
         )
     }
 }
@@ -269,7 +278,8 @@ struct ProfilePictureView: View {
                     guard let item = newItem else { return }
                     // Load image data and create a UIImage from it
                     if let data = try? await item.loadTransferable(type: Data.self),
-                       let image = UIImage(data: data) {
+                       let image = UIImage(data: data)
+                    {
                         selectedImage = image
                         // Save to Documents directory
                         savedImageURL = saveImageToDocuments(image)
@@ -401,4 +411,3 @@ struct ProfilePageView_Previews: PreviewProvider {
             .environmentObject(PopupManager())
     }
 }
-

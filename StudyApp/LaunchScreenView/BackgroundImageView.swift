@@ -12,7 +12,7 @@ struct BackgroundImageView: View {
     var imageName: String
     var title: String
     var description: String
-    
+
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
@@ -20,34 +20,34 @@ struct BackgroundImageView: View {
                 BackgroundImageWithOverlay(
                     imageName: imageName,
                     gradientColors: [.clear, .cyan.opacity(0.7)],
-                    height: geometry.size.height / 1.5, title: title  // Half the screen height
+                    height: geometry.size.height / 1.5, title: title // Half the screen height
                 )
-                
+
                 // Second Half: Text overlay
                 TextOverlayView(
                     title: title,
                     description: description,
-                    height: geometry.size.height / 2  // Half the screen height
+                    height: geometry.size.height / 2 // Half the screen height
                 )
             }
-            .ignoresSafeArea()  // Ensure content fills the screen
+            .ignoresSafeArea() // Ensure content fills the screen
         }
     }
 }
-// Reusable Background Image with Gradient Overlay
+
 // Reusable Background Image with Gradient Overlay
 struct BackgroundImageWithOverlay: View {
     var imageName: String
     var gradientColors: [Color]
-    var height: CGFloat  // Added height parameter to control the height dynamically
+    var height: CGFloat // Added height parameter to control the height dynamically
     @State var title: String
-    
+
     var body: some View {
         VStack {
             Image(imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(height: height)  // Set the height
+                .frame(height: height) // Set the height
                 .overlay(
                     LinearGradient(
                         gradient: Gradient(colors: gradientColors),
@@ -56,10 +56,10 @@ struct BackgroundImageWithOverlay: View {
                     )
                     .opacity(0.7)
                 )
-                .clipped()  // Clip the image to avoid overflow
+                .clipped() // Clip the image to avoid overflow
                 .overlay {
                     TopIcon_Title(title: title)
-                        .offset(y:200)
+                        .offset(y: 200)
                 }
         }
     }
@@ -69,13 +69,13 @@ struct BackgroundImageWithOverlay: View {
 struct TextOverlayView: View {
     var title: String
     var description: String
-    var height: CGFloat  // Added height parameter to control the height dynamically
-    
+    var height: CGFloat // Added height parameter to control the height dynamically
+
     var body: some View {
         ZStack {
             Rectangle()
                 .foregroundColor(.white)
-                .frame(height: height)  // Set the height dynamically
+                .frame(height: height) // Set the height dynamically
             VStack(alignment: .center) {
                 Text(title)
                     .font(.system(size: 25, weight: .bold))
@@ -87,9 +87,7 @@ struct TextOverlayView: View {
                     .padding(.horizontal)
                 Spacer()
                 HStack(alignment: .center) {
-                    Button(action: {
-                        
-                    }){
+                    Button(action: {}) {
                         Text("Skip")
                             .font(.system(size: 18, weight: .medium))
                             .foregroundStyle(Color.cyan)
@@ -98,7 +96,7 @@ struct TextOverlayView: View {
                     Button(action: {
                         // Define button action here
                         print("Button tapped!")
-                    }){
+                    }) {
                         Image(systemName: "arrow.right") // Right arrow symbol
                             .font(.system(size: 18, weight: .bold)) // Adjust arrow size and weight
                             .foregroundColor(.white) // Arrow color
@@ -110,10 +108,6 @@ struct TextOverlayView: View {
                 .padding(.trailing, 30)
                 Spacer()
             }
-
         }
     }
 }
-
-
-

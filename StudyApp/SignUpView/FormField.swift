@@ -7,6 +7,7 @@
 import SwiftUI
 
 // MARK: - Reusable Form Field View with Validation
+
 struct FormField: View {
     // Common
     var title: String
@@ -27,8 +28,8 @@ struct FormField: View {
     @Binding var date: Date?
     @Binding var showDatePicker: Bool
     var displayedComponents: DatePickerComponents = .date
-    var minimumDate: Date? = nil
-    var maximumDate: Date? = nil
+    var minimumDate: Date?
+    var maximumDate: Date?
     var dateFormatStyle: Date.FormatStyle = .init(date: .long, time: .omitted)
 
     init(
@@ -54,18 +55,18 @@ struct FormField: View {
     ) {
         self.title = title
         self.placeholder = placeholder
-        self._text = text
-        self._selectedGender = selectedGender
+        _text = text
+        _selectedGender = selectedGender
         self.isSecure = isSecure
         self.keyboardType = keyboardType
-        self._error = error
+        _error = error
         self.isPhoneNumber = isPhoneNumber
         self.isTextEditorEnabled = isTextEditorEnabled
         self.isBackgroundColorEnabled = isBackgroundColorEnabled
         self.isDoubleSelectableRadioButtonEnabled = isDoubleSelectableRadioButtonEnabled
         self.usesDatePicker = usesDatePicker
-        self._date = date
-        self._showDatePicker = showDatePicker
+        _date = date
+        _showDatePicker = showDatePicker
         self.displayedComponents = displayedComponents
         self.minimumDate = minimumDate
         self.maximumDate = maximumDate
@@ -105,7 +106,6 @@ struct FormField: View {
                         if let max = maximumDate, let current = date, current > max {
                             date = max
                         }
-
                     }
                     .onAppear {
                         // Clamp initial date within bounds if provided
@@ -118,14 +118,14 @@ struct FormField: View {
                     }
                     .padding(.top, 4)
                 }
-            } else if self.isTextEditorEnabled {
+            } else if isTextEditorEnabled {
                 VStack(alignment: .leading, spacing: 5) {
-                    TextEditor(text: self.$text)
+                    TextEditor(text: $text)
                         .onChange(of: text) {
                             completion()
                         }
                         .frame(maxWidth: .infinity, minHeight: 150, alignment: .init(horizontal: .leading, vertical: .top))
-                        .foregroundStyle(self.text.isEmpty ? .textSecondary: .primary)
+                        .foregroundStyle(text.isEmpty ? .textSecondary : .primary)
                         .cornerRadius(10)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
@@ -136,7 +136,7 @@ struct FormField: View {
                 .padding(.top, 10)
                 .padding(.horizontal, 10)
 
-            } else if self.isDoubleSelectableRadioButtonEnabled {
+            } else if isDoubleSelectableRadioButtonEnabled {
                 VStack(alignment: .leading, spacing: 5) {
                     HStack(spacing: 15) {
                         // Button for Male
@@ -159,7 +159,7 @@ struct FormField: View {
                     TextField(placeholder, text: $text, onCommit: {
                         completion()
                     })
-                    .onChange(of: text) { oldValue, newValue in
+                    .onChange(of: text) { _, newValue in
                         if isPhoneNumber {
                             text = formatPhoneNumber(newValue)
                         }
@@ -171,7 +171,7 @@ struct FormField: View {
                 }
             }
 
-            if let error = error {
+            if let error {
                 Text(error)
                     .foregroundColor(.red)
                     .font(.caption)
@@ -180,7 +180,7 @@ struct FormField: View {
         }
         .padding([.horizontal, .vertical], 5)
     }
-    
+
     private func genderButton(for gender: Gender) -> some View {
         Button(action: {
             selectedGender = gender
@@ -201,6 +201,7 @@ struct FormField: View {
             )
         }
     }
+
     private var dateField: some View {
         Button {
             withAnimation {
@@ -227,10 +228,10 @@ struct FormField: View {
     }
 
     func formatPhoneNumber(_ number: String) -> String {
-        let digits = number.filter { $0.isNumber }
+        let digits = number.filter(\.isNumber)
         // Limit to 12 digits (4+4+4)
         let truncatedDigits = String(digits.prefix(12))
-        
+
         var formatted = ""
         for (index, digit) in truncatedDigits.enumerated() {
             if index == 4 || index == 8 {
@@ -240,9 +241,6 @@ struct FormField: View {
         }
         return formatted
     }
-
 }
 
-extension FormField {
-    
-}
+extension FormField {}

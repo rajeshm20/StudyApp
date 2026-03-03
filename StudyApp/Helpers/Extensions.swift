@@ -55,7 +55,7 @@ struct DemoView: View {
 
 extension View {
     @ViewBuilder
-    func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+    func `if`(_ condition: Bool, transform: (Self) -> some View) -> some View {
         if condition {
             transform(self)
         } else {
@@ -65,6 +65,7 @@ extension View {
 }
 
 // MARK: Card Style
+
 extension View {
     func cardStyle(padding: CGFloat = 16) -> some View {
         self
@@ -76,11 +77,12 @@ extension View {
 }
 
 // MARK: Hide keyboard
+
 /* usage:
  Button("Tap here to Sign In") {
  hideKeyboard()
  }.primaryButtonStyle()
-*/
+ */
 extension View {
     func hideKeyboard() {
         UIApplication.shared.sendAction(
@@ -90,37 +92,43 @@ extension View {
     }
 }
 
+// MARK: Convert the Swift model to JSON data.
+
+extension Encodable {
+    func toJSON() -> String? {
+        guard let data = try? JSONEncoder().encode(self) else { return nil }
+        return String(data: data, encoding: .utf8)
+    }
+}
+
 // MARK: Modern Navigation (iOS 16+)
+
 // usage: .navigate(isPresented: $goToNextScreen) { NextView() }
 // Must be inside a NavigationStack
 extension View {
     /// Presents a destination view programmatically when the binding is set to true.
     /// Should be used inside a NavigationStack.
-    func navigate<Destination: View>(
+    func navigate(
         isPresented: Binding<Bool>,
-        @ViewBuilder destination: @escaping () -> Destination
+        @ViewBuilder destination: @escaping () -> some View
     ) -> some View {
-        self
-            .navigationDestination(isPresented: isPresented, destination: destination)
+        navigationDestination(isPresented: isPresented, destination: destination)
     }
 }
 
 extension Text {
-   func titleStyle() -> some View {
-        self
-            .font(.system(size: 26, weight: .bold))
+    func titleStyle() -> some View {
+        font(.system(size: 26, weight: .bold))
             .foregroundColor(.appTextPrimary)
     }
 
     func subtitleStyle() -> some View {
-        self
-            .font(.system(size: 18, weight: .medium))
+        font(.system(size: 18, weight: .medium))
             .foregroundColor(.appTextSecondary)
     }
 
     func captionStyle() -> some View {
-        self
-            .font(.footnote)
+        font(.footnote)
             .foregroundColor(.appTextSecondary)
     }
 }
@@ -144,20 +152,18 @@ extension View {
     }
 }
 
-
 extension View {
     func primaryButtonStyle() -> some View {
-        self
-            .padding()
+        padding()
             .frame(maxWidth: .infinity)
             .background(Color.cyan)
             .foregroundColor(.white)
             .cornerRadius(10)
             .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
     }
+
     func secondaryButtonStyle() -> some View {
-        self
-            .padding()
+        padding()
             .frame(maxWidth: .infinity)
             .background(Color.yellow)
             .foregroundColor(.white)
@@ -165,9 +171,9 @@ extension View {
     }
 }
 
-
 // MARK: Fonts Extension
-//Centralise font definitions with a Font extension:
+
+// Centralise font definitions with a Font extension:
 // Usage:
 // Text("Welcome").font(.appTitle)
 
@@ -177,29 +183,28 @@ extension Font {
     static let appCaption = Font.system(size: 12, weight: .light, design: .default)
 }
 
-
 import SwiftUI
 
 extension Color {
     var isDark: Bool {
         #if canImport(UIKit)
-        let uiColor = UIColor(self)
-        var white: CGFloat = 0
-        uiColor.getWhite(&white, alpha: nil)
-        if white < 0.001 || white > 0.999 {
-            var brightness: CGFloat = 0
-            uiColor.getHue(nil, saturation: nil, brightness: &brightness, alpha: nil)
-            return brightness < 0.7
-        }
-        return white < 0.7
+            let uiColor = UIColor(self)
+            var white: CGFloat = 0
+            uiColor.getWhite(&white, alpha: nil)
+            if white < 0.001 || white > 0.999 {
+                var brightness: CGFloat = 0
+                uiColor.getHue(nil, saturation: nil, brightness: &brightness, alpha: nil)
+                return brightness < 0.7
+            }
+            return white < 0.7
         #else
-        return false
+            return false
         #endif
     }
 }
 
-
 // MARK: - Color Extension
+
 extension Color {
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)

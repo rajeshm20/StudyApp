@@ -21,17 +21,17 @@ struct ProfileViewAlternate: View {
                                 .fontWeight(.bold)
                                 .foregroundColor(.blue)
                         )
-                    
+
                     Text("Jenny Wilson")
                         .font(.title2)
                         .fontWeight(.semibold)
-                    
+
                     Text("Student ID: 2023001234")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
                 .padding(.top, 30)
-                
+
                 // Profile Stats
                 HStack(spacing: 20) {
                     ProfileStatView(title: "GPA", value: "3.85", color: .green)
@@ -39,7 +39,7 @@ struct ProfileViewAlternate: View {
                     ProfileStatView(title: "Semester", value: "Fall '25", color: .orange)
                 }
                 .padding(.horizontal, 20)
-                
+
                 // Profile Options
                 VStack(spacing: 12) {
                     ProfileOptionRow(icon: "gear", title: "Settings", color: .gray)
@@ -49,13 +49,14 @@ struct ProfileViewAlternate: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 20)
-                
+
                 Spacer()
             }
         }
         .background(Color(.systemGroupedBackground))
     }
 }
+
 #Preview {
     ProfileViewAlternate()
 }

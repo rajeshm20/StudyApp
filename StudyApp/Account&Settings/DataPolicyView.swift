@@ -1,10 +1,9 @@
 //
-//  TermsAndConditionsView.swift
+//  DataPolicyView.swift
 //  StudyApp
 //
 //  Created by Rajesh Mani on 24/10/25.
 //
-
 
 import SwiftUI
 
@@ -25,7 +24,7 @@ struct DataPolicyView: View {
                                 .fixedSize(horizontal: false, vertical: true)
 
                             // add some more paragraphs to ensure scrollable content
-                            ForEach(0..<4) { _ in
+                            ForEach(0 ..< 4) { _ in
                                 Text(sampleParagraph)
                                     .fixedSize(horizontal: false, vertical: true)
                             }
@@ -84,6 +83,7 @@ private struct BottomMinYPreferenceKey: @MainActor PreferenceKey {
 }
 
 // MARK: - Sample placeholder text
+
 private let sampleTerms = """
 Welcome to our app. Please read these Terms & Conditions carefully before using the service. By tapping Accept you agree to be bound by these terms.\n\n1. Acceptance of terms.\n2. Use license.\n3. Privacy and data collection.\n4. Intellectual property.\n5. Termination.\n\nThis is placeholder legal text to demonstrate scrolling behaviour — replace with your real terms.
 """
@@ -91,6 +91,7 @@ Welcome to our app. Please read these Terms & Conditions carefully before using 
 private let sampleParagraph = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.\n\n"
 
 // MARK: - Preview
+
 struct DataPolicyView_Previews: PreviewProvider {
     static var previews: some View {
         DataPolicyView(router: Router<MainRoute>())

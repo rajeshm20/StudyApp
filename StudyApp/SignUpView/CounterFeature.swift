@@ -5,11 +5,11 @@
 ////  Created by Rajesh Mani on 26/06/25.
 ////
 //
-//import ComposableArchitecture
+// import ComposableArchitecture
 //
 //
-//@Reducer
-//struct CounterFeature {
+// @Reducer
+// struct CounterFeature {
 //    @ObservableState
 //    struct State: Equatable {
 //        var count = 0
@@ -45,6 +45,6 @@
 //            }
 //        }
 //    }
-//}
+// }
 //
 //// (Define or mock numberFactClient as a dependency elsewhere)

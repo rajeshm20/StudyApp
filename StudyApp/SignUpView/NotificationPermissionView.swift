@@ -56,14 +56,15 @@ struct NotificationPermissionView: View {
 }
 
 // MARK: - Placeholder Illustration
+
 struct NotificationIllustration: View {
     var body: some View {
         VStack(spacing: 10) {
-            ForEach(0..<3) { index in
+            ForEach(0 ..< 3) { index in
                 HStack(spacing: 10) {
                     Circle()
                         .fill(Color.blue.opacity(0.15))
-                        .frame(width: 32, height: 32)
+                        .frame(width: CGFloat(32 - (index * 15)), height: 32)
                         .overlay(
                             Image(systemName: "bell.fill")
                                 .foregroundColor(Color.blue)

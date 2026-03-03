@@ -5,8 +5,8 @@
 //  Created by Rajesh Mani on 24/10/25.
 //
 
-import SwiftUI
 import Observation
+import SwiftUI
 
 @MainActor
 final class Router<Route: Hashable>: ObservableObject {
@@ -24,9 +24,13 @@ final class Router<Route: Hashable>: ObservableObject {
     func popToRoot() {
         path.removeLast(path.count)
     }
+    func popToSignIn() {
+        path.count > 1 ? path.removeLast(path.count - 2) : ()
+    }
 }
 
 // MARK: - Routes
+
 enum AuthRoute: Hashable {
     case onboard
     case signUp
@@ -36,6 +40,7 @@ enum AuthRoute: Hashable {
     case forgotPassword
     case resetPassword
 }
+
 enum MainRoute: Hashable {
     case profile
     case account

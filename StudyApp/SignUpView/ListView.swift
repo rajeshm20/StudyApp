@@ -1,5 +1,5 @@
 //
-//  TestView.swift
+//  ListView.swift
 //  StudyApp
 //
 //  Created by Rajesh Mani on 03/05/25.
@@ -25,7 +25,7 @@ struct ListView: View {
         Item(title: "Science", subtitle: "Biology", bodyText: "Study cell structure"),
         Item(title: "Science", subtitle: "Biology", bodyText: "Study cell structure"),
         Item(title: "Science", subtitle: "Biology", bodyText: "Study cell structure"),
-        Item(title: "Science", subtitle: "Biology", bodyText: "Study cell structure")
+        Item(title: "Science", subtitle: "Biology", bodyText: "Study cell structure"),
     ]
 
     var body: some View {
@@ -79,7 +79,7 @@ struct ListView: View {
         .listStyle(.insetGrouped)
         .padding(20)
         .listRowInsets(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
-        }
+    }
 }
 
 #Preview {

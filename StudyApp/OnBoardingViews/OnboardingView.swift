@@ -19,19 +19,32 @@ struct OnboardingView: View {
                  description: NSLocalizedString("Learn from the best instructors and enhance your skills.", comment: "Onboarding description 2")),
         PageData(imageName: "student5",
                  title: NSLocalizedString("Get the Best Class with Best Teacher", comment: "Onboarding title 3"),
-                 description: NSLocalizedString("Accelerate your learning journey and achieve your goals.", comment: "Onboarding description 3"))
+                 description: NSLocalizedString("Accelerate your learning journey and achieve your goals.", comment: "Onboarding description 3")),
     ]
 
     @State private var currentPage = 0
     @ObservedObject var router: Router<AuthRoute>
+    
+    private var windowTopInset: CGFloat {
+        guard let windowScene = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .first,
+            let keyWindow = windowScene.windows.first(where: \.isKeyWindow)
+        else {
+            return 0
+        }
+        return keyWindow.safeAreaInsets.top
+    }
 
     // MARK: - Main View
 
     var body: some View {
         GeometryReader { geo in
+            let topInset = max(windowTopInset, geo.frame(in: .global).minY)
+
             VStack(spacing: 0) {
                 TabView(selection: $currentPage) {
-                    ForEach(Array(pages.enumerated()), id: \.offset) { (index, page) in
+                    ForEach(Array(pages.enumerated()), id: \.offset) { index, page in
                         OnboardingPageView(page: page)
                             .tag(index)
                             .accessibilityElement(children: .ignore)
@@ -39,7 +52,8 @@ struct OnboardingView: View {
                 }
                 .ignoresSafeArea(.container, edges: .top)
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .frame(height: geo.size.height * 0.8)
+                .frame(height: geo.size.height * 0.8 + topInset)
+                .padding(.top, -topInset) // fixed the top gap in background image
 
                 // Page Indicators
                 HStack(spacing: 8) {
@@ -49,12 +63,11 @@ struct OnboardingView: View {
                             .frame(width: 8, height: 8)
                             .accessibilityLabel(
                                 Text(currentPage == index
-                                     ? NSLocalizedString("Current Page", comment: "")
-                                     : NSLocalizedString("Page", comment: ""))
+                                    ? NSLocalizedString("Current Page", comment: "")
+                                    : NSLocalizedString("Page", comment: ""))
                             )
                     }
                 }
-                .padding(.top, 8)
 
                 Spacer()
 
@@ -62,13 +75,13 @@ struct OnboardingView: View {
                 HStack {
                     Button(action: handleSkipOrSignUp) {
                         Text(currentPage == pages.count - 1
-                             ? NSLocalizedString("Sign Up", comment: "Sign Up button")
-                             : NSLocalizedString("Skip", comment: "Skip button"))
+                            ? NSLocalizedString("Sign Up", comment: "Sign Up button")
+                            : NSLocalizedString("Skip", comment: "Skip button"))
                             .font(.headline)
                             .foregroundColor(.cyan)
                     }
                     .accessibilityLabel(Text(currentPage == pages.count - 1 ? "Sign Up" : "Skip"))
-                    
+
                     Spacer()
 
                     Button(action: handleRightButton) {
@@ -87,11 +100,11 @@ struct OnboardingView: View {
                     }
                 }
                 .padding(.horizontal, 40)
-                .padding(.bottom, geo.safeAreaInsets.bottom + 30)
-                .navigationBarBackButtonHidden(true)
+                .padding(.bottom, geo.safeAreaInsets.bottom)
             }
-            .background(Color.white.ignoresSafeArea())
+            .background(.clear)
         }
+        .ignoresSafeArea(.container, edges: .top)
     }
 
     // MARK: - Actions
@@ -149,12 +162,16 @@ struct OnboardingPageView: View {
                     )
                     .frame(width: geo.size.width, height: geo.size.height * 0.6 + geo.safeAreaInsets.top)
                     .allowsHitTesting(false)
-                    
-                    // Title Icon
-                    TopIcon_Title(title: "Study")
-                        .padding(.top, geo.safeAreaInsets.top + 32)
-                        .padding(.leading, 20)
-                        .accessibilityHidden(true)
+
+//                    // Title Icon
+//                    VStack {
+//                        Spacer()
+//                        TopIcon_Title(title: "Study")
+//                            .padding(.top, geo.safeAreaInsets.magnitude + 32)
+//                            .padding(.leading, 140)
+//                            .accessibilityHidden(true)
+//                            .padding(.bottom, 20)
+//                    }
                 }
                 .frame(width: geo.size.width, height: geo.size.height * 0.6 + geo.safeAreaInsets.top)
                 .contentShape(Rectangle())

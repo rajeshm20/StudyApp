@@ -1,10 +1,9 @@
 //
-//  Language.swift
+//  LanguageModel.swift
 //  StudyApp
 //
 //  Created by Rajesh Mani on 23/10/25.
 //
-
 
 import Foundation
 import SwiftUI
@@ -16,7 +15,7 @@ struct Language: Identifiable, Codable {
 
     var flagEmoji: String {
         code.unicodeScalars
-            .map { 127397 + $0.value }
+            .map { 127_397 + $0.value }
             .compactMap(UnicodeScalar.init)
             .map(String.init)
             .joined()
@@ -31,9 +30,9 @@ class LanguageViewModel: ObservableObject {
 
     var filteredLanguages: [Language] {
         if searchText.isEmpty {
-            return languages
+            languages
         } else {
-            return languages.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+            languages.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
         }
     }
 

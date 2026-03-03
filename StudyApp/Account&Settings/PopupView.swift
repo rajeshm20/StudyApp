@@ -5,7 +5,6 @@
 //  Created by Rajesh Mani on 19/10/25.
 //
 
-
 import SwiftUI
 
 struct PopupView: View {
@@ -16,7 +15,7 @@ struct PopupView: View {
     var onClose: () -> Void
 
     var body: some View {
-        ZStack() {
+        ZStack {
             Color.black.opacity(0.4)
                 .ignoresSafeArea()
                 .transition(.opacity)
@@ -38,14 +37,14 @@ struct PopupView: View {
                 Text(title)
                     .font(.title3.bold())
                     .foregroundColor(.black)
-                
+
                 // Message
                 Text(message)
                     .font(.body)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.gray)
                     .padding(.horizontal, 24)
-                
+
                 // Close button
                 BorderedButton(action: onClose) {
                     HStack {
@@ -62,7 +61,6 @@ struct PopupView: View {
         }
     }
 }
-
 
 #Preview {
     PopupView(title: "Update Success", image: "key", message: "Profile Updated\nSuccessfully!", buttonTitle: "Close", onClose: {})

@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK: - Generic Data Protocol
+
 protocol BottomSheetDisplayable: Identifiable, Hashable {
     var displayTitle: String? { get }
     var displaySubtitle: String? { get }
@@ -45,9 +46,9 @@ struct SelectableBottomSheet<T: BottomSheetDisplayable>: View {
             }
             .padding()
             .frame(maxWidth: .infinity, minHeight: 70, maxHeight: 70)
-            
+
             Divider()
-            
+
             List(items, id: \.id) { item in
                 Button(action: {
                     switch selectionMode {
@@ -64,8 +65,7 @@ struct SelectableBottomSheet<T: BottomSheetDisplayable>: View {
                             selected.insert(item)
                         }
                     }
-                })
-                {
+                }) {
                     HStack {
                         VStack(alignment: .leading) {
                             Text(item.displayTitle ?? "")
@@ -85,7 +85,6 @@ struct SelectableBottomSheet<T: BottomSheetDisplayable>: View {
                                     .foregroundColor(.secondary)
                                     .font(.caption)
                             }
-
                         }
                         Spacer()
                         if selected.contains(item) {
@@ -129,7 +128,7 @@ struct GenericBottomSheetView: View {
     @State private var showSheet = false
     @State private var selectedItems = Set<Portfolio>()
     @State private var selectionMode: SelectionMode = .multiple // Default to multiple selection
-    
+
     let data = [
         Portfolio(id: UUID(), displayTitle: "1876-76765-19876", displaySubtitle: "Portfolio", displayNote1: "Sell Order", displayNote2: ""),
         Portfolio(id: UUID(), displayTitle: "1876-76765-19676", displaySubtitle: "Portfolio", displayNote1: "Sell Order", displayNote2: ""),
@@ -144,7 +143,7 @@ struct GenericBottomSheetView: View {
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding()
-            
+
             Button("Show Bottom Sheet") {
                 showSheet = true
             }

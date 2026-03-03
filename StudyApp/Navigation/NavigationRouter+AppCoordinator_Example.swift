@@ -5,19 +5,20 @@
 ////  Created by Rajesh Mani on 21/10/25.
 ////
 ///
-import SwiftUI
 import Observation
+import SwiftUI
 
 // MARK: - Routes
+
 enum AuthRoute_ex: Hashable {
     case signUp
     case signIn
 }
+
 enum MainRoute_ex: Hashable {
     case dashboard
     case profile
 }
-
 
 @MainActor
 final class AppCoordinator_ex: ObservableObject {
@@ -95,6 +96,7 @@ struct AuthHomeView: View {
         .padding()
     }
 }
+
 struct SetupView: View {
     var router: Router<AuthRoute_ex>
 
@@ -132,7 +134,7 @@ struct VerifyView: View {
 struct MainFlowView_ex: View {
     @EnvironmentObject var coordinator: AppCoordinator
     @StateObject private var router = Router<MainRoute_ex>()
-    
+
     var body: some View {
         NavigationStack(path: $router.path) {
             MainHomeView(router: router)
@@ -144,7 +146,7 @@ struct MainFlowView_ex: View {
                         ProfileeView(router: router)
                     }
                 }
-           }
+        }
     }
 }
 
@@ -186,7 +188,6 @@ struct QuestionnaireView: View {
             Button("Go to Profile") {
                 router.push(.profile)
             }
-
         }
         .padding()
     }

@@ -10,7 +10,7 @@ import SwiftUI
 struct VerificationCodeView: View {
     @State private var code: [String] = ["", "", "", ""]
     @FocusState private var focusedIndex: Int?
-    
+
     var body: some View {
         VStack {
             // Header
@@ -19,17 +19,17 @@ struct VerificationCodeView: View {
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .padding(.top, 40)
-            
+
             Text("Enter the code sent by SMS to verify your phone number")
                 .font(.body)
                 .foregroundColor(.white.opacity(0.8))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
                 .padding(.top, 8)
-            
+
             // OTP Input Fields
             HStack(spacing: 16) {
-                ForEach(0..<4, id: \.self) { index in
+                ForEach(0 ..< 4, id: \.self) { index in
                     TextField("", text: $code[index])
                         .frame(width: 60, height: 60)
                         .background(Color.white.opacity(0.2))
@@ -72,7 +72,7 @@ struct VerificationCodeView: View {
             }
             .padding(.horizontal)
             .padding(.top, 40)
-            
+
             // Resend Code
             Button(action: {
                 // Handle resend code logic
@@ -82,7 +82,6 @@ struct VerificationCodeView: View {
                     .foregroundColor(.white)
             }
             .padding(.top, 20)
-            
         }
         .padding()
         .background(

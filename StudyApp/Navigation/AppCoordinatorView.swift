@@ -4,8 +4,8 @@
 //
 //  Created by Rajesh Mani on 24/10/25.
 //
-import SwiftUI
 import Observation
+import SwiftUI
 
 @MainActor
 final class AppCoordinator: ObservableObject {
@@ -13,22 +13,21 @@ final class AppCoordinator: ObservableObject {
         case auth
         case main
     }
-    
+
     @Published var currentFlow: Flow = .auth
-    
+
     func switchToMain() {
         withAnimation {
             currentFlow = .main
         }
     }
-    
+
     func switchToAuth() {
         withAnimation {
             currentFlow = .auth
         }
     }
 }
-
 
 struct AppCoordinatorView: View {
     @EnvironmentObject var coordinator: AppCoordinator
@@ -42,6 +41,7 @@ struct AppCoordinatorView: View {
             }
         }
         .animation(.easeInOut, value: coordinator.currentFlow)
+        .ignoresSafeArea()
     }
 }
 

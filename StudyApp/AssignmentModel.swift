@@ -14,7 +14,7 @@ struct AssignmentCategory: Identifiable, Decodable {
     let icon: String
     let color: String
     let tasks: [AssignmentItem]
-    
+
     enum CodingKeys: String, CodingKey {
         case subject, icon, color, tasks
     }
@@ -26,7 +26,7 @@ struct AssignmentItem: Identifiable, Decodable {
     let dueDate: String
     let daysLeft: Int
     let completed: Bool
-    
+
     enum CodingKeys: String, CodingKey {
         case title, dueDate, daysLeft, completed
     }

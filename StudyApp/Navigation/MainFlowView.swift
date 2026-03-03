@@ -4,13 +4,13 @@
 //
 //  Created by Rajesh Mani on 24/10/25.
 //
-import SwiftUI
 import Observation
+import SwiftUI
 
 struct MainFlowView: View {
 //    @EnvironmentObject var coordinator: AppCoordinator
     @StateObject private var router = Router<MainRoute>()
-    
+
     var body: some View {
         NavigationStack(path: $router.path) {
             StudentDashboardView(router: router)
@@ -48,7 +48,7 @@ struct MainFlowView: View {
                         PresenceView(router: router)
                     }
                 }
-           }
+        }
     }
 }
 
@@ -56,4 +56,3 @@ struct MainFlowView: View {
     MainFlowView()
         .environmentObject(AppCoordinator())
 }
-

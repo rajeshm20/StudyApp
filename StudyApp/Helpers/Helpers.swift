@@ -6,24 +6,25 @@
 //
 
 import Foundation
-import UIKit
 import SwiftUI
+import UIKit
 
 protocol Serializable {
     func serialize() -> String
     func deserialize(_ json: String) -> Self
 }
 
-
 extension Serializable where Self: Codable {
     func serialize() -> String {
         let encoder = JSONEncoder()
         guard let data = try? encoder.encode(self),
-              let json = String(data: data, encoding: .utf8) else {
+              let json = String(data: data, encoding: .utf8)
+        else {
             return "{}"
         }
         return json
     }
+
     func deserialize(_ json: String) -> Self {
         let decoder = JSONDecoder()
         guard let data = json.data(using: .utf8) else {
@@ -32,6 +33,7 @@ extension Serializable where Self: Codable {
         return try! decoder.decode(Self.self, from: data)
     }
 }
+
 //    .gesture(
 //        DragGesture()
 //            .onEnded { value in
@@ -44,7 +46,7 @@ extension Serializable where Self: Codable {
 //                print("Velocity: \(velocityX), \(velocityY)")
 //            }
 //    )
-//After SwiftUI 2025:
+// After SwiftUI 2025:
 //    .gesture(
 //        DragGesture()
 //            .onEnded { value in
@@ -61,9 +63,7 @@ struct User: Serializable, Codable {
 }
 
 let user = User(id: 1, name: "Alice")
-//print(user.serialize())  // Prints: {"id":1,"name":"Alice"}
-
-
+// print(user.serialize())  // Prints: {"id":1,"name":"Alice"}
 
 protocol Stylable {
     func applyStyle() async
@@ -71,16 +71,15 @@ protocol Stylable {
 
 extension Stylable where Self: UILabel {
     @MainActor func applyStyle() {
-        self.font = UIFont.systemFont(ofSize: 16)
-        self.textColor = .gray
+        font = UIFont.systemFont(ofSize: 16)
+        textColor = .gray
     }
 }
 
-extension UILabel: Stylable { }
+extension UILabel: Stylable {}
 
 @MainActor let label = UILabel()
-//label.applyStyle()
-
+// label.applyStyle()
 
 struct BorderedButton<Content: View>: View {
     let action: () -> Void
@@ -101,6 +100,6 @@ struct BorderedButton<Content: View>: View {
                             .frame(maxWidth: .infinity, maxHeight: 50)
                     }
                 }
-          }
+        }
     }
 }

@@ -8,7 +8,7 @@ struct FilterBottomSheet: View {
         "See all assignments",
         "New Assignments",
         "Ongoing Assignments",
-        "Completed Assignments"
+        "Completed Assignments",
     ]
 
     var body: some View {

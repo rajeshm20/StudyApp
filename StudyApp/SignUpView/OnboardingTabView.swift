@@ -1,5 +1,5 @@
-import SwiftUI
 import Observation
+import SwiftUI
 
 struct OnboardingTabView: View {
     @State private var selectedTab = 0
@@ -22,11 +22,11 @@ struct OnboardingTabView: View {
                     .foregroundColor(.black)
             }
             .disabled(selectedTab == 0 && !canGoBackInNavStack())
-            
+
             Spacer()
 
             HStack(spacing: 6) {
-                ForEach(0..<pageCount, id: \.self) { index in
+                ForEach(0 ..< pageCount, id: \.self) { index in
                     Circle()
                         .fill(selectedTab == index ? Color.blue : Color.gray.opacity(0.4))
                         .frame(width: 6, height: 6)
@@ -43,7 +43,7 @@ struct OnboardingTabView: View {
         .padding(.horizontal)
         .padding(.top)
         .navigationBarBackButtonHidden(true)
-        
+
         TabView(selection: $selectedTab) {
             CreateProfileView(router: router)
                 .tag(0)

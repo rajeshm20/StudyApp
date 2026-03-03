@@ -9,25 +9,24 @@ import SwiftUI
 
 struct SheetView: View {
     @State var isShowingMyCustomSheet = false
-        
-        var body: some View {
-            VStack {
-                Button("Toggle the Sheet") {
-                    isShowingMyCustomSheet.toggle()
-                }
-            }
-            .padding()
-            .sheet(isPresented: $isShowingMyCustomSheet) {
-                // Our short sheet API
-                MySheetView()
+
+    var body: some View {
+        VStack {
+            Button("Toggle the Sheet") {
+                isShowingMyCustomSheet.toggle()
             }
         }
+        .padding()
+        .sheet(isPresented: $isShowingMyCustomSheet) {
+            // Our short sheet API
+            MySheetView()
+        }
+    }
 }
-
 
 struct MySheetView: View {
     @Environment(\.dismiss) var dismiss
-    
+
     var body: some View {
         VStack {
             HStack {
@@ -39,7 +38,7 @@ struct MySheetView: View {
                         .foregroundStyle(Color.white)
                 }
             }.padding()
-            
+
             Spacer()
             // If you want this image for your project, you can save the title
             // image from this article to your project file
@@ -48,7 +47,7 @@ struct MySheetView: View {
                 .scaledToFit()
             Spacer()
         }
-        .background(Gradient(colors: [.blue, .cyan, .cyan.opacity(0.5) ,.green, .yellow, .yellow.opacity(0.6)]).opacity(0.3))
+        .background(Gradient(colors: [.blue, .cyan, .cyan.opacity(0.5), .green, .yellow, .yellow.opacity(0.6)]).opacity(0.3))
     }
 }
 

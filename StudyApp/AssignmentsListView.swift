@@ -20,76 +20,76 @@ struct AssignmentsListView: View {
         Portfolio(id: UUID(), displayTitle: "See all assignments"),
         Portfolio(id: UUID(), displayTitle: "New assignments"),
         Portfolio(id: UUID(), displayTitle: "Ongoing assignments"),
-        Portfolio(id: UUID(), displayTitle: "Completed assignments")
+        Portfolio(id: UUID(), displayTitle: "Completed assignments"),
     ]
 
     var body: some View {
-            VStack(alignment: .leading, spacing: 0) {
-                // Header
-                HStack {
-                    Text("Assignments")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    
-                    Spacer()
-                    
-                    HStack(spacing: 12) {
-                        Button(action: {showListView = false}) {
-                            Image(systemName: "calendar")
-                                .foregroundColor(.gray)
-                                .frame(width: 32, height: 32)
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                        }
-                        
-                        Button(action: {showListView = true}) {
-                            Image(systemName: "list.bullet")
-                                .foregroundColor(.white)
-                                .frame(width: 32, height: 32)
-                                .background(Color.blue)
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                        }
-                    }
-                }
-                .padding(.horizontal, 20)
-                .padding(.top, 12)
+        VStack(alignment: .leading, spacing: 0) {
+            // Header
+            HStack {
+                Text("Assignments")
+                    .font(.title2)
+                    .fontWeight(.semibold)
 
-                HStack {
-                    Text("Today's")
-                        .font(.title3)
-                        .fontWeight(.medium)
-                    Spacer()
-                    Button(action: {
-                        showSheet = true
-                    }) {
-                        Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
-                            .font(.system(size: 15, weight: .medium))
+                Spacer()
+
+                HStack(spacing: 12) {
+                    Button(action: { showListView = false }) {
+                        Image(systemName: "calendar")
                             .foregroundColor(.gray)
+                            .frame(width: 32, height: 32)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
-                }
-                .padding(.horizontal, 20)
-                .padding(.vertical, 20)
-                
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 16) {
-                        ForEach(categories) { category in
-                            AssignmentCategoryCard(category: category)
-                        }
+
+                    Button(action: { showListView = true }) {
+                        Image(systemName: "list.bullet")
+                            .foregroundColor(.white)
+                            .frame(width: 32, height: 32)
+                            .background(Color.blue)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
-                    .onTapGesture(perform: {
-                        router.push(.assignmentDetails)
-                    })
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 20)
                 }
             }
-            .onAppear(perform: loadMockData)
-            .background(Color(.systemGroupedBackground))
-            .navigationBarHidden(true)
-            .sheet(isPresented: $showSheet) {
-                FilterBottomSheet()
-                    .presentationDetents([.fraction(0.35)])
-                    .presentationDragIndicator(.hidden)
-                    .background(Color.black.opacity(0.2))
+            .padding(.horizontal, 20)
+            .padding(.top, 12)
+
+            HStack {
+                Text("Today's")
+                    .font(.title3)
+                    .fontWeight(.medium)
+                Spacer()
+                Button(action: {
+                    showSheet = true
+                }) {
+                    Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundColor(.gray)
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 20)
+
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 16) {
+                    ForEach(categories) { category in
+                        AssignmentCategoryCard(category: category)
+                    }
+                }
+                .onTapGesture(perform: {
+                    router.push(.assignmentDetails)
+                })
+                .padding(.horizontal, 16)
+                .padding(.bottom, 20)
+            }
+        }
+        .onAppear(perform: loadMockData)
+        .background(Color(.systemGroupedBackground))
+        .navigationBarHidden(true)
+        .sheet(isPresented: $showSheet) {
+            FilterBottomSheet()
+                .presentationDetents([.fraction(0.35)])
+                .presentationDragIndicator(.hidden)
+                .background(Color.black.opacity(0.2))
 //                SelectableBottomSheet(
 //                    title: "Choose your filter",
 //                    items: data,
@@ -100,10 +100,9 @@ struct AssignmentsListView: View {
 //                    selectionMode: selectionMode
 //                )
 //                .presentationDetents([.medium, .large])
-            }
-
+        }
     }
-    
+
     private func loadMockData() {
         let json = """
         [
@@ -147,7 +146,7 @@ struct AssignmentsListView: View {
 
 struct AssignmentCategoryCard: View {
     let category: AssignmentCategory
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(spacing: 10) {
@@ -159,7 +158,7 @@ struct AssignmentCategoryCard: View {
                 Text(category.subject)
                     .font(.system(size: 16, weight: .semibold))
             }
-            
+
             ForEach(category.tasks) { task in
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {

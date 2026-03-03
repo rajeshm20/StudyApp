@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+
 //
-//struct CounterView: View {
+// struct CounterView: View {
 //    let store: StoreOf<CounterFeature>
 //
 //    var body: some View {
@@ -25,12 +26,12 @@ import SwiftUI
 //            }
 //        }
 //    }
-//}
-//class Usr {
+// }
+// class Usr {
 //    var name = "Anonymous"
-//}
+// }
 //
-//struct ContentVieww: View {
+// struct ContentVieww: View {
 //    var body: some View {
 //        Text("Hello, world!")
 //            .task {
@@ -42,7 +43,7 @@ import SwiftUI
 //    func loadData(for user: Usr) async {
 //        print("Loading data for \(user.name)…")
 //    }
-//}
+// }
 struct Userr: Hashable { let name: String }
 struct Article: Hashable { let title: String }
 struct Settings: Hashable {
@@ -81,9 +82,10 @@ struct NavigationStackVw: View {
                 Button(action: {
                     path.append(Settings(name: "Karan", theme: "Light", showTutorial: true, favoriteColor: "Blue"))
                     // Navigate or perform action here
-                }){
+                }) {
                     Label("Settings", systemImage: "gear")
-                }            }
+                }
+            }
             .navigationDestination(for: Userr.self) { user in
                 HStack(alignment: .lastTextBaseline) {
                     Text("SwiftUI")
@@ -125,6 +127,7 @@ struct NavigationStackVw: View {
             }
         }
     }
+
     @ViewBuilder
     func profileImage(isLoggedIn: Bool) -> some View {
         if isLoggedIn {

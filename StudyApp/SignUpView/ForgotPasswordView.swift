@@ -14,7 +14,7 @@ struct ForgotPasswordView: View {
 
     var router: Router<AuthRoute>
     @EnvironmentObject var coordinator: AppCoordinator
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Forgot Password")
@@ -25,10 +25,10 @@ struct ForgotPasswordView: View {
                 .subtitleStyle()
                 .padding([.horizontal], 20)
             FormField(title: "Email", placeholder: "study@email.com", text: $email, keyboardType: .emailAddress, error: $emailError, completion: {
-                self.validateFields(title: .email)
+                validateFields(title: .email)
             })
             .padding(10)
-            
+
             // Sign-In Button (Reusable)
             AppButton(
                 title: "Reset Password",
@@ -48,13 +48,14 @@ struct ForgotPasswordView: View {
         .padding()
         Spacer()
     }
+
     // Add this new function
     func validateAllFields() {
         validateFields(title: .email)
-        
+
         // Check if all fields are valid
         let allFieldsValid =
-                            emailError == nil
+            emailError == nil
 
         if allFieldsValid {
             popupManager.show(
@@ -79,7 +80,6 @@ struct ForgotPasswordView: View {
             break
         }
     }
-    
 }
 
 #Preview {

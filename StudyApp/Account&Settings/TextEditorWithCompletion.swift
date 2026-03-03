@@ -9,9 +9,9 @@ import SwiftUI
 struct TextEditorWithCompletion: View {
     @State var text = ""
     @FocusState private var isFocused: Bool
-    
+
     var completion: () -> Void
-    
+
     var body: some View {
         TextEditor(text: $text)
             .focused($isFocused)
@@ -38,7 +38,6 @@ struct TextEditorWithCompletion: View {
             }
     }
 }
-
 
 #Preview {
     TextEditorWithCompletion(completion: {})

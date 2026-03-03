@@ -5,7 +5,6 @@
 //  Created by Rajesh Mani on 24/10/25.
 //
 
-
 import SwiftUI
 
 struct CreateProfileView: View {
@@ -98,6 +97,7 @@ struct CreateProfileView: View {
 }
 
 // MARK: - ImagePicker
+
 struct ImagePicker: UIViewControllerRepresentable {
     @Environment(\.presentationMode) var presentationMode
     @Binding var selectedImage: UIImage?
@@ -110,7 +110,7 @@ struct ImagePicker: UIViewControllerRepresentable {
         return picker
     }
 
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+    func updateUIViewController(_: UIImagePickerController, context _: Context) {}
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -123,8 +123,9 @@ struct ImagePicker: UIViewControllerRepresentable {
             self.parent = parent
         }
 
-        func imagePickerController(_ picker: UIImagePickerController,
-                                   didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        func imagePickerController(_: UIImagePickerController,
+                                   didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any])
+        {
             if let image = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
                 parent.selectedImage = image
             }

@@ -1,23 +1,25 @@
 import SwiftUI
 
 // MARK: - Tab Selection
+
 enum TabSelection: String, CaseIterable {
     case dashboard = "Dashboard"
     case calendar = "Calendar"
     case assignments = "Assignments"
     case profile = "Profile"
-    
+
     var icon: String {
         switch self {
-        case .dashboard: return "square.grid.2x2"
-        case .calendar: return "calendar"
-        case .assignments: return "list.bullet"
-        case .profile: return "person"
+        case .dashboard: "square.grid.2x2"
+        case .calendar: "calendar"
+        case .assignments: "list.bullet"
+        case .profile: "person"
         }
     }
 }
 
 // MARK: - Data Models
+
 struct StudentData: Codable {
     let name: String
     let greeting: String
@@ -49,25 +51,26 @@ struct ScheduleClass: Codable, Identifiable {
 }
 
 // MARK: - Data Service
+
 @MainActor
 class StudentDataService: ObservableObject {
     @Published var studentData: StudentData?
     @Published var isLoading = true
-    
+
     init() {
         Task {
             await loadMockData()
         }
     }
-    
+
     private func loadMockData() async {
         // Simulate API call delay
         try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
-        
+
         studentData = getMockStudentData()
         isLoading = false
     }
-    
+
     private func getMockStudentData() -> StudentData {
         // Mock JSON data that would typically come from an API
         let mockJSON = """
@@ -131,13 +134,14 @@ class StudentDataService: ObservableObject {
             ]
         }
         """
-        
+
         let data = mockJSON.data(using: .utf8)!
         return try! JSONDecoder().decode(StudentData.self, from: data)
     }
 }
 
 // MARK: - Main View
+
 struct StudentDashboardView: View {
     @StateObject private var dataService = StudentDataService()
     @State private var selectedTab: TabSelection = .dashboard
@@ -171,7 +175,7 @@ struct StudentDashboardView: View {
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                
+
                 // Bottom Tab Bar
                 BottomTabBar(selectedTab: $selectedTab)
             }
@@ -181,10 +185,10 @@ struct StudentDashboardView: View {
             .navigationBarBackButtonHidden(true)
         }
     }
-
 }
 
 // MARK: - Loading View
+
 struct LoadingView: View {
     var body: some View {
         VStack {
@@ -201,6 +205,7 @@ struct LoadingView: View {
 }
 
 // MARK: - Error View
+
 struct ErrorView: View {
     var body: some View {
         VStack {
@@ -217,6 +222,7 @@ struct ErrorView: View {
 }
 
 // MARK: - Dashboard Content
+
 struct DashboardContentView: View {
     let studentData: StudentData
     var router: Router<MainRoute>
@@ -229,16 +235,16 @@ struct DashboardContentView: View {
                     name: studentData.name,
                     greeting: studentData.greeting
                 )
-                
+
                 // Stats Cards
                 StatsCardsView(stats: studentData.stats)
-                
+
                 // Navigation Icons
                 NavigationIconsView(items: studentData.navigationItems, router: router)
-                
+
                 // Schedule Section
                 ScheduleView(classes: studentData.schedule)
-                
+
                 Spacer(minLength: 100)
             }
         }
@@ -247,10 +253,11 @@ struct DashboardContentView: View {
 }
 
 // MARK: - Header
+
 struct DashboardHeader: View {
     let name: String
     let greeting: String
-    
+
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
@@ -258,14 +265,14 @@ struct DashboardHeader: View {
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)
-                
+
                 Text(greeting)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
-            
+
             Spacer()
-            
+
             Button(action: {}) {
                 Image(systemName: "bell")
                     .font(.title2)
@@ -279,9 +286,10 @@ struct DashboardHeader: View {
 }
 
 // MARK: - Stats Cards
+
 struct StatsCardsView: View {
     let stats: StudentStats
-    
+
     var body: some View {
         VStack(spacing: 15) {
             HStack(spacing: 15) {
@@ -290,21 +298,21 @@ struct StatsCardsView: View {
                     title: "Presence",
                     valueColor: .orange
                 )
-                
+
                 StatsCard(
                     value: "\(stats.completeness)%",
                     title: "Completeness",
                     valueColor: .blue
                 )
             }
-            
+
             HStack(spacing: 15) {
                 StatsCard(
                     value: "\(stats.assignments)",
                     title: "Assignments",
                     valueColor: .cyan
                 )
-                
+
                 StatsCard(
                     value: "\(stats.totalSubjects)",
                     title: "Total Subject",
@@ -318,6 +326,7 @@ struct StatsCardsView: View {
 }
 
 // MARK: - Navigation Icons
+
 struct NavigationIconsView: View {
     let items: [NavigationItem]
     var router: Router<MainRoute>
@@ -334,9 +343,10 @@ struct NavigationIconsView: View {
 }
 
 // MARK: - Schedule
+
 struct ScheduleView: View {
     let classes: [ScheduleClass]
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             HStack {
@@ -344,14 +354,14 @@ struct ScheduleView: View {
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)
-                
+
                 Spacer()
             }
             .padding(.horizontal, 20)
-            
+
             // Time Headers
             HStack {
-                ForEach(7...12, id: \.self) { hour in
+                ForEach(7 ... 12, id: \.self) { hour in
                     Text("\(hour)")
                         .font(.caption)
                         .foregroundColor(.secondary)
@@ -359,7 +369,7 @@ struct ScheduleView: View {
                 }
             }
             .padding(.horizontal, 20)
-            
+
             // Schedule Items
             VStack(spacing: 8) {
                 ForEach(classes) { scheduleClass in
@@ -372,6 +382,7 @@ struct ScheduleView: View {
 }
 
 // MARK: - Tab Views
+
 struct CalendarView: View {
     var body: some View {
         ScrollView {
@@ -390,7 +401,7 @@ struct CalendarView: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 20)
-                
+
                 // Mock Calendar Events
                 VStack(spacing: 15) {
                     CalendarEventCard(
@@ -399,14 +410,14 @@ struct CalendarView: View {
                         time: "9:00 AM - 11:00 AM",
                         color: .orange
                     )
-                    
+
                     CalendarEventCard(
                         title: "Geography Project Due",
                         date: "Sept 18, 2025",
                         time: "11:59 PM",
                         color: .cyan
                     )
-                    
+
                     CalendarEventCard(
                         title: "English Literature Quiz",
                         date: "Sept 20, 2025",
@@ -415,7 +426,7 @@ struct CalendarView: View {
                     )
                 }
                 .padding(.horizontal, 20)
-                
+
                 Spacer()
             }
         }
@@ -440,7 +451,7 @@ struct AssignmentsView: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 20)
-                
+
                 // Assignment Categories
                 VStack(spacing: 15) {
                     AssignmentCard(
@@ -449,7 +460,7 @@ struct AssignmentsView: View {
                         color: .orange,
                         assignments: ["Economic Analysis Report", "Geography Map Project", "English Essay Draft"]
                     )
-                    
+
                     AssignmentCard(
                         title: "Completed Assignments",
                         count: "13",
@@ -458,7 +469,7 @@ struct AssignmentsView: View {
                     )
                 }
                 .padding(.horizontal, 20)
-                
+
                 Spacer()
             }
         }
@@ -467,34 +478,34 @@ struct AssignmentsView: View {
     }
 }
 
-
 // MARK: - Helper Views
+
 struct CalendarEventCard: View {
     let title: String
     let date: String
     let time: String
     let color: Color
-    
+
     var body: some View {
         HStack {
             Rectangle()
                 .fill(color)
                 .frame(width: 4)
-            
+
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .font(.headline)
                     .foregroundColor(.primary)
-                
+
                 Text(date)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
-                
+
                 Text(time)
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
-            
+
             Spacer()
         }
         .padding()
@@ -509,29 +520,29 @@ struct AssignmentCard: View {
     let count: String
     let color: Color
     let assignments: [String]
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text(title)
                     .font(.headline)
                     .foregroundColor(.primary)
-                
+
                 Spacer()
-                
+
                 Text(count)
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(color)
             }
-            
+
             VStack(alignment: .leading, spacing: 6) {
                 ForEach(assignments.prefix(3), id: \.self) { assignment in
                     HStack {
                         Circle()
                             .fill(color.opacity(0.3))
                             .frame(width: 6, height: 6)
-                        
+
                         Text(assignment)
                             .font(.subheadline)
                             .foregroundColor(.secondary)
@@ -550,14 +561,14 @@ struct ProfileStatView: View {
     let title: String
     let value: String
     let color: Color
-    
+
     var body: some View {
         VStack(spacing: 8) {
             Text(value)
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundColor(color)
-            
+
             Text(title)
                 .font(.caption)
                 .foregroundColor(.secondary)
@@ -574,7 +585,7 @@ struct ProfileOptionRow: View {
     let icon: String
     let title: String
     let color: Color
-    
+
     var body: some View {
         Button(action: {}) {
             HStack {
@@ -582,13 +593,13 @@ struct ProfileOptionRow: View {
                     .font(.title3)
                     .foregroundColor(color)
                     .frame(width: 24)
-                
+
                 Text(title)
                     .font(.subheadline)
                     .foregroundColor(.primary)
-                
+
                 Spacer()
-                
+
                 Image(systemName: "chevron.right")
                     .font(.caption)
                     .foregroundColor(.secondary)
@@ -603,40 +614,39 @@ struct ProfileOptionRow: View {
 }
 
 // MARK: - Reusable Components
+
 struct StatsCard: View {
     let value: String
     let title: String
     let valueColor: Color
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(value)
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundColor(valueColor)
-                
+
             Text(title)
                 .font(.title3)
                 .foregroundColor(.black.opacity(0.6))
         }
         .frame(maxWidth: .infinity)
-        .frame(width: 150,height: 100)
+        .frame(width: 150, height: 100)
         .background(Color(.systemBackground))
         .cornerRadius(12)
         .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 1)
     }
 }
 
-
 struct NavigationIconView: View {
     let item: NavigationItem
     var router: Router<MainRoute>
-    
+
     var body: some View {
         VStack(spacing: 8) {
             Button(action: {
-                switch item.title
-                {
+                switch item.title {
                 case "Course":
                     router.push(.courses)
                     print("course tapped")
@@ -660,41 +670,41 @@ struct NavigationIconView: View {
                     .background(colorFromString(item.backgroundColor))
                     .clipShape(Circle())
             }
-            
+
             Text(item.title)
                 .font(.caption)
                 .foregroundColor(.primary)
         }
     }
-    
+
     private func colorFromString(_ colorString: String) -> Color {
         switch colorString.lowercased() {
-        case "orange": return .orange
-        case "blue": return .blue
-        case "green": return .green
-        case "teal": return Color(red: 0.4, green: 0.6, blue: 0.7)
-        case "navy": return Color(red: 0.2, green: 0.3, blue: 0.5)
-        case "cyan": return .cyan
-        default: return .gray
+        case "orange": .orange
+        case "blue": .blue
+        case "green": .green
+        case "teal": Color(red: 0.4, green: 0.6, blue: 0.7)
+        case "navy": Color(red: 0.2, green: 0.3, blue: 0.5)
+        case "cyan": .cyan
+        default: .gray
         }
     }
 }
 
 struct ScheduleItem: View {
     let scheduleClass: ScheduleClass
-    
+
     var body: some View {
         HStack(spacing: 0) {
             // Calculate positioning
             let startColumn = scheduleClass.startHour - 7
             let totalColumns = 6
-            
+
             // Add spacers before the class block
-            ForEach(0..<startColumn, id: \.self) { _ in
+            ForEach(0 ..< startColumn, id: \.self) { _ in
                 Spacer()
                     .frame(maxWidth: .infinity)
             }
-            
+
             // Class block spanning multiple columns
             HStack(spacing: 0) {
                 Text(scheduleClass.subject)
@@ -710,32 +720,32 @@ struct ScheduleItem: View {
             .frame(width: CGFloat(scheduleClass.duration) * (UIScreen.main.bounds.width - 40) / CGFloat(totalColumns))
             .background(colorFromString(scheduleClass.color).opacity(0.3))
             .cornerRadius(6)
-            
+
             // Add spacers after the class block
             let remainingColumns = totalColumns - startColumn - scheduleClass.duration
-            ForEach(0..<remainingColumns, id: \.self) { _ in
+            ForEach(0 ..< remainingColumns, id: \.self) { _ in
                 Spacer()
                     .frame(maxWidth: .infinity)
             }
         }
     }
-    
+
     private func colorFromString(_ colorString: String) -> Color {
         switch colorString.lowercased() {
-        case "orange": return .orange
-        case "blue": return .blue
-        case "green": return .green
-        case "cyan": return .cyan
-        case "red": return .red
-        case "purple": return .purple
-        default: return .gray
+        case "orange": .orange
+        case "blue": .blue
+        case "green": .green
+        case "cyan": .cyan
+        case "red": .red
+        case "purple": .purple
+        default: .gray
         }
     }
 }
 
 struct BottomTabBar: View {
     @Binding var selectedTab: TabSelection
-    
+
     var body: some View {
         HStack(spacing: 0) {
             ForEach(TabSelection.allCases, id: \.self) { tab in
@@ -762,7 +772,7 @@ struct TabBarItem: View {
     let tab: TabSelection
     let isSelected: Bool
     let action: () -> Void
-    
+
     var body: some View {
         Button(action: action) {
             Image(systemName: tab.icon)

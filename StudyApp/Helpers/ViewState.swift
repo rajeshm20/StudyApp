@@ -53,22 +53,22 @@ func performanceTest() {
     let iterations = 100_000
     let testData = Data(repeating: 0, count: 1000)
     let testError = NSError(domain: "test", code: 1, userInfo: nil)
-    
+
     // Test struct creation
     let structStart = CFAbsoluteTimeGetCurrent()
-    for _ in 0..<iterations {
-        let _ = ResultStruct(isSuccess: true, data: testData, error: nil)
+    for _ in 0 ..< iterations {
+        _ = ResultStruct(isSuccess: true, data: testData, error: nil)
     }
     let structTime = CFAbsoluteTimeGetCurrent() - structStart
-    
+
     // Test enum creation
     let enumStart = CFAbsoluteTimeGetCurrent()
-    for _ in 0..<iterations {
-        let _ = ResultEnum.success(testData)
+    for _ in 0 ..< iterations {
+        _ = ResultEnum.success(testData)
     }
     let enumTime = CFAbsoluteTimeGetCurrent() - enumStart
-    
+
     print("Struct time: \(structTime)s")
     print("Enum time: \(enumTime)s")
-    print("Enum is \(structTime/enumTime)x faster")
+    print("Enum is \(structTime / enumTime)x faster")
 }

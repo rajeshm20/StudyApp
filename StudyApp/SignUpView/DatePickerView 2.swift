@@ -1,25 +1,25 @@
 //
-//  DatePickerView.swift
+//  DatePickerView 2.swift
 //  StackViewChallenge
 //
 //  Created by Rajesh Mani on 01/05/25.
 //  Copyright © 2025 Rasmusson Software Consulting. All rights reserved.
 //
 
-//import UIKit
+// import UIKit
 //
 //
 //
-//class DateSelectionViewController: UIViewController {
+// class DateSelectionViewController: UIViewController {
 //
 //    private let fromTextField = UITextField()
 //    private let toTextField = UITextField()
 //    private let datePicker = UIDatePicker()
 //    private let doneButton = UIButton(type: .system)
-//    
+//
 //    private var isSelectingFromDate = false
 //    private let calendar = Calendar.current
-//    
+//
 //    override func viewDidLoad() {
 //        super.viewDidLoad()
 //        view.backgroundColor = .white
@@ -39,7 +39,7 @@
 //
 //        fromTextField.placeholder = "From"
 //        toTextField.placeholder = "To"
-//        
+//
 //        // Add Tap Gesture
 //        fromTextField.addTarget(self, action: #selector(fromTapped), for: .touchDown)
 //        toTextField.addTarget(self, action: #selector(toTapped), for: .touchDown)
@@ -65,15 +65,15 @@
 //            fromTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
 //            fromTextField.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: -10),
 //            fromTextField.heightAnchor.constraint(equalToConstant: 40),
-//            
+//
 //            toTextField.topAnchor.constraint(equalTo: fromTextField.topAnchor),
 //            toTextField.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 10),
 //            toTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
 //            toTextField.heightAnchor.constraint(equalToConstant: 40),
-//            
+//
 //            datePicker.topAnchor.constraint(equalTo: fromTextField.bottomAnchor, constant: 20),
 //            datePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            
+//
 //            doneButton.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 20),
 //            doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 //        ])
@@ -177,7 +177,7 @@
 //    private func yesterday() -> Date {
 //        return calendar.date(byAdding: .day, value: -1, to: Date())!
 //    }
-//    
+//
 //    private func sanitizeFromDate() {
 //        if let from = parseDate(fromTextField.text), calendar.isDateInToday(from) {
 //            fromTextField.text = ""
@@ -186,8 +186,7 @@
 //            datePicker.setDate(yesterday(), animated: true)
 //        }
 //    }
-//}
-
+// }
 
 import UIKit
 
@@ -197,15 +196,14 @@ enum StatementType {
 }
 
 class DateSelectionViewController: UIViewController {
-    
     private let fromTextField = UITextField()
     private let toTextField = UITextField()
     private let datePicker = UIDatePicker()
     private let doneButton = UIButton(type: .system)
-    
+
     private var activeField: UITextField?
     private var statementType: StatementType = .eAdvice
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -213,65 +211,65 @@ class DateSelectionViewController: UIViewController {
         setupInitialDates()
         configureDatePicker()
     }
-    
+
     private func setupUI() {
         fromTextField.placeholder = "From Date"
         toTextField.placeholder = "To Date"
-        
-        [fromTextField, toTextField].forEach {
-            $0.borderStyle = .roundedRect
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.addTarget(self, action: #selector(textFieldTapped(_:)), for: .editingDidBegin)
+
+        for item in [fromTextField, toTextField] {
+            item.borderStyle = .roundedRect
+            item.translatesAutoresizingMaskIntoConstraints = false
+            item.addTarget(self, action: #selector(textFieldTapped(_:)), for: .editingDidBegin)
         }
-        
+
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.datePickerMode = .date
         datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
-        
+
         doneButton.setTitle("Done", for: .normal)
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
         doneButton.isEnabled = false
-        
+
         view.addSubview(fromTextField)
         view.addSubview(toTextField)
         view.addSubview(datePicker)
         view.addSubview(doneButton)
-        
+
         let stack = UIStackView(arrangedSubviews: [fromTextField, toTextField])
         stack.axis = .horizontal
         stack.distribution = .fillEqually
         stack.spacing = 10
         stack.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stack)
-        
+
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             stack.heightAnchor.constraint(equalToConstant: 40),
-            
+
             datePicker.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 20),
             datePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
+
             doneButton.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 20),
             doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
-    
+
     private func setupInitialDates() {
         let calendar = Calendar.current
         let now = Date()
         let yesterday = calendar.date(byAdding: .day, value: -1, to: now)!
         let fromDate = calendar.date(byAdding: .day, value: -30, to: yesterday)!
-        
+
         toTextField.text = formatDate(yesterday)
         fromTextField.text = formatDate(fromDate)
     }
 
     private func configureDatePicker() {
         datePicker.maximumDate = Date()
-        
+
         switch statementType {
         case .eStatement:
             if #available(iOS 13.4, *) {
@@ -291,16 +289,16 @@ class DateSelectionViewController: UIViewController {
         if let text = sender.text, let date = parseDate(text) {
             datePicker.setDate(date, animated: true)
         }
-        
+
         updateDatePickerRange()
     }
-    
+
     private func updateDatePickerRange() {
         let now = Date()
         let calendar = Calendar.current
         let yesterday = calendar.date(byAdding: .day, value: -1, to: now)!
         let fiveYearsAgo = calendar.date(byAdding: .year, value: -5, to: now)!
-        
+
         switch activeField {
         case fromTextField:
             // From Date: 5 years ago to yesterday (no future)
@@ -313,8 +311,7 @@ class DateSelectionViewController: UIViewController {
                 let twelveMonthsAfterFromDate = calendar.date(byAdding: .month, value: 12, to: fromDate)!
                 datePicker.minimumDate = fromDate
                 datePicker.maximumDate = min(twelveMonthsAfterFromDate, yesterday)
-            }
-            else {
+            } else {
                 // If no fromDate, restrict to last 5 years up to yesterday
                 datePicker.minimumDate = fiveYearsAgo
                 datePicker.maximumDate = yesterday
@@ -328,7 +325,7 @@ class DateSelectionViewController: UIViewController {
     @objc private func dateChanged(_ sender: UIDatePicker) {
         let selected = sender.date
         let calendar = Calendar.current
-        
+
         if activeField == fromTextField {
             if calendar.isDateInToday(selected) {
                 let yesterday = calendar.date(byAdding: .day, value: -1, to: selected)!
@@ -341,22 +338,23 @@ class DateSelectionViewController: UIViewController {
 
         let formattedDate = formatDate(sender.date)
         activeField?.text = formattedDate
-        
+
         validateForm()
     }
-    
+
     private func validateForm() {
         guard let fromDateStr = fromTextField.text,
               let toDateStr = toTextField.text,
               let fromDate = parseDate(fromDateStr),
-              let toDate = parseDate(toDateStr) else {
+              let toDate = parseDate(toDateStr)
+        else {
             doneButton.isEnabled = false
             return
         }
-        
+
         let calendar = Calendar.current
         let maxToDate = calendar.date(byAdding: .day, value: 365, to: fromDate)!
-        
+
         if toDate <= maxToDate {
             doneButton.isEnabled = true
         } else {
@@ -369,28 +367,27 @@ class DateSelectionViewController: UIViewController {
         print("To: \(toTextField.text ?? "")")
         // Perform any further actions here
     }
-    
+
     private func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = statementType == .eStatement ? "MMM yyyy" : "dd MMM yyyy"
         if #available(iOS 17.4, *) {
-            datePicker.datePickerMode = statementType == .eStatement ? .yearAndMonth :  .date
+            datePicker.datePickerMode = statementType == .eStatement ? .yearAndMonth : .date
         } else {
             // Fallback on earlier versions
         }
 
         return formatter.string(from: date)
     }
-    
+
     private func parseDate(_ text: String) -> Date? {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd MMM yyyy"
         return formatter.date(from: text)
     }
-    
+
     private func yesterday() -> Date {
         let calendar = Calendar.current
         return calendar.date(byAdding: .day, value: -1, to: Date())!
     }
-
 }

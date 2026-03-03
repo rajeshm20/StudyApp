@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TopIcon_Title: View {
-    var title:String
+    var title: String
     var body: some View {
         HStack {
             ZStack {

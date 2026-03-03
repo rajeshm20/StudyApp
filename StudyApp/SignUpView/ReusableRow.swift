@@ -1,5 +1,5 @@
 //
-//  RowView.swift
+//  ReusableRow.swift
 //  StudyApp
 //
 //  Created by Rajesh Mani on 03/05/25.
@@ -47,7 +47,7 @@ struct ReusableRow<Footer: View>: View {
 }
 
 #Preview {
-    ReusableRow(title: "Title", subtitle: "SubTitle", bodyText: "lorem ipsumkdjflskdjflskdjf kdjflskdj ldfjsl d", rightIconName: "plus", rightIconAction: { print("Hello") }, footer: {                     HStack {
+    ReusableRow(title: "Title", subtitle: "SubTitle", bodyText: "lorem ipsumkdjflskdjflskdjf kdjflskdj ldfjsl d", rightIconName: "plus", rightIconAction: { print("Hello") }, footer: { HStack {
         Text("Footer text")
             .font(.footnote)
             .foregroundColor(.secondary)
@@ -55,5 +55,5 @@ struct ReusableRow<Footer: View>: View {
         Button("Action") { print("Footer action") }
             .font(.footnote)
     }
-})
+    })
 }

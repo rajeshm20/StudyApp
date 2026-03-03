@@ -1,5 +1,5 @@
 //
-//  Notifications.swift
+//  NotificationsVieww.swift
 //  StudyApp
 //
 //  Created by Rajesh Mani on 21/10/25.
@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK: - Reusable Toggle Row
+
 struct NotificationToggleRow: View {
     let title: String
     let subtitle: String
@@ -31,13 +32,14 @@ struct NotificationToggleRow: View {
 }
 
 // MARK: - Notifications View
+
 struct NotificationsSettingsView: View {
     @State private var emailNotifications = true
     @State private var appsUpdate = true
     @State private var recommendations = false
     @State private var messages = true
-    var router:Router<MainRoute>
-    
+    var router: Router<MainRoute>
+
     var body: some View {
         VStack {
             List {

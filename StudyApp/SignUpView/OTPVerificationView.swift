@@ -1,12 +1,12 @@
 //
-//  OTPView.swift
+//  OTPVerificationView.swift
 //  StudyApp
 //
 //  Created by Rajesh Mani on 29/09/24.
 //
 
-import SwiftUI
 import Observation
+import SwiftUI
 
 struct OTPVerificationView: View {
     @State private var code: [String] = ["", "", "", ""]
@@ -16,7 +16,7 @@ struct OTPVerificationView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
     var router: Router<AuthRoute>
-    
+
     var body: some View {
         VStack {
             // Header
@@ -25,27 +25,27 @@ struct OTPVerificationView: View {
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .padding(.top, 40)
-            
+
             Text("Enter the code sent by SMS to verify your phone number")
                 .font(.body)
                 .foregroundColor(.white.opacity(0.8))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
                 .padding(.top, 8)
-            
+
             // OTP Input Fields
             HStack(spacing: 16) {
-                ForEach(0..<4, id: \.self) { index in
+                ForEach(0 ..< 4, id: \.self) { index in
                     ZStack {
                         // Background with conditional border
                         RoundedRectangle(cornerRadius: 40)
                             .fill(Color.white.opacity(0.2))
-                        
+
                         // Active border
                         RoundedRectangle(cornerRadius: 40)
                             .stroke(Color.white, lineWidth: 2)
                             .opacity(focusedIndex == index ? 1 : 0)
-                        
+
                         TextField("", text: $code[index])
                             .frame(width: 60, height: 60)
                             .foregroundColor(.white)
@@ -53,14 +53,14 @@ struct OTPVerificationView: View {
                             .multilineTextAlignment(.center)
                             .keyboardType(.numberPad)
                             .focused($focusedIndex, equals: index)
-                            .onChange(of: code[index]) { oldValue, newValue in
-                                let filtered = newValue.filter { $0.isNumber }
-                                
+                            .onChange(of: code[index]) { _, newValue in
+                                let filtered = newValue.filter(\.isNumber)
+
                                 // Update field with filtered value if it changed
                                 if filtered != newValue {
                                     code[index] = filtered
                                 }
-                                
+
                                 if filtered.count == 1 {
                                     if index < 3 {
                                         focusedIndex = index + 1
@@ -101,7 +101,7 @@ struct OTPVerificationView: View {
             .disabled(!enableVerifyBtn)
             .padding(.horizontal)
             .padding(.top, 40)
-            
+
             // Resend Code
             Button(action: {
                 // Handle resend code logic
@@ -111,7 +111,6 @@ struct OTPVerificationView: View {
                     .foregroundColor(.white)
             }
             .padding(.top, 20)
-            
         }
         .padding(horizontalSizeClass == .compact ? 25 : 160)
         .navigationBarBackButtonHidden(true)
@@ -120,7 +119,7 @@ struct OTPVerificationView: View {
             LinearGradient(gradient: Gradient(colors: [Color.blue, Color.cyan]),
                            startPoint: .top,
                            endPoint: .bottom)
-            .ignoresSafeArea()
+                .ignoresSafeArea()
         )
     }
 }

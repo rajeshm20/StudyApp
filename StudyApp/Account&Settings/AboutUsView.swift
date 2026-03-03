@@ -1,5 +1,5 @@
 //
-//  AboutUsView!.swift
+//  AboutUsView.swift
 //  StudyApp
 //
 //  Created by Rajesh Mani on 26/10/25.
@@ -16,33 +16,33 @@ struct AboutUsView: View {
                     .titleStyle()
                     .padding()
                 Text("""
-                     Add new navigation methods to protocol as your flow complexity grows.
+                 Add new navigation methods to protocol as your flow complexity grows.
 
-                     Router tracks all navigation state centrally, facilitating flexible navigation.
+                 Router tracks all navigation state centrally, facilitating flexible navigation.
 
-                     Each module remains decoupled and only knows protocol, supporting deep linking, pop, or tab scenarios.
+                 Each module remains decoupled and only knows protocol, supporting deep linking, pop, or tab scenarios.
 
-                     You can extend this further for sheet presentations, modals, child coordinators—all via protocol and state in the centralized router.
-                     Let me know which pattern or scenario you’d like a deeper code sample for! 
-                    """)
-                    .subtitleStyle()
-                    .padding()
+                 You can extend this further for sheet presentations, modals, child coordinators—all via protocol and state in the centralized router.
+                 Let me know which pattern or scenario you’d like a deeper code sample for! 
+                """)
+                .subtitleStyle()
+                .padding()
                 Spacer()
                 Text("Business")
                     .titleStyle()
                     .padding()
                 Text("""
-                     Add new navigation methods to protocol as your flow complexity grows.
+                 Add new navigation methods to protocol as your flow complexity grows.
 
-                     Router tracks all navigation state centrally, facilitating flexible navigation.
+                 Router tracks all navigation state centrally, facilitating flexible navigation.
 
-                     Each module remains decoupled and only knows protocol, supporting deep linking, pop, or tab scenarios.
+                 Each module remains decoupled and only knows protocol, supporting deep linking, pop, or tab scenarios.
 
-                     You can extend this further for sheet presentations, modals, child coordinators—all via protocol and state in the centralized router.
-                     Let me know which pattern or scenario you’d like a deeper code sample for! 
-                    """)
-                    .subtitleStyle()
-                    .padding()
+                 You can extend this further for sheet presentations, modals, child coordinators—all via protocol and state in the centralized router.
+                 Let me know which pattern or scenario you’d like a deeper code sample for! 
+                """)
+                .subtitleStyle()
+                .padding()
                 Spacer()
             }
             .accentColor(.black)

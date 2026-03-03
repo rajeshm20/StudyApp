@@ -49,9 +49,7 @@ struct DatePickerView: View {
     DatePickerView()
 }
 
-
 class CustomTextField: UIView {
-
     let titleLabel = UILabel()
     let textField = UITextField()
     private let underline = CALayer()
@@ -96,7 +94,7 @@ class CustomTextField: UIView {
             textField.leadingAnchor.constraint(equalTo: leadingAnchor),
             textField.trailingAnchor.constraint(equalTo: trailingAnchor),
             textField.heightAnchor.constraint(equalToConstant: 32),
-            textField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2)
+            textField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2),
         ])
 
         // Underline
@@ -116,8 +114,6 @@ class CustomTextField: UIView {
     }
 }
 
-
-
 // Your existing CustomTextField class with the added customInputView property (as above)
 
 struct CustomTextFieldWrapper: UIViewRepresentable {
@@ -134,7 +130,7 @@ struct CustomTextFieldWrapper: UIViewRepresentable {
 
         // Create UIDatePicker
         let datePicker = UIDatePicker()
-        
+
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.date = date
@@ -153,7 +149,7 @@ struct CustomTextFieldWrapper: UIViewRepresentable {
         return customField
     }
 
-    func updateUIView(_ uiView: CustomTextField, context: Context) {
+    func updateUIView(_ uiView: CustomTextField, context _: Context) {
         uiView.textField.text = text
         uiView.titleLabel.text = title
         uiView.textField.placeholder = placeholder

@@ -5,7 +5,6 @@
 //  Created by Rajesh Mani on 15/10/25.
 //
 
-
 import SwiftUI
 
 @MainActor
@@ -21,7 +20,7 @@ class ProfileViewModel: ObservableObject {
         do {
             let data = try Data(contentsOf: url)
             let decoded = try JSONDecoder().decode(UserProfile.self, from: data)
-            self.profile = decoded
+            profile = decoded
         } catch {
             print("❌ Failed to decode profile_mock.json:", error)
         }

@@ -5,13 +5,13 @@
 //  Created by Rajesh Mani on 21/09/24.
 //
 
-import SwiftUI
-import SwiftData
 import Observation
+import SwiftData
+import SwiftUI
 
 @main
 struct StudyAppApp: App {
-    @StateObject var popupManager: PopupManager = PopupManager()
+    @StateObject var popupManager: PopupManager = .init()
     @StateObject private var coordinator = AppCoordinator()
 
     var sharedModelContainer: ModelContainer = {
@@ -26,6 +26,7 @@ struct StudyAppApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
+
     var body: some Scene {
         WindowGroup {
             AppCoordinatorView()
@@ -51,6 +52,7 @@ struct StudyAppApp: App {
                             )
                         }
                         .transition(.scale)
+                        .animation(.bouncy, value: popupManager.isVisible)
                     }
                 }
         }

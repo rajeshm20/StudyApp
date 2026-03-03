@@ -5,11 +5,11 @@
 //  Created by Rajesh Mani on 24/10/25.
 //
 
-import SwiftUI
 import Observation
+import SwiftUI
 
 struct AuthFlowView: View {
-//    @EnvironmentObject var coordinator: AppCoordinator
+    //    @EnvironmentObject var coordinator: AppCoordinator
     @StateObject private var router = Router<AuthRoute>()
     
     var body: some View {
@@ -19,6 +19,9 @@ struct AuthFlowView: View {
                     switch route {
                     case .onboard:
                         OnboardingView(router: router)
+                            .navigationBarBackButtonHidden(true)
+                            .toolbar(.hidden, for: .navigationBar)
+                            .toolbarBackground(.hidden, for: .navigationBar)
                     case .signUp:
                         SignUpView(router: router)
                     case .otp:
@@ -33,7 +36,7 @@ struct AuthFlowView: View {
                         ResetPasswordView(router: router)
                     }
                 }
-        }
+            }
     }
 }
 

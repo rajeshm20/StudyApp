@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import UIKit
 import SwiftUI
+import UIKit
 
 // Theme definition
 struct AppTheme {
@@ -36,8 +36,7 @@ class ThemeManager: ObservableObject {
     @Published var currentTheme: AppTheme = .light
 }
 
-
-struct AppFont {
+enum AppFont {
     static let title = Font.system(size: 24, weight: .bold)
     static let subtitle = Font.system(size: 18, weight: .medium)
     static let body = Font.system(size: 16)
@@ -48,42 +47,41 @@ extension Color {
     static let brandPrimary = Color("themeColor")
 }
 
-
 enum AppTheme1: String, CaseIterable, Codable {
-    case system = "system"
-    case light = "light"
-    case dark = "dark"
-    case cosmic = "cosmic"
-    
+    case system
+    case light
+    case dark
+    case cosmic
+
     var displayName: String {
         switch self {
-        case .system: return "System"
-        case .light: return "Light"
-        case .dark: return "Dark"
-        case .cosmic: return "Cosmic Purple"
+        case .system: "System"
+        case .light: "Light"
+        case .dark: "Dark"
+        case .cosmic: "Cosmic Purple"
         }
     }
-    
+
     var colorScheme: ColorScheme? {
         switch self {
-        case .system: return nil
-        case .light: return .light
-        case .dark, .cosmic: return .dark
+        case .system: nil
+        case .light: .light
+        case .dark, .cosmic: .dark
         }
     }
-    
+
     var accentColor: Color {
         switch self {
-        case .system, .light: return .blue
-        case .dark: return .cyan
-        case .cosmic: return .purple
+        case .system, .light: .blue
+        case .dark: .cyan
+        case .cosmic: .purple
         }
     }
 }
 
 struct ThemeSettings: View {
-    @AppStorage("selectedTheme") private var selectedTheme: AppTheme1 = .system
-    
+    @AppStorage("selectedTheme") private var selectedTheme: AppTheme1 = .dark
+
     var body: some View {
         Form {
             Section("Appearance") {
@@ -99,4 +97,9 @@ struct ThemeSettings: View {
         .preferredColorScheme(selectedTheme.colorScheme)
         .accentColor(selectedTheme.accentColor)
     }
+}
+
+
+#Preview {
+    ThemeSettings()
 }

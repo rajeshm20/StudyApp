@@ -4,7 +4,7 @@ import SwiftUI
 
 enum AccountViewTitles: String {
     case oldPassword = "Old Password"
-    case newPassword =  "New Password"
+    case newPassword = "New Password"
     case confirmPassword = "Confirm Password"
 }
 
@@ -20,7 +20,7 @@ struct AccountView: View {
     @State private var newPasswordError: String? = nil
     @State private var confirmPasswordError: String? = nil
     @EnvironmentObject var popupManager: PopupManager
-    var router:Router<MainRoute>
+    var router: Router<MainRoute>
 
     // Computed property for form validation
     var isFormValid: Bool {
@@ -37,82 +37,87 @@ struct AccountView: View {
 
     var body: some View {
         // Use a ZStack to layer the navigation bar content over the scroll view
-            ZStack(alignment: .top) {
-                // White background for the form
-                Color.white.edgesIgnoringSafeArea(.all)
-                
-                // Outer blue border/background color from the image
-                VStack {
-                    Spacer()
-                    // A blue frame to mimic the light-blue container background from the image
-                    Color(red: 0.9, green: 0.95, blue: 1.0)
-                        .frame(height: 100)
-                }
-                .edgesIgnoringSafeArea(.bottom)
-                
-                VStack(spacing: 0) {
-                    // MARK: Scrollable Form Content
-                    ScrollView {
-                        VStack(spacing: 15) {
-                            // MARK: Form Fields
-                            Spacer()
-                            FormField(title: "Old Password", placeholder: "Your password", text: $oldPassword, isSecure: true, error: $oldPasswordError, completion: {
-                                self.validateFields(title:.oldPassword)
-                            })
-                            FormField(title: "New Password", placeholder: "New password", text: $newPassword, isSecure: true, error: $newPasswordError, completion: {
-                                self.validateFields(title:.newPassword)
-                            })
-                            FormField(title: "Confirm Password", placeholder: "Confirm password", text: $confirmPassword, isSecure: true, error: $confirmPasswordError, completion: {
-                                self.validateFields(title:.confirmPassword)
-                            })
-                            Spacer()
-                            // MARK: Update Button
-                            AppButton(
-                                title: "Update Password",
-                                style: .filled,
-                                foregroundColor: .white,
-                                backgroundColor: .cyan,
-                                cornerRadius: 8,
-                                font: .system(size: 18, weight: .bold),
-                                fullWidth: true,
-                                isLoading: false,
-                                isDisabled: false
-                            ) {
-                                if isFormValid {
-                                    // Logic to save/update profile goes here
-                                    alertMessage = "Password updated successfully!"
-                                    popupManager.show(
-                                        title: "Password Updated",
-                                        image: "key",
-                                        message: alertMessage,
-                                        onClose: {
-                                            // Dynamic navigation or any logic goes here:
-                                            router.pop()
-                                            popupManager.isVisible = false // Also dismiss the popup
-                                        }
-                                    )
+        ZStack(alignment: .top) {
+            // White background for the form
+            Color.white.edgesIgnoringSafeArea(.all)
 
-                                    self.hideKeyboard()
-                                } else {
-                                    validateFields(title: .oldPassword)
-                                    validateFields(title: .newPassword)
-                                    validateFields(title: .confirmPassword)
-                                }
-                            }
-                            .padding(.horizontal, 10)
-                        }
-                        .padding(.horizontal, 25) // Horizontal padding for the form content
-                    }
-                }
+            // Outer blue border/background color from the image
+            VStack {
+                Spacer()
+                // A blue frame to mimic the light-blue container background from the image
+                Color(red: 0.9, green: 0.95, blue: 1.0)
+                    .frame(height: 100)
             }
-            .navigationTitle("Account")
-            .navigationBarTitleDisplayMode(.inline)
-        // Keyboard dismiss gesture for entire screen
-            .simultaneousGesture(
-                TapGesture().onEnded { self.hideKeyboard() }
-            )
+            .edgesIgnoringSafeArea(.bottom)
 
+            VStack(spacing: 0) {
+                // MARK: Scrollable Form Content
+
+                ScrollView {
+                    VStack(spacing: 15) {
+                        // MARK: Form Fields
+
+                        Spacer()
+                        FormField(title: "Old Password", placeholder: "Your password", text: $oldPassword, isSecure: true, error: $oldPasswordError, completion: {
+                            validateFields(title: .oldPassword)
+                        })
+                        FormField(title: "New Password", placeholder: "New password", text: $newPassword, isSecure: true, error: $newPasswordError, completion: {
+                            validateFields(title: .newPassword)
+                        })
+                        FormField(title: "Confirm Password", placeholder: "Confirm password", text: $confirmPassword, isSecure: true, error: $confirmPasswordError, completion: {
+                            validateFields(title: .confirmPassword)
+                        })
+                        Spacer()
+
+                        // MARK: Update Button
+
+                        AppButton(
+                            title: "Update Password",
+                            style: .filled,
+                            foregroundColor: .white,
+                            backgroundColor: .cyan,
+                            cornerRadius: 8,
+                            font: .system(size: 18, weight: .bold),
+                            fullWidth: true,
+                            isLoading: false,
+                            isDisabled: false
+                        ) {
+                            if isFormValid {
+                                // Logic to save/update profile goes here
+                                alertMessage = "Password updated successfully!"
+                                popupManager.show(
+                                    title: "Password Updated",
+                                    image: "key",
+                                    message: alertMessage,
+                                    onClose: {
+                                        // Dynamic navigation or any logic goes here:
+                                        router.pop()
+                                        popupManager.isVisible = false // Also dismiss the popup
+                                    }
+                                )
+
+                                hideKeyboard()
+                            } else {
+                                validateFields(title: .oldPassword)
+                                validateFields(title: .newPassword)
+                                validateFields(title: .confirmPassword)
+                            }
+                        }
+                        .padding(.horizontal, 10)
+                    }
+                    .padding(.horizontal, 25) // Horizontal padding for the form content
+                }
+                .scrollDismissesKeyboard(.interactively)
+            }
+        }
+        .navigationTitle("Account")
+        .navigationBarTitleDisplayMode(.inline)
+//        // Keyboard dismiss gesture for entire screen
+//            .simultaneousGesture(
+//                TapGesture().onEnded { self.hideKeyboard() }
+//            )
     }
+
     // Modify the existing validateFields function
     func validateFields(title: AccountViewTitles) {
         switch title {
@@ -150,10 +155,10 @@ struct AccountView: View {
             }
         }
     }
-
 }
 
 // MARK: - Preview
+
 struct AccountVieww_Previews: PreviewProvider {
     static var previews: some View {
         AccountView(router: Router<MainRoute>())

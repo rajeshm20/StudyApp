@@ -16,49 +16,49 @@ enum AppButtonStyleKind {
 struct AppButton: View {
     let title: String
     var style: AppButtonStyleKind = .filled
-    var foregroundColor: Color? = nil
-    var backgroundColor: Color? = nil
+    var foregroundColor: Color?
+    var backgroundColor: Color?
     var cornerRadius: CGFloat = 8
     var font: Font = .system(size: 18, weight: .bold)
     var fullWidth: Bool = true
     var isLoading: Bool = false
     var isDisabled: Bool = false
-    var leadingIcon: String? = nil
-    var trailingIcon: String? = nil
+    var leadingIcon: String?
+    var trailingIcon: String?
     let action: () -> Void
 
     private var resolvedBackground: Color {
         switch style {
         case .filled:
-            return (backgroundColor ?? .cyan)
+            backgroundColor ?? .cyan
         case .outline, .plain:
-            return .clear
+            .clear
         }
     }
 
     private var resolvedForeground: Color {
         switch style {
         case .filled:
-            return (foregroundColor ?? .white)
+            foregroundColor ?? .white
         case .outline:
-            return (foregroundColor ?? .cyan)
+            foregroundColor ?? .cyan
         case .plain:
-            return (foregroundColor ?? .accentColor)
+            foregroundColor ?? .accentColor
         }
     }
 
     private var borderColor: Color {
         switch style {
         case .outline:
-            return backgroundColor ?? .cyan
+            backgroundColor ?? .cyan
         default:
-            return .clear
+            .clear
         }
     }
 
     var body: some View {
         Button(action: {
-            guard !isLoading && !isDisabled else { return }
+            guard !isLoading, !isDisabled else { return }
             action()
         }) {
             HStack(spacing: 8) {

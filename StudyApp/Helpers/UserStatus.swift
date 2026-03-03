@@ -12,18 +12,18 @@ enum UserStatus: Codable {
     case inactive(reason: String)
     case suspended(until: Date, reason: String)
     case banned(permanently: Bool)
-    
+
     enum CodingKeys: String, CodingKey {
         case type
         case reason
         case until
         case permanently
     }
-    
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let type = try container.decode(String.self, forKey: .type)
-        
+
         switch type {
         case "active":
             self = .active
@@ -41,21 +41,21 @@ enum UserStatus: Codable {
             throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Unknown user status type")
         }
     }
-    
+
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        
+
         switch self {
         case .active:
             try container.encode("active", forKey: .type)
-        case .inactive(let reason):
+        case let .inactive(reason):
             try container.encode("inactive", forKey: .type)
             try container.encode(reason, forKey: .reason)
-        case .suspended(let until, let reason):
+        case let .suspended(until, reason):
             try container.encode("suspended", forKey: .type)
             try container.encode(until, forKey: .until)
             try container.encode(reason, forKey: .reason)
-        case .banned(let permanently):
+        case let .banned(permanently):
             try container.encode("banned", forKey: .type)
             try container.encode(permanently, forKey: .permanently)
         }

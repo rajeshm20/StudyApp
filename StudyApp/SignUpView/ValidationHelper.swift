@@ -2,7 +2,6 @@
 import Foundation
 
 enum ValidationHelper {
-
     static func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
@@ -29,13 +28,13 @@ enum ValidationHelper {
         var password: String?
         var phoneNumber: String?
         var terms: String?
-        
+
         var allNilAndValid: Bool {
-            return name == nil &&
-                   email == nil &&
-                   password == nil &&
-                   phoneNumber == nil &&
-                   terms == nil
+            name == nil &&
+                email == nil &&
+                password == nil &&
+                phoneNumber == nil &&
+                terms == nil
         }
     }
 
@@ -43,7 +42,8 @@ enum ValidationHelper {
                             email: String,
                             password: String,
                             phoneNumber: String,
-                            agreeToTerms: Bool) -> FieldErrors {
+                            agreeToTerms: Bool) -> FieldErrors
+    {
         var errors = FieldErrors()
 
         // Name

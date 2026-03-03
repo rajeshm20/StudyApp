@@ -1,5 +1,5 @@
 //
-//  AboutUsView.swift
+//  AboutView.swift
 //  StudyApp
 //
 //  Created by Rajesh Mani on 21/10/25.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AboutView: View {
-    var router:Router<MainRoute>
+    var router: Router<MainRoute>
     var body: some View {
         VStack {
             List {
@@ -17,7 +17,7 @@ struct AboutView: View {
                 }) {
                     Text("About Us")
                 }
-                Button(action: { }) {
+                Button(action: {}) {
                     Text("Help")
                 }
                 Button(action: {
