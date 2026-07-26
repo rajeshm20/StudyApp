@@ -13,7 +13,11 @@ struct SignInView: View {
     @State private var password: String = ""
     @State private var emailError: String? = nil
     @State private var passwordError: String? = nil
+    @State private var authAlertMessage = ""
+    @State private var showAuthAlert = false
+    @State private var isSubmitting = false
     @EnvironmentObject var popupManager: PopupManager
+    @EnvironmentObject var authSession: AuthSessionManager
 
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
@@ -50,10 +54,10 @@ struct SignInView: View {
                     cornerRadius: 8,
                     font: .system(size: 18, weight: .bold),
                     fullWidth: true,
-                    isLoading: false,
-                    isDisabled: false
+                    isLoading: isSubmitting,
+                    isDisabled: isSubmitting
                 ) {
-                    validateAllFields()
+                    submitSignIn()
                 }
                 .padding()
 
@@ -124,6 +128,18 @@ struct SignInView: View {
         .navigationBarBackButtonHidden(false)
         .navigationTitle("Sign In")
         .navigationBarTitleDisplayMode(.large)
+        .studyAppLoadingOverlay(
+            isPresented: isSubmitting,
+            symbol: "person.crop.circle.badge.checkmark",
+            tint: .cyan,
+            title: "Signing In",
+            message: "Verifying your credentials and preparing your account."
+        )
+        .alert("Sign In Failed", isPresented: $showAuthAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(authAlertMessage)
+        }
     }
 
     // Modify the existing validateFields function
@@ -155,17 +171,40 @@ struct SignInView: View {
         let allFieldsValid =
             emailError == nil && passwordError == nil
 
-        if allFieldsValid {
-            popupManager.show(
-                title: "Account information is correct?",
-                image: "tick_round",
-                message: "Tap accept button to confirm entered details are correct.",
-                onClose: {
-                    // Dynamic navigation or any logic goes here:
-                    coordinator.switchToMain()
-                    popupManager.isVisible = false // Also dismiss the popup
+        guard allFieldsValid else { return }
+    }
+
+    private func submitSignIn() {
+        validateAllFields()
+        guard emailError == nil, passwordError == nil else { return }
+        guard !isSubmitting else { return }
+
+        isSubmitting = true
+        Task {
+            do {
+                let response = try await authSession.signIn(
+                    email: email.trimmingCharacters(in: .whitespacesAndNewlines),
+                    password: password
+                )
+                await MainActor.run {
+                    isSubmitting = false
+                    popupManager.show(
+                        title: "Signed in",
+                        image: "tick_round",
+                        message: "Your account has been connected successfully.",
+                        onPrimary: {
+                            popupManager.dismiss()
+                            coordinator.switchToMain()
+                        }
+                    )
                 }
-            )
+            } catch {
+                await MainActor.run {
+                    isSubmitting = false
+                    authAlertMessage = error.localizedDescription
+                    showAuthAlert = true
+                }
+            }
         }
     }
 }

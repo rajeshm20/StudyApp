@@ -1,9 +1,9 @@
-//
-//  ForgotPasswordView.swift
-//  StudyApp
-//
-//  Created by Rajesh Mani on 11/11/25.
-//
+    //
+    //  ForgotPasswordView.swift
+    //  StudyApp
+    //
+    //  Created by Rajesh Mani on 11/11/25.
+    //
 
 import SwiftUI
 
@@ -11,10 +11,14 @@ struct ForgotPasswordView: View {
     @State private var email: String = ""
     @State private var emailError: String? = nil
     @EnvironmentObject var popupManager: PopupManager
-
+    @State private var authAlertMessage = ""
+    @State private var showAuthAlert = false
+    @State private var isSubmitting = false
+    @EnvironmentObject var authSession: AuthSessionManager
+    @Environment(\.dismiss) private var dismiss
     var router: Router<AuthRoute>
     @EnvironmentObject var coordinator: AppCoordinator
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Forgot Password")
@@ -28,56 +32,83 @@ struct ForgotPasswordView: View {
                 validateFields(title: .email)
             })
             .padding(10)
-
-            // Sign-In Button (Reusable)
+            
+                // Sign-In Button (Reusable)
             AppButton(
-                title: "Reset Password",
+                title: "Verify Email",
                 style: .filled,
                 foregroundColor: .white,
                 backgroundColor: .cyan,
                 cornerRadius: 8,
                 font: .system(size: 18, weight: .bold),
                 fullWidth: true,
-                isLoading: false,
-                isDisabled: false
+                isLoading: isSubmitting,
+                isDisabled: isSubmitting
             ) {
-                validateAllFields()
+                verifyEMail()
             }
             .padding(.horizontal)
         }
         .padding()
+        .studyAppLoadingOverlay(
+            isPresented: isSubmitting,
+            symbol: "envelope.badge",
+            tint: .cyan,
+            title: "Verifying Email",
+            message: "Checking your account and sending the reset instructions."
+        )
+        .alert("Email verification Failed", isPresented: $showAuthAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(authAlertMessage)
+        }
+        
         Spacer()
     }
-
-    // Add this new function
-    func validateAllFields() {
+    
+        // Add this new function
+    func verifyEMail() {
         validateFields(title: .email)
+        
+        // Check if email field valid
+        guard emailError == nil else { return }
+        guard !isSubmitting else { return }
+        isSubmitting = true
 
-        // Check if all fields are valid
-        let allFieldsValid =
-            emailError == nil
-
-        if allFieldsValid {
-            popupManager.show(
-                title: "Account information is correct?",
-                image: "tick_round",
-                message: "Tap accept button to confirm entered details are correct.",
-                onClose: {
-                    // Dynamic navigation or any logic goes here:
-                    router.push(.resetPassword)
-                    popupManager.isVisible = false // Also dismiss the popup
+        Task {
+            do {
+                let response = try await authSession.ForgotPassword(
+                    email: email.trimmingCharacters(in: .whitespacesAndNewlines)
+                )
+                await MainActor.run {
+                    isSubmitting = false
+                    popupManager.show(
+                        title: response.success == true ? "Email Successfully Verified" : response.message,
+                        image: response.success == true ? "tick_round" : "notfound",
+                        message: "Check your email",
+                        onPrimary: {
+                            response.success ? router.push(.verifyOTP) : dismiss()
+                            popupManager.dismiss()
+                        }
+                    )
                 }
-            )
+            } catch {
+                await MainActor.run {
+                    isSubmitting = false
+                    authAlertMessage = error.localizedDescription
+                    showAuthAlert = true
+                }
+            }
         }
     }
-
-    // Modify the existing validateFields function
+    
+        // Modify the existing validateFields function
     func validateFields(title: Title) {
         switch title {
-        case .email:
-            emailError = ValidationHelper.isValidEmail(email) ? nil : "Invalid email address"
-        default:
-            break
+            case .email:
+                emailError = ValidationHelper.isValidEmail(email) ? nil : "Invalid email address"
+            default:
+                break
         }
     }
 }

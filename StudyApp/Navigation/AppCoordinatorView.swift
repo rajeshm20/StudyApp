@@ -9,6 +9,12 @@ import SwiftUI
 
 @MainActor
 final class AppCoordinator: ObservableObject {
+    private let logger: Logging
+
+    init(logger: Logging = StudyAppLogger.shared) {
+        self.logger = logger
+    }
+
     enum Flow {
         case auth
         case main
@@ -17,12 +23,14 @@ final class AppCoordinator: ObservableObject {
     @Published var currentFlow: Flow = .auth
 
     func switchToMain() {
+        logger.notice("Switching app flow to main", category: .navigation, metadata: ["flow": "main"])
         withAnimation {
             currentFlow = .main
         }
     }
 
     func switchToAuth() {
+        logger.notice("Switching app flow to auth", category: .navigation, metadata: ["flow": "auth"])
         withAnimation {
             currentFlow = .auth
         }

@@ -10,6 +10,7 @@
 		6110EEDF2EAB75E9004E5471 /* TermsAndConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6110EEDE2EAB75E9004E5471 /* TermsAndConditionsView.swift */; };
 		6110EEE12EAB7754004E5471 /* DataPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6110EEE02EAB7754004E5471 /* DataPolicyView.swift */; };
 		6113C3E92EA974B700A0B639 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6113C3E82EA974B700A0B639 /* Extensions.swift */; };
+		6113C3ED3015E10000A0B639 /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6113C3EC3015E10000A0B639 /* AppLogger.swift */; };
 		6113C3EB2EA97C8800A0B639 /* NotificationsVieww.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6113C3EA2EA97C8800A0B639 /* NotificationsVieww.swift */; };
 		6113C4092EA983F400A0B639 /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6113C4082EA983F400A0B639 /* LanguageModel.swift */; };
 		6113C40B2EA9843D00A0B639 /* ChooseLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6113C40A2EA9843D00A0B639 /* ChooseLanguageView.swift */; };
@@ -69,6 +70,12 @@
 		618C32782EC3A44D0079ACF1 /* PresenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618C32772EC3A44D0079ACF1 /* PresenceView.swift */; };
 		618C327A2EC3A4590079ACF1 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618C32792EC3A4590079ACF1 /* NotificationsView.swift */; };
 		61A3AE952EB35633003B7E7A /* ProfileViewAlternate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A3AE942EB35633003B7E7A /* ProfileViewAlternate.swift */; };
+		61B0AA3630134AFC00589F69 /* Base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 61B0AA3530134AFC00589F69 /* Base.xcconfig */; };
+		61B0AA3C301353CD00589F69 /* AuthSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B0AA3B301353CD00589F69 /* AuthSessionManager.swift */; };
+		61B0AA3E3013540C00589F69 /* AppDelege.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B0AA3D3013540C00589F69 /* AppDelege.swift */; };
+		61B0AA403013545C00589F69 /* KeychainSessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B0AA3F3013545C00589F69 /* KeychainSessionStore.swift */; };
+		61B0AA423013549700589F69 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B0AA413013549700589F69 /* AppConfig.swift */; };
+		61B0AA443013787B00589F69 /* ResetPasswordOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B0AA433013787B00589F69 /* ResetPasswordOTPView.swift */; };
 		61BC6E1C2DC3EB80005EFFD9 /* DatePickerView 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BC6E1B2DC3EB80005EFFD9 /* DatePickerView 2.swift */; };
 		61BE27142DB3748D0000DB49 /* GenericBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BE27132DB3748D0000DB49 /* GenericBottomSheetView.swift */; };
 		61BF54742E77286900826236 /* AllAssignmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF54732E77286800826236 /* AllAssignmentView.swift */; };
@@ -76,9 +83,7 @@
 		61BF787C2EA239FA00FF3206 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF787B2EA239FA00FF3206 /* ColorTheme.swift */; };
 		61BF787E2EA2408C00FF3206 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF787D2EA2408C00FF3206 /* ProfileHeader.swift */; };
 		61BF78802EA245A800FF3206 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF787F2EA245A800FF3206 /* FormField.swift */; };
-		61C8846D2D8FF66D00D566FC /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C8846C2D8FF66D00D566FC /* Item.swift */; };
 		61D852282F013007009D5430 /* ConnectivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D852272F013007009D5430 /* ConnectivityView.swift */; };
-		61DAFC202E64542F0037B1DF /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DAFC1F2E64542F0037B1DF /* APIResponse.swift */; };
 		61DAFC222E6454AC0037B1DF /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DAFC212E6454AC0037B1DF /* StateManager.swift */; };
 		61DAFC242E64567F0037B1DF /* UserStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DAFC232E64567F0037B1DF /* UserStatus.swift */; };
 		61DAFC262E6456E30037B1DF /* BadExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DAFC252E6456E30037B1DF /* BadExpression.swift */; };
@@ -139,6 +144,7 @@
 		6110EEDE2EAB75E9004E5471 /* TermsAndConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsView.swift; sourceTree = "<group>"; };
 		6110EEE02EAB7754004E5471 /* DataPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPolicyView.swift; sourceTree = "<group>"; };
 		6113C3E82EA974B700A0B639 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		6113C3EC3015E10000A0B639 /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
 		6113C3EA2EA97C8800A0B639 /* NotificationsVieww.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsVieww.swift; sourceTree = "<group>"; };
 		6113C4082EA983F400A0B639 /* LanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageModel.swift; sourceTree = "<group>"; };
 		6113C40A2EA9843D00A0B639 /* ChooseLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLanguageView.swift; sourceTree = "<group>"; };
@@ -181,7 +187,6 @@
 		616761CE2ED597E0008ABF89 /* ChatListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListModule.swift; sourceTree = "<group>"; };
 		616761D02ED597E6008ABF89 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6169B34F2DB94DA20075AE28 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
-		616BB57B2E2356B000B6E64E /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		616BB57D2E23573100B6E64E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		617D7ADA2EB27C180034150D /* FilterBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBottomSheet.swift; sourceTree = "<group>"; };
 		617D7ADE2EB281700034150D /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
@@ -200,6 +205,15 @@
 		618C32772EC3A44D0079ACF1 /* PresenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenceView.swift; sourceTree = "<group>"; };
 		618C32792EC3A4590079ACF1 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		61A3AE942EB35633003B7E7A /* ProfileViewAlternate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewAlternate.swift; sourceTree = "<group>"; };
+		61B0AA3230134A7500589F69 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		61B0AA3330134A8200589F69 /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
+		61B0AA3430134A8B00589F69 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
+		61B0AA3530134AFC00589F69 /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
+		61B0AA3B301353CD00589F69 /* AuthSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSessionManager.swift; sourceTree = "<group>"; };
+		61B0AA3D3013540C00589F69 /* AppDelege.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelege.swift; sourceTree = "<group>"; };
+		61B0AA3F3013545C00589F69 /* KeychainSessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSessionStore.swift; sourceTree = "<group>"; };
+		61B0AA413013549700589F69 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		61B0AA433013787B00589F69 /* ResetPasswordOTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordOTPView.swift; sourceTree = "<group>"; };
 		61BC6E1B2DC3EB80005EFFD9 /* DatePickerView 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DatePickerView 2.swift"; sourceTree = "<group>"; };
 		61BE27132DB3748D0000DB49 /* GenericBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericBottomSheetView.swift; sourceTree = "<group>"; };
 		61BF54732E77286800826236 /* AllAssignmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllAssignmentView.swift; sourceTree = "<group>"; };
@@ -207,10 +221,8 @@
 		61BF787B2EA239FA00FF3206 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
 		61BF787D2EA2408C00FF3206 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		61BF787F2EA245A800FF3206 /* FormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
-		61C8846C2D8FF66D00D566FC /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		61D6539D2EB4AEC200E58684 /* StudyApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StudyApp.entitlements; sourceTree = "<group>"; };
 		61D852272F013007009D5430 /* ConnectivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityView.swift; sourceTree = "<group>"; };
-		61DAFC1F2E64542F0037B1DF /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		61DAFC212E6454AC0037B1DF /* StateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateManager.swift; sourceTree = "<group>"; };
 		61DAFC232E64567F0037B1DF /* UserStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatus.swift; sourceTree = "<group>"; };
 		61DAFC252E6456E30037B1DF /* BadExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadExpression.swift; sourceTree = "<group>"; };
@@ -273,6 +285,8 @@
 		6113C40E2EA9864D00A0B639 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				61B0AA413013549700589F69 /* AppConfig.swift */,
+				61B0AA3D3013540C00589F69 /* AppDelege.swift */,
 				614E72AF2EAB037A00E2D448 /* Router.swift */,
 				614E72B32EAB048A00E2D448 /* AuthFlowView.swift */,
 				614E72B52EAB357500E2D448 /* MainFlowView.swift */,
@@ -295,8 +309,10 @@
 		61357E242D997DFF0071C7AF /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6113C3EC3015E10000A0B639 /* AppLogger.swift */,
 				61879BA62EA4FF5500901114 /* PopupManager.swift */,
-				61DAFC1F2E64542F0037B1DF /* APIResponse.swift */,
+				61B0AA3F3013545C00589F69 /* KeychainSessionStore.swift */,
+				61B0AA3B301353CD00589F69 /* AuthSessionManager.swift */,
 				61DAFC232E64567F0037B1DF /* UserStatus.swift */,
 				61DAFC212E6454AC0037B1DF /* StateManager.swift */,
 				61DAFC252E6456E30037B1DF /* BadExpression.swift */,
@@ -408,7 +424,10 @@
 		D34BE7442C9F163400A3A3CA = {
 			isa = PBXGroup;
 			children = (
-				616BB57B2E2356B000B6E64E /* Debug.xcconfig */,
+				61B0AA3230134A7500589F69 /* Development.xcconfig */,
+				61B0AA3530134AFC00589F69 /* Base.xcconfig */,
+				61B0AA3330134A8200589F69 /* Production.xcconfig */,
+				61B0AA3430134A8B00589F69 /* Staging.xcconfig */,
 				D34BE74F2C9F163400A3A3CA /* StudyApp */,
 				D34BE7622C9F163600A3A3CA /* StudyAppTests */,
 				D34BE76C2C9F163600A3A3CA /* StudyAppUITests */,
@@ -504,9 +523,9 @@
 				6164E50F2EABF5A100D0FBE6 /* CreateProfileView.swift */,
 				6164E5112EABF70800D0FBE6 /* ChooseTopicInterestView.swift */,
 				6164E5132EABF77100D0FBE6 /* NotificationPermissionView.swift */,
-				61C8846C2D8FF66D00D566FC /* Item.swift */,
 				D35B48852D32C04000AF3873 /* SignInView.swift */,
 				612A60852EC2D08A00C4D37D /* ForgotPasswordView.swift */,
+				61B0AA433013787B00589F69 /* ResetPasswordOTPView.swift */,
 				612A60872EC2D5CB00C4D37D /* ResetPasswordView.swift */,
 				61252D2D2D98E5E70052B8CA /* GridView_Example.swift */,
 				61FEC0EE2DAD755C00535FB1 /* SheetView.swift */,
@@ -638,6 +657,7 @@
 			files = (
 				615081112EE16C9500A6CA08 /* RegexExample.swift in Resources */,
 				D34BE75A2C9F163600A3A3CA /* Preview Assets.xcassets in Resources */,
+				61B0AA3630134AFC00589F69 /* Base.xcconfig in Resources */,
 				D34BE7572C9F163600A3A3CA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -692,6 +712,7 @@
 				61DAFC282E6457120037B1DF /* NetworkResponseClass.swift in Sources */,
 				61BE27142DB3748D0000DB49 /* GenericBottomSheetView.swift in Sources */,
 				6160AD362E9E92DA001C4899 /* SettingsHomeView.swift in Sources */,
+				61B0AA403013545C00589F69 /* KeychainSessionStore.swift in Sources */,
 				61BC6E1C2DC3EB80005EFFD9 /* DatePickerView 2.swift in Sources */,
 				61E4E39B2E0DAB4D00E08337 /* CounterView.swift in Sources */,
 				61BF54742E77286900826236 /* AllAssignmentView.swift in Sources */,
@@ -708,10 +729,10 @@
 				6113C4092EA983F400A0B639 /* LanguageModel.swift in Sources */,
 				616761D12ED597E6008ABF89 /* ContentView.swift in Sources */,
 				612A60882EC2D5CB00C4D37D /* ResetPasswordView.swift in Sources */,
-				61DAFC202E64542F0037B1DF /* APIResponse.swift in Sources */,
 				61DAFC2A2E64573E0037B1DF /* ViewState.swift in Sources */,
 				6160AD4A2E9FF920001C4899 /* UserProfile.swift in Sources */,
 				61BF78802EA245A800FF3206 /* FormField.swift in Sources */,
+				61B0AA423013549700589F69 /* AppConfig.swift in Sources */,
 				618C32782EC3A44D0079ACF1 /* PresenceView.swift in Sources */,
 				6113E72C2E71C61200048063 /* StudentDashboardView.swift in Sources */,
 				61A3AE952EB35633003B7E7A /* ProfileViewAlternate.swift in Sources */,
@@ -723,12 +744,14 @@
 				61813CB42ECB8FAF009FEEDF /* ExperimentView.swift in Sources */,
 				6169B3502DB94DA20075AE28 /* DatePickerView.swift in Sources */,
 				616761CB2ED597D0008ABF89 /* ChatLocalDataStoreProtocol.swift in Sources */,
+				61B0AA443013787B00589F69 /* ResetPasswordOTPView.swift in Sources */,
 				61BF78782EA20C7500FF3206 /* ValidationHelper.swift in Sources */,
 				61DAFC242E64567F0037B1DF /* UserStatus.swift in Sources */,
 				616761C72ED597B3008ABF89 /* ChatListRouter.swift in Sources */,
 				D393620A2CA99E62002C368B /* OTPVerificationView.swift in Sources */,
 				616761CF2ED597E0008ABF89 /* ChatListModule.swift in Sources */,
 				616761C92ED597BD008ABF89 /* ChatAPIServiceProtocol.swift in Sources */,
+				61B0AA3E3013540C00589F69 /* AppDelege.swift in Sources */,
 				61DAFC262E6456E30037B1DF /* BadExpression.swift in Sources */,
 				614E72B42EAB048A00E2D448 /* AuthFlowView.swift in Sources */,
 				615B7FBD2EDA27D60016F113 /* EncryptionManager.swift in Sources */,
@@ -740,7 +763,6 @@
 				616761CD2ED597D9008ABF89 /* ChatListView.swift in Sources */,
 				618C32712EC3A3AC0079ACF1 /* SubjectsView.swift in Sources */,
 				615A76F32DC66146008F30E3 /* ReusableRow.swift in Sources */,
-				61C8846D2D8FF66D00D566FC /* Item.swift in Sources */,
 				61FB0CD92EA6B8AB00398063 /* AboutView.swift in Sources */,
 				6160AD482E9FF914001C4899 /* ProfileViewModel.swift in Sources */,
 				6159CEEC2EAE417100AD6119 /* AboutUsView.swift in Sources */,
@@ -755,6 +777,8 @@
 				616761C52ED597AA008ABF89 /* ChatListPresenter.swift in Sources */,
 				D35B48862D32C04000AF3873 /* SignInView.swift in Sources */,
 				61E4E3992E0DAB2800E08337 /* CounterFeature.swift in Sources */,
+				61B0AA3C301353CD00589F69 /* AuthSessionManager.swift in Sources */,
+				6113C3ED3015E10000A0B639 /* AppLogger.swift in Sources */,
 				61BF787C2EA239FA00FF3206 /* ColorTheme.swift in Sources */,
 				6159CEF02EAE555400AD6119 /* AssignmentModel.swift in Sources */,
 				615A76F52DC66193008F30E3 /* ListView.swift in Sources */,
@@ -809,9 +833,9 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		D34BE7712C9F163600A3A3CA /* Debug */ = {
+		61B0AA26301349B300589F69 /* Development */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 616BB57B2E2356B000B6E64E /* Debug.xcconfig */;
+			baseConfigurationReference = 61B0AA3230134A7500589F69 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -846,8 +870,6 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 4TTDUWKTNV;
-				ENABLE_ENHANCED_SECURITY = YES;
-				ENABLE_POINTER_AUTHENTICATION = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -876,10 +898,87 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = Development;
 		};
-		D34BE7722C9F163600A3A3CA /* Release */ = {
+		61B0AA27301349B300589F69 /* Development */ = {
 			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StudyApp/StudyApp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"StudyApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 4TTDUWKTNV;
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StudyApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SchoolMate;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rajeshmani.schoolbee;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Development;
+		};
+		61B0AA28301349B300589F69 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rajeshmani.schoolbeeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StudyApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StudyApp";
+			};
+			name = Development;
+		};
+		61B0AA29301349B300589F69 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rajeshmani.schoolbeeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = StudyApp;
+			};
+			name = Development;
+		};
+		61B0AA2A301349C100589F69 /* Production */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61B0AA3330134A8200589F69 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -912,15 +1011,19 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 4TTDUWKTNV;
-				ENABLE_ENHANCED_SECURITY = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_POINTER_AUTHENTICATION = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -929,17 +1032,18 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "\"-Xfrontend -debug-time-function-bodies\"";
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				VALIDATE_PRODUCT = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Release;
+			name = Production;
 		};
-		D34BE7742C9F163600A3A3CA /* Debug */ = {
+		61B0AA2B301349C100589F69 /* Production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -950,8 +1054,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"StudyApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 4TTDUWKTNV;
-				ENABLE_ENHANCED_SECURITY = YES;
-				ENABLE_POINTER_AUTHENTICATION = YES;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -980,9 +1082,111 @@
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = Production;
 		};
-		D34BE7752C9F163600A3A3CA /* Release */ = {
+		61B0AA2C301349C100589F69 /* Production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rajeshmani.schoolbeeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StudyApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StudyApp";
+			};
+			name = Production;
+		};
+		61B0AA2D301349C100589F69 /* Production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rajeshmani.schoolbeeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = StudyApp;
+			};
+			name = Production;
+		};
+		61B0AA2E301349CC00589F69 /* Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61B0AA3430134A8B00589F69 /* Staging.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4TTDUWKTNV;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "\"-Xfrontend -debug-time-function-bodies\"";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Staging;
+		};
+		61B0AA2F301349CC00589F69 /* Staging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -993,8 +1197,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"StudyApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 4TTDUWKTNV;
-				ENABLE_ENHANCED_SECURITY = YES;
-				ENABLE_POINTER_AUTHENTICATION = YES;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1015,6 +1217,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rajeshmani.schoolbee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1022,9 +1225,9 @@
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Release;
+			name = Staging;
 		};
-		D34BE7772C9F163600A3A3CA /* Debug */ = {
+		61B0AA30301349CC00589F69 /* Staging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1040,9 +1243,134 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StudyApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StudyApp";
 			};
-			name = Debug;
+			name = Staging;
 		};
-		D34BE7782C9F163600A3A3CA /* Release */ = {
+		61B0AA31301349CC00589F69 /* Staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rajeshmani.schoolbeeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = StudyApp;
+			};
+			name = Staging;
+		};
+		61B0AA37301350A200589F69 /* Base */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61B0AA3530134AFC00589F69 /* Base.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4TTDUWKTNV;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "\"-Xfrontend -debug-time-function-bodies\"";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Base;
+		};
+		61B0AA38301350A200589F69 /* Base */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StudyApp/StudyApp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"StudyApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 4TTDUWKTNV;
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StudyApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SchoolMate;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rajeshmani.schoolbee;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Base;
+		};
+		61B0AA39301350A200589F69 /* Base */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1058,9 +1386,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StudyApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StudyApp";
 			};
-			name = Release;
+			name = Base;
 		};
-		D34BE77A2C9F163600A3A3CA /* Debug */ = {
+		61B0AA3A301350A200589F69 /* Base */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1075,24 +1403,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = StudyApp;
 			};
-			name = Debug;
-		};
-		D34BE77B2C9F163600A3A3CA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rajeshmani.schoolbeeUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = StudyApp;
-			};
-			name = Release;
+			name = Base;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1100,38 +1411,46 @@
 		D34BE7482C9F163400A3A3CA /* Build configuration list for PBXProject "StudyApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D34BE7712C9F163600A3A3CA /* Debug */,
-				D34BE7722C9F163600A3A3CA /* Release */,
+				61B0AA2A301349C100589F69 /* Production */,
+				61B0AA26301349B300589F69 /* Development */,
+				61B0AA2E301349CC00589F69 /* Staging */,
+				61B0AA37301350A200589F69 /* Base */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Production;
 		};
 		D34BE7732C9F163600A3A3CA /* Build configuration list for PBXNativeTarget "StudyApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D34BE7742C9F163600A3A3CA /* Debug */,
-				D34BE7752C9F163600A3A3CA /* Release */,
+				61B0AA2B301349C100589F69 /* Production */,
+				61B0AA27301349B300589F69 /* Development */,
+				61B0AA2F301349CC00589F69 /* Staging */,
+				61B0AA38301350A200589F69 /* Base */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Production;
 		};
 		D34BE7762C9F163600A3A3CA /* Build configuration list for PBXNativeTarget "StudyAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D34BE7772C9F163600A3A3CA /* Debug */,
-				D34BE7782C9F163600A3A3CA /* Release */,
+				61B0AA2C301349C100589F69 /* Production */,
+				61B0AA28301349B300589F69 /* Development */,
+				61B0AA30301349CC00589F69 /* Staging */,
+				61B0AA39301350A200589F69 /* Base */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Production;
 		};
 		D34BE7792C9F163600A3A3CA /* Build configuration list for PBXNativeTarget "StudyAppUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D34BE77A2C9F163600A3A3CA /* Debug */,
-				D34BE77B2C9F163600A3A3CA /* Release */,
+				61B0AA2D301349C100589F69 /* Production */,
+				61B0AA29301349B300589F69 /* Development */,
+				61B0AA31301349CC00589F69 /* Staging */,
+				61B0AA3A301350A200589F69 /* Base */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Production;
 		};
 /* End XCConfigurationList section */
 	};

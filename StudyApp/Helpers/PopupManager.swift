@@ -14,23 +14,39 @@ class PopupManager: ObservableObject {
     @Published var title = ""
     @Published var image = ""
     @Published var message = ""
-    var onClose: (() -> Void)? // <-- Add this
+    @Published var primaryButtonTitle = "Close"
+    @Published var secondaryButtonTitle: String?
+    var onPrimary: (() -> Void)?
+    var onSecondary: (() -> Void)?
 
-    func show(title: String, image: String, message: String, onClose: (() -> Void)? = nil) {
+    func show(
+        title: String,
+        image: String,
+        message: String,
+        primaryButtonTitle: String = "Close",
+        secondaryButtonTitle: String? = nil,
+        onPrimary: (() -> Void)? = nil,
+        onSecondary: (() -> Void)? = nil
+    ) {
         withAnimation {
             self.title = title
             self.image = image
             self.message = message
-            self.onClose = onClose
+            self.primaryButtonTitle = primaryButtonTitle
+            self.secondaryButtonTitle = secondaryButtonTitle
+            self.onPrimary = onPrimary
+            self.onSecondary = onSecondary
             self.isVisible = true
         }
-        // Optional: keep auto-dismiss for legacy cases
-        // If you want to auto-dismiss ONLY if onClose is nil, use:
-        if onClose == nil {
-            DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
-                guard let self else { return }
-                withAnimation { self.isVisible = false }
-            }
+    }
+
+    func dismiss() {
+        withAnimation {
+            isVisible = false
         }
+        onPrimary = nil
+        onSecondary = nil
+        secondaryButtonTitle = nil
+        primaryButtonTitle = "Close"
     }
 }

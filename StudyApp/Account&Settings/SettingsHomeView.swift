@@ -12,8 +12,14 @@ struct SettingsHomeView: View {
     @State private var profileUIImage: UIImage?
     @State private var profile = Profile()
     @State private var navigationManager = NavigationManager()
+    @State private var isLoggingOut = false
+    @State private var logoutAlertTitle = ""
+    @State private var logoutAlertMessage = ""
+    @State private var showLogoutAlert = false
     var router: Router<MainRoute>
     @EnvironmentObject var coordinator: AppCoordinator
+    @EnvironmentObject var authSession: AuthSessionManager
+    @EnvironmentObject var popupManager: PopupManager
 
     var body: some View {
 //        NavigationStack(path: $navigationManager.path) {
@@ -61,13 +67,26 @@ struct SettingsHomeView: View {
 
                     Spacer()
                     Button(action: {
-                        // Logout
-                        coordinator.switchToAuth()
+                        popupManager.show(
+                            title: "Log out?",
+                            image: "key",
+                            message: "Do you want to log out from this account?",
+                            primaryButtonTitle: "Yes",
+                            secondaryButtonTitle: "No",
+                            onPrimary: {
+                                popupManager.dismiss()
+                                performLogout()
+                            },
+                            onSecondary: {
+                                popupManager.dismiss()
+                            }
+                        )
                     }) {
-                        Image(systemName: "arrow.right.circle")
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
                             .font(.system(size: 22))
                             .foregroundColor(Color.gray.opacity(0.7))
                     }
+                    .disabled(isLoggingOut)
                 }
                 .padding(.horizontal, 24)
             }
@@ -140,7 +159,24 @@ struct SettingsHomeView: View {
         }
         .navigationBarHidden(true)
         .background(Color.white.ignoresSafeArea())
+        .studyAppLoadingOverlay(
+            isPresented: isLoggingOut,
+            symbol: "rectangle.portrait.and.arrow.right",
+            tint: .brandPrimary,
+            title: "Logging Out",
+            message: "Closing your session and clearing secure account data."
+        )
+        .alert(logoutAlertTitle, isPresented: $showLogoutAlert) {
+            Button("OK") {
+                if logoutAlertTitle == "Logged Out" {
+                    coordinator.switchToAuth()
+                }
+            }
+        } message: {
+            Text(logoutAlertMessage)
+        }
         .onAppear {
+            hydrateProfile()
             loadSavedProfileImage()
         }
 //        }
@@ -174,6 +210,45 @@ struct SettingsHomeView: View {
             profileUIImage = UIImage(data: data)
         } catch {
             print("❌ Failed to load saved profile image:", error)
+        }
+    }
+
+    private func hydrateProfile() {
+        guard let user = authSession.currentUser else { return }
+        profile.name = user.name
+        profile.email = user.email
+        if let phoneNumber = user.phoneNumber, !phoneNumber.isEmpty {
+            profile.phoneNumber = phoneNumber
+        }
+        if let dob = user.dob {
+            profile.dateOfBirth = dob
+        }
+    }
+
+    private func performLogout() {
+        guard !isLoggingOut else { return }
+        isLoggingOut = true
+
+        Task {
+            do {
+                let response = try await authSession.signOut()
+                await MainActor.run {
+                    isLoggingOut = false
+                    logoutAlertTitle = "Logged Out"
+                    logoutAlertMessage = response.message
+                    showLogoutAlert = true
+                }
+            } catch {
+                await MainActor.run {
+                    isLoggingOut = false
+                    if authSession.forcedLogoutMessage != nil {
+                        return
+                    }
+                    logoutAlertTitle = "Logout Failed"
+                    logoutAlertMessage = error.localizedDescription
+                    showLogoutAlert = true
+                }
+            }
         }
     }
 
@@ -240,6 +315,8 @@ struct SettingsHomeView_Previews: PreviewProvider {
             SettingsHomeView(img: .student3, router: Router<MainRoute>())
                 .environment(\.colorScheme, .light)
                 .preferredColorScheme(.light)
+                .environmentObject(AppCoordinator())
+                .environmentObject(AuthSessionManager())
                 .environmentObject(PopupManager())
         }
     }

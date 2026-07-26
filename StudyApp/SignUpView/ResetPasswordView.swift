@@ -1,9 +1,9 @@
-//
-//  ResetPasswordView.swift
-//  StudyApp
-//
-//  Created by Rajesh Mani on 11/11/25.
-//
+    //
+    //  ResetPasswordView.swift
+    //  StudyApp
+    //
+    //  Created by Rajesh Mani on 11/11/25.
+    //
 
 import SwiftUI
 
@@ -13,10 +13,14 @@ struct ResetPasswordView: View {
     @State private var confirmPassword: String = ""
     @State private var confirmPasswordError: String? = nil
     @EnvironmentObject var popupManager: PopupManager
-
+    @State private var authAlertMessage = ""
+    @State private var showAuthAlert = false
+    @State private var isSubmitting = false
+    @EnvironmentObject var authSession: AuthSessionManager
+    
     var router: Router<AuthRoute>
     @EnvironmentObject var coordinator: AppCoordinator
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("Reset Password")
@@ -37,80 +41,111 @@ struct ResetPasswordView: View {
             .padding(.vertical, 10)
             .padding(.horizontal, 10)
             .padding(.bottom, 15)
-
-            // Sign-In Button (Reusable)
+            
+                // Sign-In Button (Reusable)
             AppButton(
-                title: "Create Password",
+                title: "Reset Password",
                 style: .filled,
                 foregroundColor: .white,
                 backgroundColor: .cyan,
                 cornerRadius: 8,
                 font: .system(size: 18, weight: .bold),
                 fullWidth: true,
-                isLoading: false,
-                isDisabled: false
+                isLoading: isSubmitting,
+                isDisabled: isSubmitting
             ) {
-                validateAllFields()
+                resetPassword()
             }
             .padding(.horizontal)
         }
         .padding()
-
+        .studyAppLoadingOverlay(
+            isPresented: isSubmitting,
+            symbol: "key.horizontal",
+            tint: .cyan,
+            title: "Resetting Password",
+            message: "Securing your account with the new password."
+        )
+        .alert("Reset Password Failed", isPresented: $showAuthAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(authAlertMessage)
+        }
+        
         Spacer()
     }
-
-    // Modify the existing validateFields function
+    
+        // Modify the existing validateFields function
     func validateFields(title: Title) {
         switch title {
-        case .password:
-            if password.isEmpty {
-                passwordError = "Password cannot be empty"
-            } else if password.count < 6 {
-                passwordError = "Password must be at least 6 characters"
-            } else if !ValidationHelper.isValidPassword(password) {
-                passwordError = "Password must contain both letters and numbers"
-//            } else if password != confirmPassword {
-//                passwordError = "Passwords not matching"
-            } else {
-                passwordError = nil
-            }
-        case .confirmPassword:
-            if confirmPassword.isEmpty {
-                confirmPasswordError = "Password cannot be empty"
-            } else if password.count < 6 {
-                confirmPasswordError = "Password must be at least 6 characters"
-            } else if !ValidationHelper.isValidPassword(confirmPassword) {
-                confirmPasswordError = "Password must contain both letters and numbers"
-            } else if password != confirmPassword {
-                confirmPasswordError = "Passwords not matching"
-            } else {
-                confirmPasswordError = nil
-            }
-        default:
-            break
+            case .password:
+                if password.isEmpty {
+                    passwordError = "Password cannot be empty"
+                } else if password.count < 6 {
+                    passwordError = "Password must be at least 6 characters"
+                } else if !ValidationHelper.isValidPassword(password) {
+                    passwordError = "Password must contain both letters and numbers"
+                        //            } else if password != confirmPassword {
+                        //                passwordError = "Passwords not matching"
+                } else {
+                    passwordError = nil
+                }
+            case .confirmPassword:
+                if confirmPassword.isEmpty {
+                    confirmPasswordError = "Password cannot be empty"
+                } else if password.count < 6 {
+                    confirmPasswordError = "Password must be at least 6 characters"
+                } else if !ValidationHelper.isValidPassword(confirmPassword) {
+                    confirmPasswordError = "Password must contain both letters and numbers"
+                } else if password != confirmPassword {
+                    confirmPasswordError = "Passwords not matching"
+                } else {
+                    confirmPasswordError = nil
+                }
+            default:
+                break
         }
     }
-
-    // Add this new function
-    func validateAllFields() {
+    
+        // Add this new function
+    func resetPassword() {
         validateFields(title: .password)
         validateFields(title: .confirmPassword)
-
-        // Check if all fields are valid
-        let allFieldsValid =
-            passwordError == nil && confirmPasswordError == nil
-
-        if allFieldsValid {
-            popupManager.show(
-                title: "Account information is correct?",
-                image: "tick_round",
-                message: "Tap accept button to confirm entered details are correct.",
-                onClose: {
-                    // navigate to signIn
-                    router.popToSignIn()
-                    popupManager.isVisible = false // Also dismiss the popup
+        
+            // Check if all fields are valid
+        guard passwordError == nil, confirmPasswordError == nil else { return }
+        guard (authSession.sessionStore.resetToken) != nil else {
+            router.popToSignIn()
+            return
+        }
+        isSubmitting = true
+        
+        Task {
+            do {
+                let response = try await authSession
+                    .ResetPassword(
+                        password: password,
+                        confirmPassword: confirmPassword
+                    )
+                await MainActor.run {
+                    isSubmitting = false
+                    popupManager.show(
+                        title: response.success ? "Reset Password Success" : "Reset Password Failed",
+                        image: response.success ? "tick_round" :"invalid",
+                        message: response.success ? "" : response.message,
+                        onPrimary: {
+                            popupManager.dismiss()
+                            response.success ? router.popToSignIn() : ()
+                        }
+                    )
                 }
-            )
+            } catch {
+                await MainActor.run {
+                    isSubmitting = false
+                    authAlertMessage = error.localizedDescription
+                    showAuthAlert = true
+                }
+            }
         }
     }
 }

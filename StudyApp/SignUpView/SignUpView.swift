@@ -10,6 +10,7 @@ enum Title: String {
     case name = "Name"
     case email = "Email"
     case password = "Password"
+    case otp = "OTP"
     case confirmPassword = "Confirm Password"
     case phoneNumber = "Phone number"
     case terms = "Terms"
@@ -27,7 +28,11 @@ struct SignUpView: View {
     @State private var passwordError: String? = nil
     @State private var phoneNumberError: String? = nil
     @State private var termsError: String? = nil
+    @State private var authAlertMessage = ""
+    @State private var showAuthAlert = false
+    @State private var isSubmitting = false
     @EnvironmentObject var popupManager: PopupManager
+    @EnvironmentObject var authSession: AuthSessionManager
     // Popup visibility
     @State private var showPopup: Bool = false
 
@@ -104,10 +109,10 @@ struct SignUpView: View {
                         cornerRadius: 8,
                         font: .system(size: 18, weight: .bold),
                         fullWidth: true,
-                        isLoading: false,
-                        isDisabled: false
+                        isLoading: isSubmitting,
+                        isDisabled: isSubmitting
                     ) {
-                        validateAllFields()
+                        submitSignUp()
                     }
                     .padding()
 
@@ -165,6 +170,18 @@ struct SignUpView: View {
 //                }
         }
         .navigationBarBackButtonHidden(false)
+        .studyAppLoadingOverlay(
+            isPresented: isSubmitting,
+            symbol: "person.badge.plus",
+            tint: .cyan,
+            title: "Creating Account",
+            message: "Saving your details and setting up your student profile."
+        )
+        .alert("Sign Up Failed", isPresented: $showAuthAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(authAlertMessage)
+        }
 //            .simultaneousGesture(
 //                TapGesture().onEnded { self.hideKeyboard() }
 //            )
@@ -190,18 +207,7 @@ struct SignUpView: View {
             !phoneNumber.isEmpty &&
             agreeToTerms
 
-        if allFieldsValid {
-            popupManager.show(
-                title: "Account information is correct?",
-                image: "SucessTick",
-                message: "Tap accept button to confirm entered details are correct.",
-                onClose: {
-                    // Dynamic navigation or any logic goes here:
-                    router.push(.otp)
-                    popupManager.isVisible = false // Also dismiss the popup
-                }
-            )
-        }
+        guard allFieldsValid else { return }
     }
 
     // Modify the existing validateFields function
@@ -229,6 +235,52 @@ struct SignUpView: View {
             break
         }
         // Remove the automatic popup showing logic from here
+    }
+
+    private func submitSignUp() {
+        validateAllFields()
+        guard
+            nameError == nil,
+            emailError == nil,
+            passwordError == nil,
+            phoneNumberError == nil,
+            termsError == nil,
+            !isSubmitting
+        else {
+            return
+        }
+
+        isSubmitting = true
+
+        Task {
+            do {
+                let response = try await authSession.signUp(
+                    name: name.trimmingCharacters(in: .whitespacesAndNewlines),
+                    email: email.trimmingCharacters(in: .whitespacesAndNewlines),
+                    password: password,
+                    phoneNumber: phoneNumber
+                )
+
+                await MainActor.run {
+                    isSubmitting = false
+                    popupManager.show(
+                        title: "Account created",
+                        image: "tickMark",
+                        message: "Your account is ready. Sign in with the credentials you just created.",
+                        onPrimary: {
+                            popupManager.dismiss()
+                            router.push(.otp)
+                        }
+                    )
+                }
+            } catch {
+                await MainActor.run {
+                    isSubmitting = false
+                    authAlertMessage = error.localizedDescription
+                    showAuthAlert = true
+                }
+            }
+        }
     }
 }
 

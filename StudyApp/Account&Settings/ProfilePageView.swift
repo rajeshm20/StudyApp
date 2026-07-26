@@ -205,10 +205,9 @@ struct ProfilePageView: View {
                                     title: "Profile updated",
                                     image: "tick_round",
                                     message: "Tap accept button to confirm entered details are correct.",
-                                    onClose: {
-                                        // Dynamic navigation or any logic goes here:
+                                    onPrimary: {
+                                        popupManager.dismiss()
                                         router.pop()
-                                        popupManager.isVisible = false // Also dismiss the popup
                                     }
                                 )
                             }

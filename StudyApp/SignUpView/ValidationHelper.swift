@@ -21,6 +21,10 @@ enum ValidationHelper {
         let hasNumbers = password.contains { $0.isNumber }
         return hasLetters && hasNumbers
     }
+    static func isValidOTP(_ otp: String) -> Bool {
+        let predicate = NSPredicate(format: "SELF MATCHES %@", #"^\d{6}$"#)
+        return predicate.evaluate(with: otp)
+    }
 
     struct FieldErrors {
         var name: String?

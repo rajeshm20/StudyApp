@@ -15,35 +15,42 @@ struct ChatListView: View {
 
     var body: some View {
         NavigationStack {
-            List(presenter.chats) { chat in
-                HStack(spacing: 15) {
-                    AsyncImage(url: URL(string: chat.avatarURL ?? "")) { img in
-                        img.resizable()
-                    } placeholder: {
-                        Color.gray.opacity(0.3)
-                    }
-                    .frame(width: 55, height: 55)
-                    .clipShape(Circle())
+            Group {
+                if presenter.isLoading && presenter.chats.isEmpty {
+                    Color.clear
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    List(presenter.chats) { chat in
+                        HStack(spacing: 15) {
+                            AsyncImage(url: URL(string: chat.avatarURL ?? "")) { img in
+                                img.resizable()
+                            } placeholder: {
+                                Color.gray.opacity(0.3)
+                            }
+                            .frame(width: 55, height: 55)
+                            .clipShape(Circle())
 
-                    VStack(alignment: .leading) {
-                        Text(chat.name)
-                            .font(.body)
-                            .bold()
-                        Text(chat.lastMessage)
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                            .lineLimit(1)
-                    }
+                            VStack(alignment: .leading) {
+                                Text(chat.name)
+                                    .font(.body)
+                                    .bold()
+                                Text(chat.lastMessage)
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                                    .lineLimit(1)
+                            }
 
-                    Spacer()
-                    Text(Self.dateFormatter.string(from: chat.timestamp))
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
-                .padding(.vertical, 6)
-                .contentShape(Rectangle()) // Make the whole row tappable
-                .onTapGesture {
-                    presenter.didTapChat(chat)
+                            Spacer()
+                            Text(Self.dateFormatter.string(from: chat.timestamp))
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                        }
+                        .padding(.vertical, 6)
+                        .contentShape(Rectangle()) // Make the whole row tappable
+                        .onTapGesture {
+                            presenter.didTapChat(chat)
+                        }
+                    }
                 }
             }
             .navigationTitle("Chats")
@@ -54,6 +61,13 @@ struct ChatListView: View {
                 }
             }
         }
+        .studyAppLoadingOverlay(
+            isPresented: presenter.isLoading && presenter.chats.isEmpty,
+            symbol: "message.badge.waveform",
+            tint: .brandPrimary,
+            title: "Loading Chats",
+            message: "Fetching the latest conversations and unread activity."
+        )
         .onAppear {
             presenter.viewDidLoad()
         }

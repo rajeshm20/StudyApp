@@ -171,6 +171,104 @@ extension View {
     }
 }
 
+struct StudyAppLoadingOverlay: View {
+    let symbol: String
+    let tint: Color
+    let title: String
+    let message: String
+
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.18)
+                .ignoresSafeArea()
+
+            VStack(spacing: 14) {
+                ZStack {
+                    Circle()
+                        .fill(tint.opacity(0.14))
+                        .frame(width: 78, height: 78)
+
+                    Circle()
+                        .stroke(tint.opacity(0.22), lineWidth: 1)
+                        .frame(width: 92, height: 92)
+
+                    Image(systemName: symbol)
+                        .font(.system(size: 30, weight: .semibold))
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundStyle(tint)
+                        .symbolEffect(.pulse.byLayer, options: .repeating)
+                }
+
+                VStack(spacing: 6) {
+                    Text(title)
+                        .font(.headline.weight(.semibold))
+                        .foregroundStyle(.primary)
+
+                    Text(message)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                }
+
+                ProgressView()
+                    .tint(tint)
+            }
+            .padding(.horizontal, 24)
+            .padding(.vertical, 22)
+            .frame(maxWidth: 300)
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 24, style: .continuous)
+                    .stroke(tint.opacity(0.14), lineWidth: 1)
+            )
+            .shadow(color: .black.opacity(0.1), radius: 14, x: 0, y: 8)
+            .padding(.horizontal, 24)
+        }
+    }
+}
+
+private struct StudyAppLoadingOverlayModifier: ViewModifier {
+    let isPresented: Bool
+    let symbol: String
+    let tint: Color
+    let title: String
+    let message: String
+
+    func body(content: Content) -> some View {
+        content
+            .overlay {
+                if isPresented {
+                    StudyAppLoadingOverlay(
+                        symbol: symbol,
+                        tint: tint,
+                        title: title,
+                        message: message
+                    )
+                }
+            }
+    }
+}
+
+extension View {
+    func studyAppLoadingOverlay(
+        isPresented: Bool,
+        symbol: String = "arrow.triangle.2.circlepath",
+        tint: Color = .brandPrimary,
+        title: String,
+        message: String
+    ) -> some View {
+        modifier(
+            StudyAppLoadingOverlayModifier(
+                isPresented: isPresented,
+                symbol: symbol,
+                tint: tint,
+                title: title,
+                message: message
+            )
+        )
+    }
+}
+
 // MARK: Fonts Extension
 
 // Centralise font definitions with a Font extension:

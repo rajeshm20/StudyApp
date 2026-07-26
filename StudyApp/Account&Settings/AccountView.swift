@@ -89,10 +89,9 @@ struct AccountView: View {
                                     title: "Password Updated",
                                     image: "key",
                                     message: alertMessage,
-                                    onClose: {
-                                        // Dynamic navigation or any logic goes here:
+                                    onPrimary: {
+                                        popupManager.dismiss()
                                         router.pop()
-                                        popupManager.isVisible = false // Also dismiss the popup
                                     }
                                 )
 

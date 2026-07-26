@@ -4,6 +4,8 @@ import SwiftUI
 @MainActor
 final class ChatListPresenter: ObservableObject, ChatListPresenterProtocol {
     @Published var chats: [Chat] = []
+    @Published var isLoading = false
+    private let logger: Logging
 
     // Using concrete type here to allow View to access observed properties if needed,
     // or we can keep it as protocol if we handle observation differently.
@@ -17,24 +19,33 @@ final class ChatListPresenter: ObservableObject, ChatListPresenterProtocol {
     private let interactor: ChatListInteractorProtocol
 
     init(interactor: ChatListInteractorProtocol,
-         router: any ChatListRouterProtocol)
+         router: any ChatListRouterProtocol,
+         logger: Logging = StudyAppLogger.shared)
     {
         self.interactor = interactor
         self.router = router
+        self.logger = logger
     }
 
     func viewDidLoad() {
+        guard !isLoading else { return }
+        isLoading = true
+        logger.info("Chat list loading started", category: .viewModel, metadata: ["screen": "ChatListView"])
         Task {
             do {
                 let result = try await interactor.fetchChats()
                 self.chats = result
+                self.isLoading = false
+                logger.info("Chat list loading succeeded", category: .viewModel, metadata: ["count": String(result.count)])
             } catch {
-                print("Error fetching chats: \(error)")
+                self.isLoading = false
+                logger.error("Chat list loading failed", category: .viewModel, metadata: ["error": error.localizedDescription])
             }
         }
     }
 
     func didTapChat(_ chat: Chat) {
+        logger.info("Chat selected", category: .ui, metadata: ["chatID": String(chat.id)])
         router.openChatDetail(chat)
     }
 }

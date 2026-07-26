@@ -1,0 +1,20 @@
+//
+//  Development.xcconfig
+//  StudyApp
+//
+//  Created by Rajesh Mani on 24/07/26.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+OTHER_SWIFT_FLAGS = $(inherited) \
+-Xfrontend -strict-concurrency=complete \
+-Xfrontend -warn-concurrency \
+-Xfrontend -enable-actor-data-race-checks
+
+
+    // Config-Debug.xcconfig
+API_HOST = openedschool.local:8081
+API_SCHEME = http
+API_KEY = abc123devkey
+ENABLE_LOGGING = YES

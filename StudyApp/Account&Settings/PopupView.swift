@@ -11,8 +11,10 @@ struct PopupView: View {
     var title: String
     var image: String
     var message: String
-    var buttonTitle: String = "Close"
-    var onClose: () -> Void
+    var primaryButtonTitle: String = "Close"
+    var secondaryButtonTitle: String? = nil
+    var onPrimary: () -> Void
+    var onSecondary: (() -> Void)? = nil
 
     var body: some View {
         ZStack {
@@ -45,11 +47,42 @@ struct PopupView: View {
                     .foregroundColor(.gray)
                     .padding(.horizontal, 24)
 
-                // Close button
-                BorderedButton(action: onClose) {
-                    HStack {
-                        Text(buttonTitle)
-                            .foregroundStyle(Color.brandPrimary)
+                if let secondaryButtonTitle, let onSecondary {
+                    HStack(spacing: 12) {
+                        AppButton(
+                            title: secondaryButtonTitle,
+                            style: .outline,
+                            foregroundColor: .cyan,
+                            backgroundColor: .cyan,
+                            cornerRadius: 12,
+                            font: .system(size: 16, weight: .semibold),
+                            fullWidth: true
+                        ) {
+                            onSecondary()
+                        }
+                        AppButton(
+                            title: primaryButtonTitle,
+                            style: .filled,
+                            foregroundColor: .white,
+                            backgroundColor: .cyan,
+                            cornerRadius: 12,
+                            font: .system(size: 16, weight: .semibold),
+                            fullWidth: true
+                        ) {
+                            onPrimary()
+                        }
+                    }
+                } else {
+                    AppButton(
+                        title: primaryButtonTitle,
+                        style: .filled,
+                        foregroundColor: .white,
+                        backgroundColor: .cyan,
+                        cornerRadius: 12,
+                        font: .system(size: 16, weight: .semibold),
+                        fullWidth: true
+                    ) {
+                        onPrimary()
                     }
                 }
             }
@@ -63,5 +96,5 @@ struct PopupView: View {
 }
 
 #Preview {
-    PopupView(title: "Update Success", image: "key", message: "Profile Updated\nSuccessfully!", buttonTitle: "Close", onClose: {})
+    PopupView(title: "Update Success", image: "key", message: "Profile Updated\nSuccessfully!", primaryButtonTitle: "Close", onPrimary: {})
 }
