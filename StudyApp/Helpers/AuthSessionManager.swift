@@ -1,5 +1,5 @@
 //
-//  APIResponse.swift
+//  AuthSessionManager.swift
 //  StudyApp
 //
 //  Created by Rajesh Mani on 31/08/25.
@@ -7,26 +7,91 @@
 
 import Foundation
 
+// MARK: - UserRole
+// Mirrors the backend UserRole enum (UserRole.swift).
+// The raw string value must exactly match what the server persists in the database.
+enum UserRole: String, Codable, CaseIterable {
+    case admin      = "admin"
+    case principal  = "principal"
+    case teacher    = "teacher"
+    case student    = "student"
 
+    /// Human-readable display name.
+    var displayName: String {
+        switch self {
+        case .admin:     return "Administrator"
+        case .principal: return "Principal"
+        case .teacher:   return "Teacher"
+        case .student:   return "Student"
+        }
+    }
 
+    /// Whether this role carries privileged access (not a regular student).
+    var isPrivileged: Bool {
+        switch self {
+        case .admin, .principal, .teacher: return true
+        case .student: return false
+        }
+    }
+}
+
+// MARK: - AccountStatus
+// Mirrors the backend AccountStatus enum (AccountStatus.swift).
+enum AccountStatus: String, Codable {
+    /// Account is active — login permitted.
+    case active     = "active"
+    /// Account exists but has been deactivated.
+    case inactive   = "inactive"
+    /// Account has been administratively suspended.
+    case suspended  = "suspended"
+    /// Registration complete but pending admin approval.
+    case pending    = "pending"
+
+    var isLoginPermitted: Bool { self == .active }
+}
+
+// MARK: - AuthStudent
+// Safe public representation of a user account.
+// Mirrors Student.Public returned by the backend — never contains passwordHash.
 struct AuthStudent: Codable, Equatable {
     let id: UUID?
+    // Split name fields (new canonical fields)
+    let firstName: String?
+    let lastName: String?
+    // Legacy combined name — kept for backward compat with existing Keychain sessions
     let name: String
     let email: String
+    let role: UserRole
+    let status: AccountStatus
     let dob: Date?
+    // Legacy combined phone — kept for backward compat
     let phoneNumber: String?
+    // New canonical phone fields
+    let countryCode: String?
+    let contactNumber: String?
+
+    /// Convenience: returns firstName + lastName if available, falls back to `name`.
+    var displayName: String {
+        let parts = [firstName, lastName].compactMap { $0 }.joined(separator: " ")
+        return parts.isEmpty ? name : parts
+    }
 }
 
 struct LogoutResponse: Decodable, Equatable {
     let message: String
 }
 
-private struct SignUpRequest: Encodable {
-    let name: String
+// MARK: - Request DTOs (private — not exposed outside this file)
+
+/// New canonical signup request — matches POST /auth/signup/student
+private struct StudentSignupRequest: Encodable {
+    let firstName: String
+    let lastName: String
     let email: String
     let password: String
-    let dob: Date?
-    let phoneNumber: String?
+    let confirmPassword: String
+    let countryCode: String
+    let contactNumber: String
 }
 
 private struct LoginRequest: Encodable {
@@ -49,6 +114,8 @@ private struct ResetPasswordRequest: Encodable {
     let newPassword: String
     let confirmPassword: String
 }
+
+// MARK: - Response DTOs
 
 struct TokenPayload: Decodable {
     let token: String
@@ -82,31 +149,35 @@ struct ResetPasswordResponse: Decodable {
     let message: String
 }
 
+// MARK: - HTTP Helpers
+
 enum HTTPMethod: String {
-    case get = "GET"
-    case post = "POST"
-    case put = "PUT"
+    case get    = "GET"
+    case post   = "POST"
+    case put    = "PUT"
     case delete = "DELETE"
 }
 
 private enum EndPoint: String {
-    case login = "/auth/login"
-    case signup = "/auth/signup"
-    case logout = "/auth/logout"
+    /// New canonical student signup endpoint
+    case signupStudent  = "/auth/signup/student"
+    /// Legacy signup — kept so other callers are not broken
+    case signup         = "/auth/signup"
+    case login          = "/auth/login"
+    case logout         = "/auth/logout"
     case forgotPassword = "/auth/forgot-password"
-    case verifyOTP = "/auth/verify-reset-code"
-    case resetPassword = "/auth/reset-password"
+    case verifyOTP      = "/auth/verify-reset-code"
+    case resetPassword  = "/auth/reset-password"
 
     var path: String { self.rawValue }
 
     func url(baseURL: String) -> URL {
-        URL(
-            string: baseURL + path) ??
-        URL(
-            string: "http://localhost:8080/" + path
-        )!
+        URL(string: baseURL + path) ??
+        URL(string: "http://localhost:8080/" + path)!
     }
 }
+
+// MARK: - AuthSessionManager
 
 @MainActor
 final class AuthSessionManager: ObservableObject {
@@ -141,16 +212,38 @@ final class AuthSessionManager: ObservableObject {
         token?.isEmpty == false
     }
 
-    func signUp(name: String, email: String, password: String, phoneNumber: String?) async throws -> AuthStudent {
-        let request = SignUpRequest(
-            name: name,
+    // MARK: - Auth Actions
+
+    /// Signs up a new student via POST /auth/signup/student.
+    ///
+    /// - Parameters:
+    ///   - firstName: Given name (required, max 50 chars).
+    ///   - lastName: Family name (required, max 50 chars).
+    ///   - email: Valid email address.
+    ///   - password: Min 8 chars, must contain at least one letter and one number.
+    ///   - confirmPassword: Must exactly match `password`.
+    ///   - countryCode: Dialing code starting with '+', e.g. "+91".
+    ///   - contactNumber: Subscriber digits only (no country code), 7–15 digits.
+    func signUp(
+        firstName: String,
+        lastName: String,
+        email: String,
+        password: String,
+        confirmPassword: String,
+        countryCode: String,
+        contactNumber: String
+    ) async throws -> AuthStudent {
+        let request = StudentSignupRequest(
+            firstName: firstName,
+            lastName: lastName,
             email: email,
             password: password,
-            dob: nil,
-            phoneNumber: sanitized(phoneNumber)
+            confirmPassword: confirmPassword,
+            countryCode: countryCode,
+            contactNumber: contactNumber
         )
         return try await performRequest(
-            endpoint: .signup,
+            endpoint: .signupStudent,
             method: .post,
             body: request,
             responseType: AuthStudent.self
@@ -164,9 +257,6 @@ final class AuthSessionManager: ObservableObject {
             body: LoginRequest(email: email, password: password),
             responseType: LoginResponsePayload.self
         )
-//        guard let statusCode = response.status, statusCode == 200 else {
-//            throw AuthError.invalidCredentials
-//        }
         sessionStore.saveSession(
             student: response.user,
             token: response.token.token
@@ -181,7 +271,8 @@ final class AuthSessionManager: ObservableObject {
             "Authentication session restored",
             category: .authentication,
             metadata: [
-                "userID": response.user.id?.uuidString ?? "unknown"
+                "userID": response.user.id?.uuidString ?? "unknown",
+                "role": response.user.role.rawValue
             ]
         )
         return response
@@ -233,8 +324,8 @@ final class AuthSessionManager: ObservableObject {
             newPassword: password,
             confirmPassword: confirmPassword
         )
-        
-        let response =  try await performRequest(
+
+        let response = try await performRequest(
             endpoint: .resetPassword,
             method: .post,
             body: request,
@@ -269,6 +360,8 @@ final class AuthSessionManager: ObservableObject {
         return message
     }
 
+    // MARK: - Session Management
+
     private func clearSession() {
         currentUser = nil
         token = nil
@@ -284,6 +377,8 @@ final class AuthSessionManager: ObservableObject {
             sessionID: sessionStore.token
         )
     }
+
+    // MARK: - Networking
 
     private func sanitized(_ value: String?) -> String? {
         guard let trimmed = value?.trimmingCharacters(in: .whitespacesAndNewlines), !trimmed.isEmpty else {
@@ -467,6 +562,8 @@ final class AuthSessionManager: ObservableObject {
         return String(decoding: data, as: UTF8.self)
     }
 }
+
+// MARK: - AuthServiceError
 
 enum AuthServiceError: LocalizedError {
     case invalidBaseURL

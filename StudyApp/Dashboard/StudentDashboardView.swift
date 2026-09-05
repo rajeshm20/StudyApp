@@ -146,8 +146,7 @@ struct StudentDashboardView: View {
     @StateObject private var dataService = StudentDataService()
     @State private var selectedTab: TabSelection = .dashboard
     @EnvironmentObject var popupManager: PopupManager
-    // Shared NavigationManager for Option A (single stack at parent)
-    @State private var navigationManager = NavigationManager()
+    @EnvironmentObject private var localizationService: LocalizationService
     var router: Router<MainRoute>
     @EnvironmentObject var coordinator: AppCoordinator
 
@@ -170,17 +169,13 @@ struct StudentDashboardView: View {
                     case .assignments:
                         AssignmentsView()
                     case .profile:
-                        // SettingsHomeView will use the same NavigationManager via environment
                         SettingsHomeView(router: router)
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                // Bottom Tab Bar
                 BottomTabBar(selectedTab: $selectedTab)
             }
-//            .navigationTitle("Dashboard")
-//            .navigationBarTitleDisplayMode(.inline)
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
         }
@@ -190,11 +185,13 @@ struct StudentDashboardView: View {
 // MARK: - Loading View
 
 struct LoadingView: View {
+    @EnvironmentObject private var localizationService: LocalizationService
+
     var body: some View {
         VStack {
             ProgressView()
                 .scaleEffect(1.2)
-            Text("Loading...")
+            Text(localizationService.text(.dashboardLoading))
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .padding(.top, 10)
@@ -207,12 +204,14 @@ struct LoadingView: View {
 // MARK: - Error View
 
 struct ErrorView: View {
+    @EnvironmentObject private var localizationService: LocalizationService
+
     var body: some View {
         VStack {
             Image(systemName: "exclamationmark.triangle")
                 .font(.largeTitle)
                 .foregroundColor(.orange)
-            Text("Failed to load data")
+            Text(localizationService.text(.dashboardFailedToLoad))
                 .font(.headline)
                 .padding(.top, 10)
         }
@@ -255,13 +254,14 @@ struct DashboardContentView: View {
 // MARK: - Header
 
 struct DashboardHeader: View {
+    @EnvironmentObject private var localizationService: LocalizationService
     let name: String
     let greeting: String
 
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Hi, \(name)")
+                Text(localizationService.text(.dashboardGreeting, name))
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)
@@ -288,6 +288,7 @@ struct DashboardHeader: View {
 // MARK: - Stats Cards
 
 struct StatsCardsView: View {
+    @EnvironmentObject private var localizationService: LocalizationService
     let stats: StudentStats
 
     var body: some View {
@@ -295,13 +296,13 @@ struct StatsCardsView: View {
             HStack(spacing: 15) {
                 StatsCard(
                     value: "\(stats.presence)%",
-                    title: "Presence",
+                    title: localizationService.text(.dashboardPresence),
                     valueColor: .orange
                 )
 
                 StatsCard(
                     value: "\(stats.completeness)%",
-                    title: "Completeness",
+                    title: localizationService.text(.dashboardCompleteness),
                     valueColor: .blue
                 )
             }
@@ -309,13 +310,13 @@ struct StatsCardsView: View {
             HStack(spacing: 15) {
                 StatsCard(
                     value: "\(stats.assignments)",
-                    title: "Assignments",
+                    title: localizationService.text(.dashboardAssignments),
                     valueColor: .cyan
                 )
 
                 StatsCard(
                     value: "\(stats.totalSubjects)",
-                    title: "Total Subject",
+                    title: localizationService.text(.dashboardTotalSubjects),
                     valueColor: .orange
                 )
             }
@@ -345,12 +346,13 @@ struct NavigationIconsView: View {
 // MARK: - Schedule
 
 struct ScheduleView: View {
+    @EnvironmentObject private var localizationService: LocalizationService
     let classes: [ScheduleClass]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             HStack {
-                Text("Schedule")
+                Text(localizationService.text(.dashboardSchedule))
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)
@@ -640,25 +642,22 @@ struct StatsCard: View {
 }
 
 struct NavigationIconView: View {
+    @EnvironmentObject private var localizationService: LocalizationService
     let item: NavigationItem
     var router: Router<MainRoute>
 
     var body: some View {
         VStack(spacing: 8) {
             Button(action: {
-                switch item.title {
-                case "Course":
+                switch localizedTitle {
+                case localizationService.text(.dashboardCourse):
                     router.push(.courses)
-                    print("course tapped")
-                case "Subjects":
+                case localizationService.text(.dashboardSubjects):
                     router.push(.courseDetails)
-                    print("Subjects tapped")
-                case "Class":
+                case localizationService.text(.dashboardClass):
                     router.push(.myClasses)
-                    print("Class tapped")
-                case "Presence":
+                case localizationService.text(.dashboardPresence):
                     router.push(.myPresence)
-                    print("Presence tapped")
                 default:
                     break
                 }
@@ -671,9 +670,24 @@ struct NavigationIconView: View {
                     .clipShape(Circle())
             }
 
-            Text(item.title)
+            Text(localizedTitle)
                 .font(.caption)
                 .foregroundColor(.primary)
+        }
+    }
+
+    private var localizedTitle: String {
+        switch item.title {
+        case "Course":
+            localizationService.text(.dashboardCourse)
+        case "Subjects":
+            localizationService.text(.dashboardSubjects)
+        case "Class":
+            localizationService.text(.dashboardClass)
+        case "Presence":
+            localizationService.text(.dashboardPresence)
+        default:
+            item.title
         }
     }
 

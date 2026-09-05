@@ -170,7 +170,7 @@ private actor LoggerContextStore {
 }
 
 private struct LoggerMetadataFactory {
-    static func build(
+    @MainActor static func build(
         category: LogCategory,
         extra: [String: String],
         file: String,
@@ -368,7 +368,7 @@ private actor LogPipeline {
     func process(level: LogLevel, category: LogCategory, message: String, metadata: [String: String], file: String, function: String, line: Int) async {
         guard level >= configuration.minimumLevel else { return }
         let context = await contextStore.snapshot()
-        let event = LogEvent(
+        let event = await LogEvent(
             level: level,
             category: category,
             message: PrivacyRedactor.redact(message),

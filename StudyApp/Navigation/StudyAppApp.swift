@@ -5,8 +5,6 @@
 //  Created by Rajesh Mani on 21/09/24.
 //
 
-import Observation
-import SwiftData
 import SwiftUI
 
 @main
@@ -14,24 +12,12 @@ struct StudyAppApp: App {
     @StateObject var popupManager: PopupManager = .init()
     @StateObject private var coordinator = AppCoordinator()
     @StateObject private var authSession = AuthSessionManager()
+    @StateObject private var localizationService = LocalizationService()
     private let logger: Logging = StudyAppLogger.shared
     @Environment(\.scenePhase) private var scenePhase
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State private var showSessionExpiredAlert = false
     @State private var sessionExpiredMessage = ""
-
-//    var sharedModelContainer: ModelContainer = {
-//        let schema = Schema([
-//            Item.self,
-//        ])
-//        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-//
-//        do {
-//            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-//        } catch {
-//            fatalError("Could not create ModelContainer: \(error)")
-//        }
-//    }()
 
     var body: some Scene {
         WindowGroup {
@@ -39,6 +25,8 @@ struct StudyAppApp: App {
                 .environmentObject(coordinator)
                 .environmentObject(authSession)
                 .environmentObject(popupManager)
+                .environmentObject(localizationService)
+                .environment(\.locale, localizationService.currentLanguage.locale)
                 .environment(\.logger, logger)
                 .onAppear {
                     logger.notice("StudyApp launched", category: .lifecycle)
@@ -92,7 +80,6 @@ struct StudyAppApp: App {
                     Text(sessionExpiredMessage)
                 }
         }
-//        .modelContainer(sharedModelContainer)
         .onChange(of: scenePhase) { oldPhase, newPhase in
             switch newPhase {
             case .active:
@@ -106,9 +93,4 @@ struct StudyAppApp: App {
             }
         }
     }
-}
-
-
-struct Item {
-    var text: String
 }

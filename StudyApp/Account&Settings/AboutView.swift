@@ -8,33 +8,35 @@
 import SwiftUI
 
 struct AboutView: View {
+    @EnvironmentObject private var localizationService: LocalizationService
     var router: Router<MainRoute>
+
     var body: some View {
         VStack {
             List {
                 Button(action: {
                     router.push(.aboutUs)
                 }) {
-                    Text("About Us")
+                    Text(localizationService.text(.aboutUs))
                 }
                 Button(action: {}) {
-                    Text("Help")
+                    Text(localizationService.text(.help))
                 }
                 Button(action: {
                     router.push(.termsConditions)
                 }) {
-                    Text("Terms and Condition")
+                    Text(localizationService.text(.termsAndConditions))
                 }
                 Button(action: {
                     router.push(.datapolicy)
                 }) {
-                    Text("Data Policy")
+                    Text(localizationService.text(.dataPolicy))
                 }
             }
             .font(.headline)
             .foregroundStyle(.black)
         }
-        .navigationTitle("About Us")
+        .navigationTitle(localizationService.text(.aboutTitle))
         .navigationBarTitleDisplayMode(.inline)
     }
 }

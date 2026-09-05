@@ -7,6 +7,11 @@
 import Foundation
 import UIKit
 
+struct Item {
+    let id: Int
+    let title: String
+}
+
 // ✅ Use enums for state machines
 enum ViewState {
     case loading

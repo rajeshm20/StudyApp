@@ -1,76 +1,129 @@
 //  StudyApp
 //
 //  Created by Rajesh Mani on 29/09/24.
-//
+//  Updated to use POST /auth/signup/student (canonical new endpoint).
 
-import Observation
 import SwiftUI
 
 enum Title: String {
     case name = "Name"
+    case firstName = "First Name"
+    case lastName = "Last Name"
     case email = "Email"
     case password = "Password"
-    case otp = "OTP"
     case confirmPassword = "Confirm Password"
+    case otp = "OTP"
+    case countryCode = "Country Code"
+    case contactNumber = "Contact Number"
     case phoneNumber = "Phone number"
     case terms = "Terms"
 }
 
 struct SignUpView: View {
-    @State private var name: String = ""
+    // MARK: - Form state (new canonical fields)
+    @State private var firstName: String = ""
+    @State private var lastName: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
-    @State private var phoneNumber: String = ""
+    @State private var confirmPassword: String = ""
+    @State private var countryCode: String = "+91"
+    @State private var contactNumber: String = ""
     @State private var agreeToTerms: Bool = false
-    // Error states for each field
-    @State private var nameError: String? = nil
+
+    // MARK: - Per-field error states
+    @State private var firstNameError: String? = nil
+    @State private var lastNameError: String? = nil
     @State private var emailError: String? = nil
     @State private var passwordError: String? = nil
-    @State private var phoneNumberError: String? = nil
+    @State private var confirmPasswordError: String? = nil
+    @State private var countryCodeError: String? = nil
+    @State private var contactNumberError: String? = nil
     @State private var termsError: String? = nil
+
     @State private var authAlertMessage = ""
     @State private var showAuthAlert = false
     @State private var isSubmitting = false
+
     @EnvironmentObject var popupManager: PopupManager
     @EnvironmentObject var authSession: AuthSessionManager
-    // Popup visibility
-    @State private var showPopup: Bool = false
-
-    // Add this new state variable for navigation
-//    @State private var navigateToOTP: Bool = false
+    @EnvironmentObject private var localizationService: LocalizationService
     var router: Router<AuthRoute>
 
     var body: some View {
         ZStack {
             ScrollView {
                 VStack {
-                    // Form Fields with Validation Errors
-                    FormField(title: "Name",
-                              placeholder: "Your name",
-                              text: $name,
-                              error: $nameError,
-                              completion: { validateFields(title: .name) })
-                    FormField(title: "Email",
-                              placeholder: "study@email.com",
-                              text: $email,
-                              keyboardType: .emailAddress,
-                              error: $emailError,
-                              completion: { validateFields(title: .email) })
-                    FormField(title: "Password",
-                              placeholder: "Your password",
-                              text: $password,
-                              isSecure: true,
-                              error: $passwordError,
-                              completion: { validateFields(title: .password) })
-                    FormField(title: "Phone Number",
-                              placeholder: "0334 xxxx xxxx",
-                              text: $phoneNumber,
-                              keyboardType: .numberPad,
-                              error: $phoneNumberError,
-                              isPhoneNumber: true,
-                              completion: { validateFields(title: .phoneNumber) })
+                    // First Name
+                    FormField(
+                        title: localizationService.text(.authFirstName),
+                        placeholder: localizationService.text(.authFirstNamePlaceholder),
+                        text: $firstName,
+                        error: $firstNameError,
+                        completion: { validateFields(title: .firstName) }
+                    )
 
-                    // Terms and Conditions Checkbox
+                    // Last Name
+                    FormField(
+                        title: localizationService.text(.authLastName),
+                        placeholder: localizationService.text(.authLastNamePlaceholder),
+                        text: $lastName,
+                        error: $lastNameError,
+                        completion: { validateFields(title: .lastName) }
+                    )
+
+                    // Email
+                    FormField(
+                        title: localizationService.text(.authEmail),
+                        placeholder: "study@email.com",
+                        text: $email,
+                        keyboardType: .emailAddress,
+                        error: $emailError,
+                        completion: { validateFields(title: .email) }
+                    )
+
+                    // Password
+                    FormField(
+                        title: localizationService.text(.authPassword),
+                        placeholder: localizationService.text(.authPasswordPlaceholder),
+                        text: $password,
+                        isSecure: true,
+                        error: $passwordError,
+                        completion: { validateFields(title: .password) }
+                    )
+
+                    // Confirm Password
+                    FormField(
+                        title: localizationService.text(.authConfirmPassword),
+                        placeholder: localizationService.text(.authConfirmPasswordPlaceholder),
+                        text: $confirmPassword,
+                        isSecure: true,
+                        error: $confirmPasswordError,
+                        completion: { validateFields(title: .confirmPassword) }
+                    )
+
+                    // Country Code + Phone Number (side by side)
+                    HStack(alignment: .top, spacing: 8) {
+                        FormField(
+                            title: localizationService.text(.authCountryCode),
+                            placeholder: localizationService.text(.authCountryCodePlaceholder),
+                            text: $countryCode,
+                            keyboardType: .phonePad,
+                            error: $countryCodeError,
+                            completion: { validateFields(title: .countryCode) }
+                        )
+                        .frame(maxWidth: 110)
+
+                        FormField(
+                            title: localizationService.text(.authContactNumber),
+                            placeholder: localizationService.text(.authContactNumberPlaceholder),
+                            text: $contactNumber,
+                            keyboardType: .numberPad,
+                            error: $contactNumberError,
+                            completion: { validateFields(title: .contactNumber) }
+                        )
+                    }
+
+                    // Terms checkbox
                     HStack(alignment: .top) {
                         Toggle(isOn: $agreeToTerms) {
                             Text("")
@@ -78,12 +131,12 @@ struct SignUpView: View {
                         .toggleStyle(CheckboxToggleStyle())
 
                         VStack(alignment: .leading, spacing: 5) {
-                            Text("I agree with the")
+                            Text(localizationService.text(.authAgreeTermsPrefix))
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
-                                + Text(" terms and conditions")
+                                + Text(localizationService.text(.authAgreeTermsLink))
                                 .foregroundColor(.blue)
-                                + Text(" and also the protection of my personal data on this application")
+                                + Text(localizationService.text(.authAgreeTermsSuffix))
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
 
@@ -100,9 +153,8 @@ struct SignUpView: View {
 
                     Spacer()
 
-                    // Sign-Up Button (Reusable)
                     AppButton(
-                        title: "Sign Up",
+                        title: localizationService.text(.authSignUp),
                         style: .filled,
                         foregroundColor: .white,
                         backgroundColor: .cyan,
@@ -118,158 +170,132 @@ struct SignUpView: View {
 
                     Spacer()
                 }
-                .navigationTitle("Sign Up")
+                .navigationTitle(localizationService.text(.authSignUp))
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarBackButtonHidden(true)
                 .padding(.horizontal)
             }
             .scrollDismissesKeyboard(.interactively)
-            // Popup overlay
-//                if showPopup {
-//                    ZStack {
-//                        Color.black.opacity(0.4)
-//                            .edgesIgnoringSafeArea(.all)
-//                            .onTapGesture {
-//                                showPopup = false
-//                            }
-//
-//                        VStack(spacing: 20) {
-//                            Image(systemName: "checkmark.circle.fill") // Replace with your custom icon
-//                                .font(.system(size: 50))
-//                                .foregroundColor(.cyan)
-//
-//                            Text("Account information is correct?")
-//                                .font(.headline)
-//                                .fontWeight(.semibold)
-//                                .multilineTextAlignment(.center)
-//
-//                            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fames velit.")
-//                                .font(.subheadline)
-//                                .multilineTextAlignment(.center)
-//                                .foregroundColor(.gray)
-//
-//                            Button(action: {
-//                                showPopup = false
-//                                router.push(.otp)
-//                            }) {
-//                                Text("Accept")
-//                                    .foregroundColor(.white)
-//                                    .font(.system(size: 18, weight: .bold))
-//                                    .frame(maxWidth: .infinity)
-//                                    .padding()
-//                                    .background(Color.cyan)
-//                                    .cornerRadius(8)
-//                            }
-//                        }
-//                        .padding()
-//                        .background(Color.white)
-//                        .cornerRadius(16)
-//                        .shadow(radius: 20)
-//                        .padding(.horizontal, 20)
-//                    }
-//                }
         }
         .navigationBarBackButtonHidden(false)
         .studyAppLoadingOverlay(
             isPresented: isSubmitting,
             symbol: "person.badge.plus",
             tint: .cyan,
-            title: "Creating Account",
-            message: "Saving your details and setting up your student profile."
+            title: localizationService.text(.authCreatingAccountTitle),
+            message: localizationService.text(.authCreatingAccountMessage)
         )
-        .alert("Sign Up Failed", isPresented: $showAuthAlert) {
-            Button("OK", role: .cancel) {}
+        .alert(localizationService.text(.authSignUpFailed), isPresented: $showAuthAlert) {
+            Button(localizationService.text(.commonOk), role: .cancel) {}
         } message: {
             Text(authAlertMessage)
         }
-//            .simultaneousGesture(
-//                TapGesture().onEnded { self.hideKeyboard() }
-//            )
     }
 
-    // Add this new function
+    // MARK: - Validation
+
     func validateAllFields() {
-        validateFields(title: .name)
+        validateFields(title: .firstName)
+        validateFields(title: .lastName)
         validateFields(title: .email)
         validateFields(title: .password)
-        validateFields(title: .phoneNumber)
+        validateFields(title: .confirmPassword)
+        validateFields(title: .countryCode)
+        validateFields(title: .contactNumber)
         validateFields(title: .terms)
-
-        // Check if all fields are valid
-        let allFieldsValid = nameError == nil &&
-            emailError == nil &&
-            passwordError == nil &&
-            phoneNumberError == nil &&
-            termsError == nil &&
-            !name.isEmpty &&
-            !email.isEmpty &&
-            !password.isEmpty &&
-            !phoneNumber.isEmpty &&
-            agreeToTerms
-
-        guard allFieldsValid else { return }
     }
 
-    // Modify the existing validateFields function
     func validateFields(title: Title) {
         switch title {
-        case .name:
-            nameError = name.isEmpty ? "Name cannot be empty" : nil
+        case .firstName:
+            firstNameError = firstName.trimmingCharacters(in: .whitespaces).isEmpty
+                ? localizationService.text(.authEmptyFirstName)
+                : nil
+        case .lastName:
+            lastNameError = lastName.trimmingCharacters(in: .whitespaces).isEmpty
+                ? localizationService.text(.authEmptyLastName)
+                : nil
         case .email:
-            emailError = ValidationHelper.isValidEmail(email) ? nil : "Please enter a valid email"
+            emailError = ValidationHelper.isValidEmail(email)
+                ? nil
+                : localizationService.text(.authInvalidEmail)
         case .password:
             if password.isEmpty {
-                passwordError = "Password cannot be empty"
-            } else if password.count < 6 {
-                passwordError = "Password must be at least 6 characters"
+                passwordError = localizationService.text(.authEmptyPassword)
+            } else if password.count < ValidationHelper.passwordMinLength {
+                passwordError = localizationService.text(.authPasswordShort)
             } else if !ValidationHelper.isValidPassword(password) {
-                passwordError = "Password must contain both letters and numbers"
+                passwordError = localizationService.text(.authPasswordWeak)
             } else {
                 passwordError = nil
             }
-        case .phoneNumber:
-            phoneNumberError = ValidationHelper.isValidPhoneNumber(phoneNumber) ? nil : "Please enter a valid phone number"
+        case .confirmPassword:
+            confirmPasswordError = (password == confirmPassword)
+                ? nil
+                : localizationService.text(.authConfirmPasswordMismatch)
+        case .countryCode:
+            countryCodeError = ValidationHelper.isValidCountryCode(countryCode)
+                ? nil
+                : localizationService.text(.authInvalidCountryCode)
+        case .contactNumber:
+            contactNumberError = ValidationHelper.isValidContactNumber(contactNumber)
+                ? nil
+                : localizationService.text(.authInvalidContactNumber)
         case .terms:
-            termsError = agreeToTerms ? nil : "You must agree to the terms"
+            termsError = agreeToTerms ? nil : localizationService.text(.authTermsRequired)
         default:
             break
         }
-        // Remove the automatic popup showing logic from here
+    }
+
+    // MARK: - Submission
+
+    private func allFieldsValid() -> Bool {
+        firstNameError == nil &&
+        lastNameError == nil &&
+        emailError == nil &&
+        passwordError == nil &&
+        confirmPasswordError == nil &&
+        countryCodeError == nil &&
+        contactNumberError == nil &&
+        termsError == nil &&
+        !firstName.isEmpty &&
+        !lastName.isEmpty &&
+        !email.isEmpty &&
+        !password.isEmpty &&
+        !confirmPassword.isEmpty &&
+        !countryCode.isEmpty &&
+        !contactNumber.isEmpty &&
+        agreeToTerms
     }
 
     private func submitSignUp() {
         validateAllFields()
-        guard
-            nameError == nil,
-            emailError == nil,
-            passwordError == nil,
-            phoneNumberError == nil,
-            termsError == nil,
-            !isSubmitting
-        else {
-            return
-        }
+        guard allFieldsValid(), !isSubmitting else { return }
 
         isSubmitting = true
 
         Task {
             do {
-                let response = try await authSession.signUp(
-                    name: name.trimmingCharacters(in: .whitespacesAndNewlines),
+                _ = try await authSession.signUp(
+                    firstName: firstName.trimmingCharacters(in: .whitespacesAndNewlines),
+                    lastName: lastName.trimmingCharacters(in: .whitespacesAndNewlines),
                     email: email.trimmingCharacters(in: .whitespacesAndNewlines),
                     password: password,
-                    phoneNumber: phoneNumber
+                    confirmPassword: confirmPassword,
+                    countryCode: countryCode.trimmingCharacters(in: .whitespacesAndNewlines),
+                    contactNumber: contactNumber.trimmingCharacters(in: .whitespacesAndNewlines)
                 )
 
                 await MainActor.run {
                     isSubmitting = false
                     popupManager.show(
-                        title: "Account created",
+                        title: localizationService.text(.authAccountCreatedTitle),
                         image: "tickMark",
-                        message: "Your account is ready. Sign in with the credentials you just created.",
+                        message: localizationService.text(.authAccountCreatedMessage),
                         onPrimary: {
                             popupManager.dismiss()
-                            router.push(.otp)
+                            router.push(.signIn)
                         }
                     )
                 }

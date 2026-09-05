@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-// MARK: - Reusable Toggle Row
-
 struct NotificationToggleRow: View {
     let title: String
     let subtitle: String
@@ -31,9 +29,8 @@ struct NotificationToggleRow: View {
     }
 }
 
-// MARK: - Notifications View
-
 struct NotificationsSettingsView: View {
+    @EnvironmentObject private var localizationService: LocalizationService
     @State private var emailNotifications = true
     @State private var appsUpdate = true
     @State private var recommendations = false
@@ -44,29 +41,29 @@ struct NotificationsSettingsView: View {
         VStack {
             List {
                 NotificationToggleRow(
-                    title: "Email Notification",
-                    subtitle: "Enable / disable email notification",
+                    title: localizationService.text(.notificationEmail),
+                    subtitle: localizationService.text(.notificationEmailSubtitle),
                     isOn: $emailNotifications
                 )
                 NotificationToggleRow(
-                    title: "Apps Update",
-                    subtitle: "Enable auto update",
+                    title: localizationService.text(.notificationUpdates),
+                    subtitle: localizationService.text(.notificationUpdatesSubtitle),
                     isOn: $appsUpdate
                 )
                 NotificationToggleRow(
-                    title: "Recommandation",
-                    subtitle: "Recommand friends to try new apps",
+                    title: localizationService.text(.notificationRecommendations),
+                    subtitle: localizationService.text(.notificationRecommendationsSubtitle),
                     isOn: $recommendations
                 )
                 NotificationToggleRow(
-                    title: "Messages",
-                    subtitle: "Enable to receive messages",
+                    title: localizationService.text(.notificationMessages),
+                    subtitle: localizationService.text(.notificationMessagesSubtitle),
                     isOn: $messages
                 )
             }
             .foregroundStyle(.black)
         }
-        .navigationTitle("Account")
+        .navigationTitle(localizationService.text(.notificationTitle))
         .navigationBarTitleDisplayMode(.inline)
     }
 }

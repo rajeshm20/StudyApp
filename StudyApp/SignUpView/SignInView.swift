@@ -5,7 +5,6 @@
 //  Created by Rajesh Mani on 11/01/25.
 //
 
-import Observation
 import SwiftUI
 
 struct SignInView: View {
@@ -18,36 +17,34 @@ struct SignInView: View {
     @State private var isSubmitting = false
     @EnvironmentObject var popupManager: PopupManager
     @EnvironmentObject var authSession: AuthSessionManager
+    @EnvironmentObject private var localizationService: LocalizationService
 
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
-    @State private var navigationManager = NavigationManager()
     var router: Router<AuthRoute>
     @EnvironmentObject var coordinator: AppCoordinator
 
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                // Email Field
-                FormField(title: "Email", placeholder: "study@email.com", text: $email, keyboardType: .emailAddress, error: $emailError, completion: {
+                FormField(title: localizationService.text(.authEmail), placeholder: "study@email.com", text: $email, keyboardType: .emailAddress, error: $emailError, completion: {
                     validateFields(title: .email)
                 })
-                FormField(title: "Password", placeholder: "Your password", text: $password, isSecure: true, error: $passwordError, completion: { validateFields(title: .password) })
-                // Forgot Password
+                FormField(title: localizationService.text(.authPassword), placeholder: localizationService.text(.authPasswordPlaceholder), text: $password, isSecure: true, error: $passwordError, completion: {
+                    validateFields(title: .password)
+                })
                 HStack {
                     Spacer()
                     Button(action: {
-                        // Handle forgot password
                         router.push(.forgotPassword)
                     }) {
-                        Text("Forgot Password?")
+                        Text(localizationService.text(.authForgotPassword) + "?")
                             .font(horizontalSizeClass == .regular ? .title3 : .footnote)
                             .foregroundColor(Color.cyan)
                     }
                 }
-                // Sign-In Button (Reusable)
                 AppButton(
-                    title: "Sign In",
+                    title: localizationService.text(.authSignIn),
                     style: .filled,
                     foregroundColor: .white,
                     backgroundColor: .cyan,
@@ -61,29 +58,26 @@ struct SignInView: View {
                 }
                 .padding()
 
-                // Sign Up Option
                 HStack {
-                    Text("Don’t have an account?")
+                    Text(localizationService.text(.authDontHaveAccount))
                         .font(horizontalSizeClass == .regular ? .title3 : .footnote)
                         .foregroundColor(.gray)
                     Button(action: {
-                        // Handle sign-up action
                         router.push(.signUp)
                     }) {
-                        Text("Sign Up")
+                        Text(localizationService.text(.authSignUp))
                             .font(horizontalSizeClass == .regular ? .title3 : .footnote)
                             .foregroundColor(Color.cyan)
                     }
                 }
 
-                // OR Divider
                 HStack {
                     VStack {
                         Color.gray
                     }
                     .frame(width: 150, height: 0.7)
                     .background(Color.gray.opacity(0.9))
-                    Text("OR")
+                    Text(localizationService.text(.authOr))
                         .font(.footnote)
                         .foregroundColor(.gray)
                         .dynamicTypeSize(.small)
@@ -96,28 +90,21 @@ struct SignInView: View {
                 }
                 .padding(.vertical)
 
-                // Social Login Buttons
                 HStack(spacing: 20) {
-                    Button(action: {
-                        // Handle Google login
-                    }) {
-                        Image("google") // Replace with your Google icon
+                    Button(action: {}) {
+                        Image("google")
                             .resizable()
                             .frame(width: 40, height: 40)
                     }
 
-                    Button(action: {
-                        // Handle Facebook login
-                    }) {
-                        Image("facebook") // Replace with your Facebook icon
+                    Button(action: {}) {
+                        Image("facebook")
                             .resizable()
                             .frame(width: 40, height: 40)
                     }
 
-                    Button(action: {
-                        // Handle Apple login
-                    }) {
-                        Image("apple") // Replace with your Apple icon
+                    Button(action: {}) {
+                        Image("apple")
                             .resizable()
                             .frame(width: 40, height: 40)
                     }
@@ -126,34 +113,33 @@ struct SignInView: View {
             .padding(horizontalSizeClass == .compact ? 25 : 160)
         }
         .navigationBarBackButtonHidden(false)
-        .navigationTitle("Sign In")
+        .navigationTitle(localizationService.text(.authSignIn))
         .navigationBarTitleDisplayMode(.large)
         .studyAppLoadingOverlay(
             isPresented: isSubmitting,
             symbol: "person.crop.circle.badge.checkmark",
             tint: .cyan,
-            title: "Signing In",
-            message: "Verifying your credentials and preparing your account."
+            title: localizationService.text(.authSigningInTitle),
+            message: localizationService.text(.authSigningInMessage)
         )
-        .alert("Sign In Failed", isPresented: $showAuthAlert) {
-            Button("OK", role: .cancel) {}
+        .alert(localizationService.text(.authSignInFailed), isPresented: $showAuthAlert) {
+            Button(localizationService.text(.commonOk), role: .cancel) {}
         } message: {
             Text(authAlertMessage)
         }
     }
 
-    // Modify the existing validateFields function
     func validateFields(title: Title) {
         switch title {
         case .email:
-            emailError = ValidationHelper.isValidEmail(email) ? nil : "Please enter a valid email"
+            emailError = ValidationHelper.isValidEmail(email) ? nil : localizationService.text(.authInvalidEmail)
         case .password:
             if password.isEmpty {
-                passwordError = "Password cannot be empty"
+                passwordError = localizationService.text(.authEmptyPassword)
             } else if password.count < 6 {
-                passwordError = "Password must be at least 6 characters"
+                passwordError = localizationService.text(.authPasswordShort)
             } else if !ValidationHelper.isValidPassword(password) {
-                passwordError = "Password must contain both letters and numbers"
+                passwordError = localizationService.text(.authPasswordWeak)
             } else {
                 passwordError = nil
             }
@@ -189,9 +175,9 @@ struct SignInView: View {
                 await MainActor.run {
                     isSubmitting = false
                     popupManager.show(
-                        title: "Signed in",
+                        title: localizationService.text(.authSignedInTitle),
                         image: "tick_round",
-                        message: "Your account has been connected successfully.",
+                        message: localizationService.text(.authSignedInMessage),
                         onPrimary: {
                             popupManager.dismiss()
                             coordinator.switchToMain()
@@ -202,7 +188,14 @@ struct SignInView: View {
                 await MainActor.run {
                     isSubmitting = false
                     authAlertMessage = error.localizedDescription
-                    showAuthAlert = true
+                    popupManager.show(
+                        title: localizationService.text(.authSignInFailed),
+                        image: "invalid",
+                        message: authAlertMessage,
+                        onPrimary: {
+                            popupManager.dismiss()
+                        }
+                    )
                 }
             }
         }

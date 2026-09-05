@@ -16,26 +16,26 @@ struct ForgotPasswordView: View {
     @State private var isSubmitting = false
     @EnvironmentObject var authSession: AuthSessionManager
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var localizationService: LocalizationService
     var router: Router<AuthRoute>
     @EnvironmentObject var coordinator: AppCoordinator
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Forgot Password")
+            Text(localizationService.text(.authForgotPassword))
                 .titleStyle()
                 .padding([.horizontal], 20)
                 .padding(.vertical)
-            Text("Enter your registered email id to reset your password.")
+            Text(localizationService.text(.authForgotPasswordDescription))
                 .subtitleStyle()
                 .padding([.horizontal], 20)
-            FormField(title: "Email", placeholder: "study@email.com", text: $email, keyboardType: .emailAddress, error: $emailError, completion: {
+            FormField(title: localizationService.text(.authEmail), placeholder: "study@email.com", text: $email, keyboardType: .emailAddress, error: $emailError, completion: {
                 validateFields(title: .email)
             })
             .padding(10)
             
-                // Sign-In Button (Reusable)
             AppButton(
-                title: "Verify Email",
+                title: localizationService.text(.authVerifyEmail),
                 style: .filled,
                 foregroundColor: .white,
                 backgroundColor: .cyan,
@@ -54,11 +54,11 @@ struct ForgotPasswordView: View {
             isPresented: isSubmitting,
             symbol: "envelope.badge",
             tint: .cyan,
-            title: "Verifying Email",
-            message: "Checking your account and sending the reset instructions."
+            title: localizationService.text(.authVerifyEmail),
+            message: localizationService.text(.authForgotPasswordDescription)
         )
-        .alert("Email verification Failed", isPresented: $showAuthAlert) {
-            Button("OK", role: .cancel) {}
+        .alert(localizationService.text(.authVerifyEmail), isPresented: $showAuthAlert) {
+            Button(localizationService.text(.commonOk), role: .cancel) {}
         } message: {
             Text(authAlertMessage)
         }
@@ -66,7 +66,6 @@ struct ForgotPasswordView: View {
         Spacer()
     }
     
-        // Add this new function
     func verifyEMail() {
         validateFields(title: .email)
         
@@ -83,9 +82,9 @@ struct ForgotPasswordView: View {
                 await MainActor.run {
                     isSubmitting = false
                     popupManager.show(
-                        title: response.success == true ? "Email Successfully Verified" : response.message,
+                        title: response.success == true ? localizationService.text(.authEmailVerifiedTitle) : response.message,
                         image: response.success == true ? "tick_round" : "notfound",
-                        message: "Check your email",
+                        message: localizationService.text(.authCheckYourEmail),
                         onPrimary: {
                             response.success ? router.push(.verifyOTP) : dismiss()
                             popupManager.dismiss()
@@ -102,13 +101,12 @@ struct ForgotPasswordView: View {
         }
     }
     
-        // Modify the existing validateFields function
     func validateFields(title: Title) {
         switch title {
-            case .email:
-                emailError = ValidationHelper.isValidEmail(email) ? nil : "Invalid email address"
-            default:
-                break
+        case .email:
+            emailError = ValidationHelper.isValidEmail(email) ? nil : localizationService.text(.authInvalidEmail)
+        default:
+            break
         }
     }
 }

@@ -8,16 +8,22 @@
 import SwiftUI
 
 struct ChooseLanguageView: View {
+    @EnvironmentObject private var localizationService: LocalizationService
     @StateObject private var viewModel = LanguageViewModel()
-    var router = Router<MainRoute>()
+    var router: Router<MainRoute>
 
     var body: some View {
-        VStack {
-            // Search bar with search lens icon
+        VStack(spacing: 16) {
+            Text(localizationService.text(.chooseLanguageDescription))
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .padding(.horizontal)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.gray)
-                TextField("Search", text: $viewModel.searchText)
+                TextField(localizationService.text(.commonSearch), text: $viewModel.searchText)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
             }
@@ -26,20 +32,24 @@ struct ChooseLanguageView: View {
             .cornerRadius(10)
             .padding(.horizontal)
 
-            // List of languages
             List(viewModel.filteredLanguages) { language in
                 HStack {
                     Text(language.flagEmoji)
                         .font(.system(.largeTitle))
 
-                    Text(language.name)
-                        .font(.system(.title3, weight: .bold))
-                        .font(.body)
-                        .foregroundColor(.primary)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(language.nativeName)
+                            .font(.system(.title3, weight: .bold))
+                            .foregroundColor(.primary)
+
+                        Text(language.accessibilityName)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
 
                     Spacer()
 
-                    if viewModel.selectedLanguage?.id == language.id {
+                    if viewModel.selectedLanguage == language {
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(.blue)
                     } else {
@@ -49,19 +59,19 @@ struct ChooseLanguageView: View {
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    viewModel.selectedLanguage = language
+                    viewModel.select(language: language)
                 }
             }
             .listStyle(.plain)
         }
-        .navigationTitle("Choose your language")
+        .navigationTitle(localizationService.text(.chooseLanguageTitle))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            viewModel.loadLanguages()
+            viewModel.configure(with: localizationService)
         }
     }
 }
 
 #Preview {
-    ChooseLanguageView()
+    ChooseLanguageView(router: Router<MainRoute>())
 }

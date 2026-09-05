@@ -80,7 +80,6 @@ struct FormField: View {
                 .font(.subheadline)
                 .fontWeight(.semibold)
                 .foregroundColor(.black)
-
             if usesDatePicker {
                 dateField
                 if showDatePicker {
@@ -97,9 +96,7 @@ struct FormField: View {
                     )
                     .datePickerStyle(.graphical)
                     .labelsHidden()
-                    .environment(\.locale, Locale.current)
                     .onChange(of: date) { _, _ in
-                        // can add extra validation if needed
                         if let min = minimumDate, let current = date, current < min {
                             date = min
                         }
@@ -108,7 +105,6 @@ struct FormField: View {
                         }
                     }
                     .onAppear {
-                        // Clamp initial date within bounds if provided
                         if let min = minimumDate, let current = date, current < min {
                             date = min
                         }
@@ -139,9 +135,7 @@ struct FormField: View {
             } else if isDoubleSelectableRadioButtonEnabled {
                 VStack(alignment: .leading, spacing: 5) {
                     HStack(spacing: 15) {
-                        // Button for Male
                         genderButton(for: .male)
-                        // Button for Female
                         genderButton(for: .female)
                         Spacer()
                     }
@@ -184,7 +178,7 @@ struct FormField: View {
     private func genderButton(for gender: Gender) -> some View {
         Button(action: {
             selectedGender = gender
-            completion() // 👈 Call completion when gender is changed
+            completion()
         }) {
             HStack(spacing: 8) {
                 Image(systemName: selectedGender == gender ? "checkmark.circle.fill" : "circle")
@@ -229,7 +223,6 @@ struct FormField: View {
 
     func formatPhoneNumber(_ number: String) -> String {
         let digits = number.filter(\.isNumber)
-        // Limit to 12 digits (4+4+4)
         let truncatedDigits = String(digits.prefix(12))
 
         var formatted = ""

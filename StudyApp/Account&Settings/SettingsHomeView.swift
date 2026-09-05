@@ -11,26 +11,22 @@ struct SettingsHomeView: View {
     var img: ImageResource?
     @State private var profileUIImage: UIImage?
     @State private var profile = Profile()
-    @State private var navigationManager = NavigationManager()
     @State private var isLoggingOut = false
     @State private var logoutAlertTitle = ""
     @State private var logoutAlertMessage = ""
     @State private var showLogoutAlert = false
+    @State private var shouldSwitchToAuthAfterAlert = false
     var router: Router<MainRoute>
     @EnvironmentObject var coordinator: AppCoordinator
     @EnvironmentObject var authSession: AuthSessionManager
     @EnvironmentObject var popupManager: PopupManager
+    @EnvironmentObject private var localizationService: LocalizationService
 
     var body: some View {
-//        NavigationStack(path: $navigationManager.path) {
         VStack(spacing: 0) {
-            // MARK: - Header
-
             VStack(spacing: 20) {
-                // App title
-                TopIcon_Title(title: "Study")
+                TopIcon_Title(title: localizationService.text(.appName))
 
-                // User Info
                 HStack(spacing: 14) {
                     if let uiImage = profileUIImage {
                         Image(uiImage: uiImage)
@@ -57,7 +53,7 @@ struct SettingsHomeView: View {
                             .foregroundColor(Color.primaryBlue.opacity(0.9))
                     }
                     VStack(alignment: .leading, spacing: 3) {
-                        Text("Welcome")
+                        Text(localizationService.text(.settingsWelcome))
                             .font(.system(size: 14))
                             .foregroundColor(Color.gray)
                         Text(profile.name)
@@ -68,11 +64,11 @@ struct SettingsHomeView: View {
                     Spacer()
                     Button(action: {
                         popupManager.show(
-                            title: "Log out?",
+                            title: localizationService.text(.settingsLogoutTitle),
                             image: "key",
-                            message: "Do you want to log out from this account?",
-                            primaryButtonTitle: "Yes",
-                            secondaryButtonTitle: "No",
+                            message: localizationService.text(.settingsLogoutMessage),
+                            primaryButtonTitle: localizationService.text(.settingsLogoutYes),
+                            secondaryButtonTitle: localizationService.text(.settingsLogoutNo),
                             onPrimary: {
                                 popupManager.dismiss()
                                 performLogout()
@@ -94,8 +90,6 @@ struct SettingsHomeView: View {
 
             Divider()
                 .padding(.horizontal, 24)
-
-            // MARK: - Menu List
 
             Group {
                 Button(action: {
@@ -123,8 +117,6 @@ struct SettingsHomeView: View {
 
             Spacer(minLength: 50)
 
-            // MARK: - Help Card
-
             HelpCardView()
                 .onTapGesture(perform: {
                     router.push(.about)
@@ -132,20 +124,18 @@ struct SettingsHomeView: View {
 
             Spacer(minLength: 100)
 
-            // MARK: - Footer
-
             VStack(spacing: 8) {
                 HStack(spacing: 6) {
-                    Text("Privacy Policy")
+                    Text(localizationService.text(.settingsPrivacyPolicy))
                     Image(systemName: "chevron.right")
                         .font(.system(size: 10))
 
-                    Text("Terms")
+                    Text(localizationService.text(.settingsTerms))
                     Image(systemName: "chevron.right")
                         .font(.system(size: 10))
 
                     HStack(spacing: 4) {
-                        Text("English")
+                        Text(localizationService.currentLanguage.nativeName)
                         Image(systemName: "chevron.down")
                             .font(.system(size: 10))
                     }
@@ -163,12 +153,13 @@ struct SettingsHomeView: View {
             isPresented: isLoggingOut,
             symbol: "rectangle.portrait.and.arrow.right",
             tint: .brandPrimary,
-            title: "Logging Out",
-            message: "Closing your session and clearing secure account data."
+            title: localizationService.text(.settingsLoggingOutTitle),
+            message: localizationService.text(.settingsLoggingOutMessage)
         )
         .alert(logoutAlertTitle, isPresented: $showLogoutAlert) {
-            Button("OK") {
-                if logoutAlertTitle == "Logged Out" {
+            Button(localizationService.text(.commonOk)) {
+                if shouldSwitchToAuthAfterAlert {
+                    shouldSwitchToAuthAfterAlert = false
                     coordinator.switchToAuth()
                 }
             }
@@ -179,10 +170,7 @@ struct SettingsHomeView: View {
             hydrateProfile()
             loadSavedProfileImage()
         }
-//        }
     }
-
-    // MARK: - Persistence helpers (match ProfilePictureView)
 
     private var profileImageURL: URL? {
         do {
@@ -234,8 +222,9 @@ struct SettingsHomeView: View {
                 let response = try await authSession.signOut()
                 await MainActor.run {
                     isLoggingOut = false
-                    logoutAlertTitle = "Logged Out"
+                    logoutAlertTitle = localizationService.text(.settingsLoggedOutTitle)
                     logoutAlertMessage = response.message
+                    shouldSwitchToAuthAfterAlert = true
                     showLogoutAlert = true
                 }
             } catch {
@@ -244,31 +233,14 @@ struct SettingsHomeView: View {
                     if authSession.forcedLogoutMessage != nil {
                         return
                     }
-                    logoutAlertTitle = "Logout Failed"
+                    logoutAlertTitle = localizationService.text(.settingsLogoutFailedTitle)
                     logoutAlertMessage = error.localizedDescription
+                    shouldSwitchToAuthAfterAlert = false
                     showLogoutAlert = true
                 }
             }
         }
     }
-
-//    @ViewBuilder
-//    private func destinationView(for destination: AppDestination) -> some View {
-//        switch destination {
-//        case .profile(_):
-//            ProfilePageView()
-//        case .account:
-//            AccountView()
-//        case .settings:
-//            SettingsView()
-//        case .about:
-//            AboutUsView()
-//        case .help:
-//            EmptyView()
-//        default:
-//            EmptyView()
-//        }
-//    }
 }
 
 // MARK: - Settings Row
