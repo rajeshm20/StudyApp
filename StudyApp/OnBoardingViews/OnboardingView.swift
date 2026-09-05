@@ -8,23 +8,30 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    // MARK: - Properties
-
-    private let pages: [PageData] = [
-        PageData(imageName: "StudyingFemale",
-                 title: NSLocalizedString("Find Your Favourite Class", comment: "Onboarding title 1"),
-                 description: NSLocalizedString("Find your favorite class. Lorem ipsum dolor sit amet, consectetur adipiscing elit.", comment: "Onboarding description 1")),
-        PageData(imageName: "student3",
-                 title: NSLocalizedString("Explore More Skills", comment: "Onboarding title 2"),
-                 description: NSLocalizedString("Learn from the best instructors and enhance your skills.", comment: "Onboarding description 2")),
-        PageData(imageName: "student5",
-                 title: NSLocalizedString("Get the Best Class with Best Teacher", comment: "Onboarding title 3"),
-                 description: NSLocalizedString("Accelerate your learning journey and achieve your goals.", comment: "Onboarding description 3")),
-    ]
-
+    @EnvironmentObject private var localizationService: LocalizationService
     @State private var currentPage = 0
     @ObservedObject var router: Router<AuthRoute>
-    
+
+    private var pages: [PageData] {
+        [
+            PageData(
+                imageName: "StudyingFemale",
+                title: localizationService.text(.onboardingTitleOne),
+                description: localizationService.text(.onboardingDescriptionOne)
+            ),
+            PageData(
+                imageName: "student3",
+                title: localizationService.text(.onboardingTitleTwo),
+                description: localizationService.text(.onboardingDescriptionTwo)
+            ),
+            PageData(
+                imageName: "student5",
+                title: localizationService.text(.onboardingTitleThree),
+                description: localizationService.text(.onboardingDescriptionThree)
+            )
+        ]
+    }
+
     private var windowTopInset: CGFloat {
         guard let windowScene = UIApplication.shared.connectedScenes
             .compactMap({ $0 as? UIWindowScene })
@@ -35,8 +42,6 @@ struct OnboardingView: View {
         }
         return keyWindow.safeAreaInsets.top
     }
-
-    // MARK: - Main View
 
     var body: some View {
         GeometryReader { geo in
@@ -53,9 +58,8 @@ struct OnboardingView: View {
                 .ignoresSafeArea(.container, edges: .top)
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 .frame(height: geo.size.height * 0.8 + topInset)
-                .padding(.top, -topInset) // fixed the top gap in background image
+                .padding(.top, -topInset)
 
-                // Page Indicators
                 HStack(spacing: 8) {
                     ForEach(pages.indices, id: \.self) { index in
                         Circle()
@@ -63,30 +67,33 @@ struct OnboardingView: View {
                             .frame(width: 8, height: 8)
                             .accessibilityLabel(
                                 Text(currentPage == index
-                                    ? NSLocalizedString("Current Page", comment: "")
-                                    : NSLocalizedString("Page", comment: ""))
+                                    ? localizationService.text(.onboardingCurrentPage)
+                                    : localizationService.text(.onboardingPage))
                             )
                     }
                 }
 
                 Spacer()
 
-                // Navigation Buttons
                 HStack {
                     Button(action: handleSkipOrSignUp) {
                         Text(currentPage == pages.count - 1
-                            ? NSLocalizedString("Sign Up", comment: "Sign Up button")
-                            : NSLocalizedString("Skip", comment: "Skip button"))
+                            ? localizationService.text(.authSignUp)
+                            : localizationService.text(.onboardingSkip))
                             .font(.headline)
                             .foregroundColor(.cyan)
                     }
-                    .accessibilityLabel(Text(currentPage == pages.count - 1 ? "Sign Up" : "Skip"))
+                    .accessibilityLabel(
+                        Text(currentPage == pages.count - 1
+                            ? localizationService.text(.authSignUp)
+                            : localizationService.text(.onboardingSkip))
+                    )
 
                     Spacer()
 
                     Button(action: handleRightButton) {
                         if currentPage == pages.count - 1 {
-                            Text(NSLocalizedString("Sign In", comment: "Sign In button"))
+                            Text(localizationService.text(.authSignIn))
                                 .font(.headline)
                                 .foregroundColor(.cyan)
                         } else {
@@ -95,7 +102,7 @@ struct OnboardingView: View {
                                 .frame(width: 60, height: 60)
                                 .background(Color.cyan)
                                 .clipShape(Circle())
-                                .accessibilityLabel(Text(NSLocalizedString("Next", comment: "Next page")))
+                                .accessibilityLabel(Text(localizationService.text(.onboardingNext)))
                         }
                     }
                 }
@@ -107,13 +114,10 @@ struct OnboardingView: View {
         .ignoresSafeArea(.container, edges: .top)
     }
 
-    // MARK: - Actions
-
     private func handleSkipOrSignUp() {
         if currentPage == pages.count - 1 {
             router.push(.signUp)
         } else {
-            // Jump to last page
             currentPage = pages.count - 1
         }
     }
@@ -126,8 +130,6 @@ struct OnboardingView: View {
         }
     }
 }
-
-// MARK: - OnboardingPageView
 
 struct OnboardingPageView: View {
     let page: PageData
@@ -142,7 +144,6 @@ struct OnboardingPageView: View {
                                 .resizable()
                                 .scaledToFill()
                         } else {
-                            // Fallback placeholder for missing images
                             Color.gray.opacity(0.2)
                                 .overlay(
                                     Image(systemName: "photo")
@@ -162,16 +163,6 @@ struct OnboardingPageView: View {
                     )
                     .frame(width: geo.size.width, height: geo.size.height * 0.6 + geo.safeAreaInsets.top)
                     .allowsHitTesting(false)
-
-//                    // Title Icon
-//                    VStack {
-//                        Spacer()
-//                        TopIcon_Title(title: "Study")
-//                            .padding(.top, geo.safeAreaInsets.magnitude + 32)
-//                            .padding(.leading, 140)
-//                            .accessibilityHidden(true)
-//                            .padding(.bottom, 20)
-//                    }
                 }
                 .frame(width: geo.size.width, height: geo.size.height * 0.6 + geo.safeAreaInsets.top)
                 .contentShape(Rectangle())
@@ -203,8 +194,6 @@ struct OnboardingPageView: View {
         }
     }
 }
-
-// MARK: - Preview
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {

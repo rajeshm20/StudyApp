@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Security
 
 // MARK: - UserRole
 // Mirrors the backend UserRole enum (UserRole.swift).
@@ -206,6 +207,21 @@ final class AuthSessionManager: ObservableObject {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         return encoder
+    }()
+
+    // MARK: - Networking Session
+    // Configured with TLS 1.2 minimum to mirror backend security enforcement.
+    static let urlSession: URLSession = {
+        let configuration = URLSessionConfiguration.default
+        configuration.tlsMinimumSupportedProtocolVersion = .TLSv12
+        configuration.tlsMaximumSupportedProtocolVersion = .TLSv13
+        configuration.timeoutIntervalForRequest = 30
+        configuration.timeoutIntervalForResource = 60
+        #if DEBUG
+        return URLSession(configuration: configuration, delegate: LocalhostTrustDelegate(), delegateQueue: nil)
+        #else
+        return URLSession(configuration: configuration)
+        #endif
     }()
 
     var isAuthenticated: Bool {
@@ -437,7 +453,7 @@ final class AuthSessionManager: ObservableObject {
             ]
         )
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await Self.urlSession.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse else {
             logger.error(
                 "REST request failed with invalid response",
@@ -589,3 +605,29 @@ enum AuthServiceError: LocalizedError {
         }
     }
 }
+
+// MARK: - LocalhostTrustDelegate
+// Enables testing HTTPS with self-signed certificates locally in DEBUG builds.
+#if DEBUG
+final class LocalhostTrustDelegate: NSObject, URLSessionDelegate, Sendable {
+    func urlSession(
+        _ session: URLSession,
+        didReceive challenge: URLAuthenticationChallenge,
+        completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
+    ) {
+        guard challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust,
+              let serverTrust = challenge.protectionSpace.serverTrust else {
+            completionHandler(.performDefaultHandling, nil)
+            return
+        }
+
+        let host = challenge.protectionSpace.host.lowercased()
+        if host == "localhost" || host == "127.0.0.1" || host == "openedschool.local" || host.hasSuffix(".charlesproxy.com") {
+            completionHandler(.useCredential, URLCredential(trust: serverTrust))
+        } else {
+            completionHandler(.performDefaultHandling, nil)
+        }
+    }
+}
+#endif
+
