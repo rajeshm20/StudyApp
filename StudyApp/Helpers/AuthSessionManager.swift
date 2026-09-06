@@ -76,6 +76,49 @@ struct AuthStudent: Codable, Equatable {
         let parts = [firstName, lastName].compactMap { $0 }.joined(separator: " ")
         return parts.isEmpty ? name : parts
     }
+
+    // Explicit memberwise initializer
+    init(
+        id: UUID? = nil,
+        firstName: String? = nil,
+        lastName: String? = nil,
+        name: String,
+        email: String,
+        role: UserRole = .student,
+        status: AccountStatus = .active,
+        dob: Date? = nil,
+        phoneNumber: String? = nil,
+        countryCode: String? = nil,
+        contactNumber: String? = nil
+    ) {
+        self.id = id
+        self.firstName = firstName
+        self.lastName = lastName
+        self.name = name
+        self.email = email
+        self.role = role
+        self.status = status
+        self.dob = dob
+        self.phoneNumber = phoneNumber
+        self.countryCode = countryCode
+        self.contactNumber = contactNumber
+    }
+
+    // Resilient decoder with safe fallbacks for legacy/partial backend responses
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decodeIfPresent(UUID.self, forKey: .id)
+        self.firstName = try container.decodeIfPresent(String.self, forKey: .firstName)
+        self.lastName = try container.decodeIfPresent(String.self, forKey: .lastName)
+        self.name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
+        self.email = try container.decodeIfPresent(String.self, forKey: .email) ?? ""
+        self.role = (try? container.decode(UserRole.self, forKey: .role)) ?? .student
+        self.status = (try? container.decode(AccountStatus.self, forKey: .status)) ?? .active
+        self.dob = try container.decodeIfPresent(Date.self, forKey: .dob)
+        self.phoneNumber = try container.decodeIfPresent(String.self, forKey: .phoneNumber)
+        self.countryCode = try container.decodeIfPresent(String.self, forKey: .countryCode)
+        self.contactNumber = try container.decodeIfPresent(String.self, forKey: .contactNumber)
+    }
 }
 
 struct LogoutResponse: Decodable, Equatable {
